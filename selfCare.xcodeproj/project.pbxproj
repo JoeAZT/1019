@@ -3,23 +3,34 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		71C47D13263DAAB300C979D9 /* selfCareApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C47D12263DAAB300C979D9 /* selfCareApp.swift */; };
-		71C47D15263DAAB300C979D9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C47D14263DAAB300C979D9 /* ContentView.swift */; };
+		71C47D15263DAAB300C979D9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C47D14263DAAB300C979D9 /* HomeView.swift */; };
 		71C47D17263DAAB800C979D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71C47D16263DAAB800C979D9 /* Assets.xcassets */; };
 		71C47D1A263DAAB800C979D9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71C47D19263DAAB800C979D9 /* Preview Assets.xcassets */; };
+		71C47D23263DDA6200C979D9 /* IrregularGradient in Frameworks */ = {isa = PBXBuildFile; productRef = 71C47D22263DDA6200C979D9 /* IrregularGradient */; };
+		71F54848263E3A6D00325490 /* JournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F54847263E3A6D00325490 /* JournalView.swift */; };
+		71F5484A263E3A8C00325490 /* NewEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F54849263E3A8C00325490 /* NewEntryView.swift */; };
+		71F5484C263E3B2A00325490 /* LinksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F5484B263E3B2A00325490 /* LinksView.swift */; };
+		71F5484E263F0CCD00325490 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F5484D263F0CCD00325490 /* ProfileView.swift */; };
+		71F54850263F0CF400325490 /* GoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F5484F263F0CF400325490 /* GoalsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		71C47D0F263DAAB300C979D9 /* selfCare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = selfCare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71C47D12263DAAB300C979D9 /* selfCareApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selfCareApp.swift; sourceTree = "<group>"; };
-		71C47D14263DAAB300C979D9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		71C47D14263DAAB300C979D9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		71C47D16263DAAB800C979D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		71C47D19263DAAB800C979D9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		71C47D1B263DAAB800C979D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		71F54847263E3A6D00325490 /* JournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalView.swift; sourceTree = "<group>"; };
+		71F54849263E3A8C00325490 /* NewEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEntryView.swift; sourceTree = "<group>"; };
+		71F5484B263E3B2A00325490 /* LinksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinksView.swift; sourceTree = "<group>"; };
+		71F5484D263F0CCD00325490 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		71F5484F263F0CF400325490 /* GoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71C47D23263DDA6200C979D9 /* IrregularGradient in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,7 +65,12 @@
 			isa = PBXGroup;
 			children = (
 				71C47D12263DAAB300C979D9 /* selfCareApp.swift */,
-				71C47D14263DAAB300C979D9 /* ContentView.swift */,
+				71C47D14263DAAB300C979D9 /* HomeView.swift */,
+				71F54847263E3A6D00325490 /* JournalView.swift */,
+				71F54849263E3A8C00325490 /* NewEntryView.swift */,
+				71F5484B263E3B2A00325490 /* LinksView.swift */,
+				71F5484D263F0CCD00325490 /* ProfileView.swift */,
+				71F5484F263F0CF400325490 /* GoalsView.swift */,
 				71C47D16263DAAB800C979D9 /* Assets.xcassets */,
 				71C47D1B263DAAB800C979D9 /* Info.plist */,
 				71C47D18263DAAB800C979D9 /* Preview Content */,
@@ -85,6 +102,9 @@
 			dependencies = (
 			);
 			name = selfCare;
+			packageProductDependencies = (
+				71C47D22263DDA6200C979D9 /* IrregularGradient */,
+			);
 			productName = selfCare;
 			productReference = 71C47D0F263DAAB300C979D9 /* selfCare.app */;
 			productType = "com.apple.product-type.application";
@@ -112,6 +132,9 @@
 				Base,
 			);
 			mainGroup = 71C47D06263DAAB300C979D9;
+			packageReferences = (
+				71C47D21263DDA6200C979D9 /* XCRemoteSwiftPackageReference "IrregularGradient" */,
+			);
 			productRefGroup = 71C47D10263DAAB300C979D9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -138,7 +161,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71C47D15263DAAB300C979D9 /* ContentView.swift in Sources */,
+				71F5484A263E3A8C00325490 /* NewEntryView.swift in Sources */,
+				71F5484C263E3B2A00325490 /* LinksView.swift in Sources */,
+				71F54848263E3A6D00325490 /* JournalView.swift in Sources */,
+				71C47D15263DAAB300C979D9 /* HomeView.swift in Sources */,
+				71F54850263F0CF400325490 /* GoalsView.swift in Sources */,
+				71F5484E263F0CCD00325490 /* ProfileView.swift in Sources */,
 				71C47D13263DAAB300C979D9 /* selfCareApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -328,6 +356,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		71C47D21263DDA6200C979D9 /* XCRemoteSwiftPackageReference "IrregularGradient" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/joogps/IrregularGradient";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		71C47D22263DDA6200C979D9 /* IrregularGradient */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 71C47D21263DDA6200C979D9 /* XCRemoteSwiftPackageReference "IrregularGradient" */;
+			productName = IrregularGradient;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 71C47D07263DAAB300C979D9 /* Project object */;
 }
