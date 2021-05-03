@@ -10,8 +10,8 @@ import SwiftUI
 struct NewEntryView: View {
     
     @State var ratingSlider: Double = 0.0
-    @State var reflectionText: String = "It's ok not to write anything today if you don't want to"
-    @State var happyText: String = "It's ok not to write anything today if you don't want to"
+    @State var reflectionText: String = ""
+    @State var happyText: String = ""
     
     var body: some View {
         
@@ -71,14 +71,24 @@ struct NewEntryView: View {
                     .padding(.top, 50)
                     .padding(.bottom, 15)
                 
-                
-                TextEditor(text: $reflectionText)
-                    .frame(width: 340, height: 300, alignment: .leading)
-                    .padding()
-                    .overlay(RoundedRectangle(cornerRadius: 16)
-                    .stroke(Color.white, lineWidth: 4))
+                ZStack(alignment: .top) {
                     
-                    //.padding(.vertical)
+                    TextViewWrapper(text: $reflectionText)
+                        .frame(width: 340, height: 300, alignment: .leading)
+                        .padding()
+                        .overlay(RoundedRectangle(cornerRadius: 16)
+                                    .stroke(Color.white, lineWidth: 4))
+                    
+                    if reflectionText.isEmpty {
+                        Text("Today I felt...")
+                            .opacity(0.3)
+                            .padding(.all, 25)
+                            .padding(.trailing, 230)
+                    }
+                }
+                
+                
+                //.padding(.vertical)
                 
                 Text("What made you happy today?")
                     .fontWeight(.bold)
@@ -88,15 +98,36 @@ struct NewEntryView: View {
                     .padding()
                 
                 
-                TextEditor(text: $happyText)
-                    .frame(width: 340, height: 300, alignment: .center)
-                    .padding()
-                    .overlay(RoundedRectangle(cornerRadius: 16)
-                    .stroke(Color.white, lineWidth: 4))
+                ZStack(alignment: .top) {
+                    TextViewWrapper(text: $happyText)
+                        .frame(width: 340, height: 300, alignment: .center)
+                        .padding()
+                        .overlay(RoundedRectangle(cornerRadius: 16)
+                                    .stroke(Color.white, lineWidth: 4))
                     
                     //.padding(.vertical)
+                    
+                    if happyText.isEmpty {
+                        Text("I was happy today because...")
+                            .opacity(0.4)
+                            .padding(.all, 25)
+                            .padding(.trailing, 110)
+                    }
+                }
                 
-                
+                Button(action: {
+                    print("Complete Entry")
+                    
+                    
+                }, label: {
+                    Text("Complete Entry")
+                        .font(.system(size: 20, weight: .bold))
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(LinearGradient(gradient: Gradient(colors: [Color .blue, .pink]), startPoint: .leading, endPoint: .trailing))
+                        .cornerRadius(15)
+                })
+                .padding()
                 
             }
         }
