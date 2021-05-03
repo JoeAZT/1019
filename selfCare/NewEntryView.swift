@@ -34,9 +34,10 @@ struct NewEntryView: View {
                     Spacer()
                     
                     Text(String(format: "%.1f", ratingSlider))
-                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .fontWeight(.bold)
                         .foregroundColor(.white)
                 }
+                .padding(.top, 20)
                 .padding(.horizontal)
                 
                 //Slider
@@ -63,35 +64,39 @@ struct NewEntryView: View {
                 .padding(.top, 30)
                 
                 //Reflection
-                Text(String(format: "Why was you day %.1f?", ratingSlider))
+                Text(String(format: "Why was your day %.1f/10?", ratingSlider))
                     .fontWeight(.bold)
                     .frame(width: 370, height: 20, alignment: .leading)
                     .foregroundColor(.white)
                     .padding(.top, 50)
+                    .padding(.bottom, 15)
                 
                 
                 TextEditor(text: $reflectionText)
                     .frame(width: 340, height: 300, alignment: .leading)
                     .padding()
                     .overlay(RoundedRectangle(cornerRadius: 16)
-                                .stroke(Color.white, lineWidth: 4))
+                    .stroke(Color.white, lineWidth: 4))
                     
-                    .padding(.vertical)
+                    //.padding(.vertical)
                 
                 Text("What made you happy today?")
                     .fontWeight(.bold)
                     .frame(width: 370, height: 20, alignment: .leading)
                     .foregroundColor(.white)
                     .padding(.top, 50)
+                    .padding()
                 
                 
                 TextEditor(text: $happyText)
                     .frame(width: 340, height: 300, alignment: .center)
                     .padding()
                     .overlay(RoundedRectangle(cornerRadius: 16)
-                                .stroke(Color.white, lineWidth: 4))
+                    .stroke(Color.white, lineWidth: 4))
                     
-                    .padding(.vertical)
+                    //.padding(.vertical)
+                
+                
                 
             }
         }
