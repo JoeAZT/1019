@@ -12,16 +12,22 @@ struct NewEntryView: View {
     @State var ratingSlider: Double = 0.0
     @State var reflectionText: String = ""
     @State var happyText: String = ""
+    @Binding var showNewEntryView: Bool
+    @ObservedObject var entryStore: EntryStore
+    
     
     var body: some View {
         
         ScrollView {
             VStack {
                 
+                Color("ModeColor")
+                
+                
                 //Screen Title
                 Text("New Entry")
                     .fontWeight(.semibold)
-                    .foregroundColor(.white)
+                    .foregroundColor(Color("TextColor"))
                     .font(.title)
                     .padding()
                 
@@ -29,13 +35,13 @@ struct NewEntryView: View {
                 HStack {
                     Text("How was your day?")
                         .fontWeight(.bold)
-                        .foregroundColor(.white)
+                        .foregroundColor(Color("TextColor"))
                     
                     Spacer()
                     
                     Text(String(format: "%.1f", ratingSlider))
                         .fontWeight(.bold)
-                        .foregroundColor(.white)
+                        .foregroundColor(Color("TextColor"))
                 }
                 .padding(.top, 20)
                 .padding(.horizontal)
@@ -45,8 +51,8 @@ struct NewEntryView: View {
                 HStack {
                     
                     Text("0")
+                        .foregroundColor(Color("TextColor"))
                     ZStack {
-                        
                         
                         LinearGradient(
                             gradient: Gradient(colors: [.pink, .blue]),
@@ -59,6 +65,7 @@ struct NewEntryView: View {
                             .opacity(0.05)
                     }
                     Text("10")
+                        .foregroundColor(Color("TextColor"))
                 }
                 .padding(.horizontal)
                 .padding(.top, 30)
@@ -67,7 +74,7 @@ struct NewEntryView: View {
                 Text(String(format: "Why was your day %.1f/10?", ratingSlider))
                     .fontWeight(.bold)
                     .frame(width: 370, height: 20, alignment: .leading)
-                    .foregroundColor(.white)
+                    .foregroundColor(Color("TextColor"))
                     .padding(.top, 50)
                     .padding(.bottom, 15)
                 
@@ -77,7 +84,7 @@ struct NewEntryView: View {
                         .frame(width: 340, height: 300, alignment: .leading)
                         .padding()
                         .overlay(RoundedRectangle(cornerRadius: 16)
-                                    .stroke(Color.white, lineWidth: 4))
+                                    .stroke(Color("TextColor"), lineWidth: 4))
                     
                     if reflectionText.isEmpty {
                         Text("Today I felt...")
@@ -93,7 +100,7 @@ struct NewEntryView: View {
                 Text("What made you happy today?")
                     .fontWeight(.bold)
                     .frame(width: 370, height: 20, alignment: .leading)
-                    .foregroundColor(.white)
+                    .foregroundColor(Color("TextColor"))
                     .padding(.top, 50)
                     .padding()
                 
@@ -103,7 +110,7 @@ struct NewEntryView: View {
                         .frame(width: 340, height: 300, alignment: .center)
                         .padding()
                         .overlay(RoundedRectangle(cornerRadius: 16)
-                                    .stroke(Color.white, lineWidth: 4))
+                                    .stroke(Color("TextColor"), lineWidth: 4))
                     
                     //.padding(.vertical)
                     
@@ -117,6 +124,12 @@ struct NewEntryView: View {
                 
                 Button(action: {
                     print("Complete Entry")
+                    
+                    self.showNewEntryView = false
+                    let entry = Entry(id: UUID().uuidString, rating: ratingSlider, reflectionText: reflectionText, happyText: happyText)
+                    entryStore.addEntry(entry)
+                    
+                    print(entry)
                     
                     
                 }, label: {

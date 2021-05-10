@@ -17,6 +17,7 @@ struct HomeView: View {
     @State private var showGoalsView = false
     @State private var showProfileView = false
     @State private var showLinksView = false
+    @StateObject var entryStore = EntryStore()
     
     var body: some View {
         VStack {
@@ -107,7 +108,7 @@ struct HomeView: View {
                         .shadow(color: .black.opacity(0.4), radius: 3, x: 0, y: 3)
                 })
                 .sheet(isPresented: $showJournalView, content: {
-                    JournalView()
+                    JournalView(entryStore: entryStore)
                 })
                 Spacer()
                 
@@ -124,9 +125,9 @@ struct HomeView: View {
                         .foregroundColor(.white)
                         .shadow(color: .black.opacity(0.4), radius: 3, x: 0, y: 3)
                 })
-                .sheet(isPresented: $showNewEntryView, content: {
-                    NewEntryView()
-                })
+                .sheet(isPresented: $showNewEntryView) {
+                    NewEntryView(showNewEntryView: $showNewEntryView, entryStore: entryStore)
+                }
                 Spacer()
                 
                 //Goals Button
