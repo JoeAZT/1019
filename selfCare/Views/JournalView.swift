@@ -13,13 +13,42 @@ struct JournalView: View {
     
     var body: some View {
         
-        List {
-            ForEach(entryStore.entries) { entry in
-                Text(entry.happyText)
-                    .fontWeight(.bold)
-                    .foregroundColor(Color("TextColor"))
-                    .frame(width: 300, height: 100, alignment: .center)
-                    .background(Color.blue)
+        VStack {
+            Text("Journal")
+                .fontWeight(.semibold)
+                .foregroundColor(Color("TextColor"))
+                .font(.title)
+                .padding()
+            
+            List {
+                ForEach(entryStore.entries) { entry in
+                    
+                    HStack {
+                        
+                        VStack(alignment: .leading) {
+                            Text(Date().addingTimeInterval(600), style: .date)
+                            Text(entry.reflectionText)
+                        }
+                        .frame(width: 220, height: 80, alignment: .leading)
+                        .padding()
+                        .overlay(RoundedRectangle(cornerRadius: 16)
+                        .stroke(Color("TextColor"), lineWidth: 4))
+                        .padding()
+                        
+                        VStack(alignment: .center) {
+                            Text("Rating")
+                                .fontWeight(.semibold)
+                                .font(.system(size: 15))
+                            Text(String(format: "%.1f", entry.rating))
+                                .font(.system(size: 40))
+                        }
+                        .frame(width: 80, height: 80)
+                        .padding()
+                        .overlay(RoundedRectangle(cornerRadius: 16)
+                        .stroke(Color("TextColor"), lineWidth: 4))
+                        .padding(5)
+                    }
+                }
             }
         }
     }

@@ -130,6 +130,7 @@ struct NewEntryView: View {
                     entryStore.addEntry(entry)
                     
                     print(entry)
+                    print(Date())
                     
                     
                 }, label: {
