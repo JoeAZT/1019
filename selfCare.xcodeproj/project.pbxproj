@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		710FE17626406AF3005419E0 /* TextViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710FE17526406AF3005419E0 /* TextViewWrapper.swift */; };
+		7110D03F264AA2100051CF62 /* Goals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7110D03E264AA2100051CF62 /* Goals.swift */; };
+		7110D041264AADAD0051CF62 /* NewGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7110D040264AADAD0051CF62 /* NewGoalView.swift */; };
 		71881EA826473CB900604DAC /* Entries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71881EA726473CB900604DAC /* Entries.swift */; };
 		71C47D13263DAAB300C979D9 /* selfCareApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C47D12263DAAB300C979D9 /* selfCareApp.swift */; };
 		71C47D15263DAAB300C979D9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C47D14263DAAB300C979D9 /* HomeView.swift */; };
@@ -23,6 +25,8 @@
 
 /* Begin PBXFileReference section */
 		710FE17526406AF3005419E0 /* TextViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewWrapper.swift; sourceTree = "<group>"; };
+		7110D03E264AA2100051CF62 /* Goals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goals.swift; sourceTree = "<group>"; };
+		7110D040264AADAD0051CF62 /* NewGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGoalView.swift; sourceTree = "<group>"; };
 		71881EA726473CB900604DAC /* Entries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entries.swift; sourceTree = "<group>"; };
 		71C47D0F263DAAB300C979D9 /* selfCare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = selfCare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71C47D12263DAAB300C979D9 /* selfCareApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selfCareApp.swift; sourceTree = "<group>"; };
@@ -49,15 +53,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7110D042264AAE660051CF62 /* Goals */ = {
+			isa = PBXGroup;
+			children = (
+				71F5484F263F0CF400325490 /* GoalsView.swift */,
+				7110D040264AADAD0051CF62 /* NewGoalView.swift */,
+			);
+			path = Goals;
+			sourceTree = "<group>";
+		};
+		7110D043264AAE7A0051CF62 /* Journal */ = {
+			isa = PBXGroup;
+			children = (
+				71F54847263E3A6D00325490 /* JournalView.swift */,
+				71F54849263E3A8C00325490 /* NewEntryView.swift */,
+			);
+			path = Journal;
+			sourceTree = "<group>";
+		};
+		7110D044264AAE8D0051CF62 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				71C47D14263DAAB300C979D9 /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		71881EA62647039900604DAC /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				71F5484B263E3B2A00325490 /* LinksView.swift */,
 				71F5484D263F0CCD00325490 /* ProfileView.swift */,
-				71F5484F263F0CF400325490 /* GoalsView.swift */,
-				71F54849263E3A8C00325490 /* NewEntryView.swift */,
-				71F54847263E3A6D00325490 /* JournalView.swift */,
-				71C47D14263DAAB300C979D9 /* HomeView.swift */,
+				7110D042264AAE660051CF62 /* Goals */,
+				7110D043264AAE7A0051CF62 /* Journal */,
+				7110D044264AAE8D0051CF62 /* Home */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -66,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				71881EA726473CB900604DAC /* Entries.swift */,
+				7110D03E264AA2100051CF62 /* Goals.swift */,
 			);
 			path = Structs;
 			sourceTree = "<group>";
@@ -183,8 +213,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7110D03F264AA2100051CF62 /* Goals.swift in Sources */,
 				71F5484A263E3A8C00325490 /* NewEntryView.swift in Sources */,
 				71F5484C263E3B2A00325490 /* LinksView.swift in Sources */,
+				7110D041264AADAD0051CF62 /* NewGoalView.swift in Sources */,
 				710FE17626406AF3005419E0 /* TextViewWrapper.swift in Sources */,
 				71F54848263E3A6D00325490 /* JournalView.swift in Sources */,
 				71C47D15263DAAB300C979D9 /* HomeView.swift in Sources */,

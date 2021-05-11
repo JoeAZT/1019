@@ -18,6 +18,7 @@ struct HomeView: View {
     @State private var showProfileView = false
     @State private var showLinksView = false
     @StateObject var entryStore = EntryStore()
+    @StateObject var goalStore = GoalStore()
     
     var body: some View {
         VStack {
@@ -133,7 +134,6 @@ struct HomeView: View {
                 //Goals Button
                 Button(action: {
                     
-                    self.rating = Double.random(in: 0.0...1.0)
                     showGoalsView.toggle()
                     
                 }, label: {
@@ -143,9 +143,9 @@ struct HomeView: View {
                         .foregroundColor(.white)
                         .shadow(color: .black.opacity(0.4), radius: 3, x: 0, y: 3)
                 })
-                .sheet(isPresented: $showGoalsView, content: {
-                    GoalsView()
-                })
+                .sheet(isPresented: $showGoalsView) {
+                    GoalsView(goalStore: goalStore)
+                }
                 
             }
             

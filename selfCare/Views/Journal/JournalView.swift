@@ -22,18 +22,17 @@ struct JournalView: View {
             
             List {
                 ForEach(entryStore.entries) { entry in
-                    
                     HStack {
-                        
                         VStack(alignment: .leading) {
                             Text(Date().addingTimeInterval(600), style: .date)
+                                .fontWeight(.semibold)
                             Text(entry.reflectionText)
                         }
                         .frame(width: 220, height: 80, alignment: .leading)
                         .padding()
                         .overlay(RoundedRectangle(cornerRadius: 16)
                         .stroke(Color("TextColor"), lineWidth: 4))
-                        .padding()
+                        .padding(5)
                         
                         VStack(alignment: .center) {
                             Text("Rating")

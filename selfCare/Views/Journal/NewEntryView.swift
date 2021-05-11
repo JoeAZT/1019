@@ -18,18 +18,16 @@ struct NewEntryView: View {
     
     var body: some View {
         
+        VStack {
+            
+            //Screen Title
+            Text("New Entry")
+                .fontWeight(.semibold)
+                .foregroundColor(Color("TextColor"))
+                .font(.title)
+                .padding()
+        
         ScrollView {
-            VStack {
-                
-                Color("ModeColor")
-                
-                
-                //Screen Title
-                Text("New Entry")
-                    .fontWeight(.semibold)
-                    .foregroundColor(Color("TextColor"))
-                    .font(.title)
-                    .padding()
                 
                 //First line
                 HStack {
@@ -130,7 +128,6 @@ struct NewEntryView: View {
                     entryStore.addEntry(entry)
                     
                     print(entry)
-                    print(Date())
                     
                     
                 }, label: {
