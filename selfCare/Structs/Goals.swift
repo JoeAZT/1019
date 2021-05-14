@@ -16,6 +16,7 @@ struct Goal: Identifiable {
 //    }
     
     var id: String
+    let title: String
     let goalText: String
     let completed: Bool
     //let importance:

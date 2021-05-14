@@ -12,7 +12,6 @@ struct GoalsView: View {
     @ObservedObject var goalStore: GoalStore
     @State private var showNewGoalView = false
     
-    
     var body: some View {
         
         VStack {
@@ -24,18 +23,38 @@ struct GoalsView: View {
             
             VStack {
                 
-                List {
-                    ForEach(goalStore.goals) { goal in
-                            VStack(alignment: .leading) {
+                ZStack {
+                    
+                    List {
+                        ForEach(goalStore.goals) { goal in
+                                VStack(alignment: .center) {
 
-                                Text(goal.goalText)
-                            }
-                            .frame(width: 220, height: 80, alignment: .leading)
-                            .padding()
-                            .overlay(RoundedRectangle(cornerRadius: 16)
-                            .stroke(Color("TextColor"), lineWidth: 4))
-                            .padding(5)
+                                    Text(goal.title)
+                                }
+                                .frame(width: 350, height: 80, alignment: .leading)
+                                .padding()
+                                .overlay(RoundedRectangle(cornerRadius: 16)
+                                .stroke(Color("TextColor"), lineWidth: 4))
+                                .padding(5)
+                                
+                        }
+                    }
+                    
+                    if goalStore.goals.isEmpty {
+                        
+                        VStack {
+                            Image(systemName: "plus.circle")
+                                .font(.system(size: 200, weight: .regular, design: .default))
+                                .padding(30)
                             
+                            Text("When you enter goals they will appear on this screen. It's up to you whether they're short term or long term, or if they should be assigned as daily goals.")
+                                .font(.system(size: 20, weight: .regular, design: .default))
+                                .multilineTextAlignment(.center)
+                                .padding(.horizontal, 60)
+                            
+                        }
+                            .opacity(0.4)
+                        .padding(.bottom, 50)
                     }
                 }
                 Button(action: {

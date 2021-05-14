@@ -127,6 +127,8 @@ struct NewEntryView: View {
                     let entry = Entry(id: UUID().uuidString, rating: ratingSlider, reflectionText: reflectionText, happyText: happyText)
                     entryStore.addEntry(entry)
                     
+                    //CacheStorageManager.shared.saveEntries()
+                    
                     print(entry)
                     
                     

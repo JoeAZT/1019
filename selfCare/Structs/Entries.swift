@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Entry: Identifiable {
+struct Entry: Identifiable, Codable {
     let id: String
     let rating: Double
     let reflectionText: String
