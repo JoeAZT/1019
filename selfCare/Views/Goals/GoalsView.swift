@@ -24,24 +24,21 @@ struct GoalsView: View {
             VStack {
                 
                 ZStack {
-                    
+                    //List of goals
                     List {
                         ForEach(goalStore.goals) { goal in
                                 VStack(alignment: .center) {
-
                                     Text(goal.title)
                                 }
-                                .frame(width: 350, height: 80, alignment: .leading)
+                                .frame(width: 350, height: 40, alignment: .leading)
                                 .padding()
                                 .overlay(RoundedRectangle(cornerRadius: 16)
                                 .stroke(Color("TextColor"), lineWidth: 4))
                                 .padding(5)
-                                
                         }
                     }
-                    
+                    //Empty goal list placeholder
                     if goalStore.goals.isEmpty {
-                        
                         VStack {
                             Image(systemName: "plus.circle")
                                 .font(.system(size: 200, weight: .regular, design: .default))
@@ -58,7 +55,6 @@ struct GoalsView: View {
                     }
                 }
                 Button(action: {
-                    print("Create Goal Screen")
                     showNewGoalView.toggle()
                     
                 }, label: {

@@ -52,18 +52,21 @@ struct JournalView: View {
                     }
                 }
                 
-                VStack {
-                    Image(systemName: "plus.circle")
-                        .font(.system(size: 200, weight: .regular, design: .default))
-                        .padding(30)
+                if entryStore.entries.isEmpty {
                     
-                    Text("When you create journal entries they will appear on this screen. It's ok if you dont want to write anything down some days, you just have to give me a rating.")
-                        .font(.system(size: 20, weight: .regular, design: .default))
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal, 60)
+                    VStack {
+                        Image(systemName: "plus.circle")
+                            .font(.system(size: 200, weight: .regular, design: .default))
+                            .padding(30)
+                        
+                        Text("When you create journal entries they will appear on this screen. It's ok if you dont want to write anything down some days, you just have to give me a rating.")
+                            .font(.system(size: 20, weight: .regular, design: .default))
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 60)
+                    }
+                    .opacity(0.4)
+                    .padding(.bottom, 50)
                 }
-                .opacity(0.4)
-                .padding(.bottom, 50)
             }
         }
         

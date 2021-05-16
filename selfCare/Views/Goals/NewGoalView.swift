@@ -65,7 +65,7 @@ struct NewGoalView: View {
                             .overlay(RoundedRectangle(cornerRadius: 16)
                                         .stroke(Color("TextColor"), lineWidth: 4))
                             .padding(.bottom, 10)
-                        if titleText.isEmpty {
+                        if goalText.isEmpty {
                             Text("Tell me more abut your goal...")
                                 .opacity(0.4)
                                 .padding(.all, 25)
