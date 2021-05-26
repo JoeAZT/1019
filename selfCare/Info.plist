@@ -31,6 +31,10 @@
 	<true/>
 	<key>UILaunchScreen</key>
 	<dict/>
+	<key>Image Name</key>
+	<string>selfCare logo</string>
+	<key>Background color</key>
+	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

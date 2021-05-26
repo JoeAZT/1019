@@ -20,11 +20,14 @@ struct HomeView: View {
     @StateObject var entryStore = EntryStore()
     @StateObject var goalStore = GoalStore()
     
+    @State var selectedPage = 0
+    
     var body: some View {
         VStack {
             
             HStack {
                 
+                //Profile
                 Button(action: {
                     showProfileView.toggle()
                     
@@ -38,8 +41,18 @@ struct HomeView: View {
                 .sheet(isPresented: $showProfileView, content: {
                     ProfileView()
                 })
+                
+                Spacer()
+                //Logo
+                Image("selfCare logo")
+                    .resizable()
+                        .scaledToFit()
+                        .frame(width: 60.0, height: 60.0)
+                    .shadow(color: .black.opacity(0.4), radius: 3, x: 0, y: 3)
+
                 Spacer()
                 
+                //Links
                 Button(action: {
                     
                     showLinksView.toggle()
@@ -56,39 +69,15 @@ struct HomeView: View {
                 })
             }
             
-            
-            
-            ZStack {
+            //Tab view sections
+            TabView(selection: $selectedPage) {
+                CircleGraphic(rating: rating)
+                .tag(0)
                 
-                //Circle Track
-                Circle()
-                    .stroke(lineWidth: 40)
-                    .opacity(0.1)
-                    .foregroundColor(.black)
-                
-                
-                VStack {
-                    Text("Your average rating:")
-                        .font(.system(size: 15, weight: .bold, design: .default))
-                        .foregroundColor(.white)
-                        .shadow(color: .black.opacity(0.2), radius: 3, x: 0, y: 3)
-                    
-                    Text(String(format: "%.1f", rating * 10))
-                        .font(.system(size: 148))
-                        .foregroundColor(.white)
-                        .shadow(color: .black.opacity(0.3), radius: 3, x: 0, y: 3)
-                }
-                
-                Circle()
-                    .trim(from: 0.0, to: CGFloat(self.rating))
-                    .stroke(style: StrokeStyle(lineWidth: 40.0, lineCap: .round, lineJoin: .round))
-                    .foregroundColor(.white)
-                    .shadow(color: .black.opacity(0.2), radius: 3, x: 0, y: 3)
-                    .animation(Animation.easeInOut(duration: 2.0))
-                    .rotationEffect(.degrees(-90))
+                FeelingsGraphs()
+                .tag(1)
             }
-            .padding(.horizontal, 50)
-            
+            .tabViewStyle(PageTabViewStyle())
             
             Spacer()
             
@@ -154,6 +143,7 @@ struct HomeView: View {
         .embedInBackground()
     }
 }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

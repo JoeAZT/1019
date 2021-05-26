@@ -12,7 +12,11 @@
 		7110D041264AADAD0051CF62 /* NewGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7110D040264AADAD0051CF62 /* NewGoalView.swift */; };
 		7110D047264AC5F50051CF62 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 7110D046264AC5F50051CF62 /* Cache */; };
 		7110D049264AC9B00051CF62 /* CacheStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7110D048264AC9B00051CF62 /* CacheStorageManager.swift */; };
+		714ED70A265E7E2B00007B99 /* CircleGraphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714ED709265E7E2B00007B99 /* CircleGraphic.swift */; };
+		714ED70C265E7F9A00007B99 /* FeelingsGraphs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714ED70B265E7F9A00007B99 /* FeelingsGraphs.swift */; };
 		71881EA826473CB900604DAC /* Entries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71881EA726473CB900604DAC /* Entries.swift */; };
+		71A09A92265E886200554FC8 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 71A09A91265E886200554FC8 /* SwiftUICharts */; };
+		71A09A94265EA06D00554FC8 /* MoodGraphs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A09A93265EA06D00554FC8 /* MoodGraphs.swift */; };
 		71C47D13263DAAB300C979D9 /* selfCareApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C47D12263DAAB300C979D9 /* selfCareApp.swift */; };
 		71C47D15263DAAB300C979D9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C47D14263DAAB300C979D9 /* HomeView.swift */; };
 		71C47D17263DAAB800C979D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71C47D16263DAAB800C979D9 /* Assets.xcassets */; };
@@ -30,7 +34,10 @@
 		7110D03E264AA2100051CF62 /* Goals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goals.swift; sourceTree = "<group>"; };
 		7110D040264AADAD0051CF62 /* NewGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGoalView.swift; sourceTree = "<group>"; };
 		7110D048264AC9B00051CF62 /* CacheStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheStorageManager.swift; sourceTree = "<group>"; };
+		714ED709265E7E2B00007B99 /* CircleGraphic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleGraphic.swift; sourceTree = "<group>"; };
+		714ED70B265E7F9A00007B99 /* FeelingsGraphs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeelingsGraphs.swift; sourceTree = "<group>"; };
 		71881EA726473CB900604DAC /* Entries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entries.swift; sourceTree = "<group>"; };
+		71A09A93265EA06D00554FC8 /* MoodGraphs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodGraphs.swift; sourceTree = "<group>"; };
 		71C47D0F263DAAB300C979D9 /* selfCare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = selfCare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71C47D12263DAAB300C979D9 /* selfCareApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selfCareApp.swift; sourceTree = "<group>"; };
 		71C47D14263DAAB300C979D9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -49,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71A09A92265E886200554FC8 /* SwiftUICharts in Frameworks */,
 				71C47D23263DDA6200C979D9 /* IrregularGradient in Frameworks */,
 				7110D047264AC5F50051CF62 /* Cache in Frameworks */,
 			);
@@ -78,6 +86,9 @@
 		7110D044264AAE8D0051CF62 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				714ED709265E7E2B00007B99 /* CircleGraphic.swift */,
+				714ED70B265E7F9A00007B99 /* FeelingsGraphs.swift */,
+				71A09A93265EA06D00554FC8 /* MoodGraphs.swift */,
 				71C47D14263DAAB300C979D9 /* HomeView.swift */,
 			);
 			path = Home;
@@ -104,11 +115,19 @@
 			path = Structs;
 			sourceTree = "<group>";
 		};
+		71A09A90265E886200554FC8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		71C47D06263DAAB300C979D9 = {
 			isa = PBXGroup;
 			children = (
 				71C47D11263DAAB300C979D9 /* selfCare */,
 				71C47D10263DAAB300C979D9 /* Products */,
+				71A09A90265E886200554FC8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -162,6 +181,7 @@
 			packageProductDependencies = (
 				71C47D22263DDA6200C979D9 /* IrregularGradient */,
 				7110D046264AC5F50051CF62 /* Cache */,
+				71A09A91265E886200554FC8 /* SwiftUICharts */,
 			);
 			productName = selfCare;
 			productReference = 71C47D0F263DAAB300C979D9 /* selfCare.app */;
@@ -193,6 +213,7 @@
 			packageReferences = (
 				71C47D21263DDA6200C979D9 /* XCRemoteSwiftPackageReference "IrregularGradient" */,
 				7110D045264AC5F50051CF62 /* XCRemoteSwiftPackageReference "Cache" */,
+				714ED70D265E80BD00007B99 /* XCRemoteSwiftPackageReference "SwiftUICharts" */,
 			);
 			productRefGroup = 71C47D10263DAAB300C979D9 /* Products */;
 			projectDirPath = "";
@@ -229,9 +250,12 @@
 				71F54848263E3A6D00325490 /* JournalView.swift in Sources */,
 				71C47D15263DAAB300C979D9 /* HomeView.swift in Sources */,
 				71881EA826473CB900604DAC /* Entries.swift in Sources */,
+				714ED70A265E7E2B00007B99 /* CircleGraphic.swift in Sources */,
 				71F54850263F0CF400325490 /* GoalsView.swift in Sources */,
 				71F5484E263F0CCD00325490 /* ProfileView.swift in Sources */,
 				71C47D13263DAAB300C979D9 /* selfCareApp.swift in Sources */,
+				71A09A94265EA06D00554FC8 /* MoodGraphs.swift in Sources */,
+				714ED70C265E7F9A00007B99 /* FeelingsGraphs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,6 +454,14 @@
 				minimumVersion = 6.0.0;
 			};
 		};
+		714ED70D265E80BD00007B99 /* XCRemoteSwiftPackageReference "SwiftUICharts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mecid/SwiftUICharts";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.6.2;
+			};
+		};
 		71C47D21263DDA6200C979D9 /* XCRemoteSwiftPackageReference "IrregularGradient" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/joogps/IrregularGradient";
@@ -445,6 +477,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7110D045264AC5F50051CF62 /* XCRemoteSwiftPackageReference "Cache" */;
 			productName = Cache;
+		};
+		71A09A91265E886200554FC8 /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 714ED70D265E80BD00007B99 /* XCRemoteSwiftPackageReference "SwiftUICharts" */;
+			productName = SwiftUICharts;
 		};
 		71C47D22263DDA6200C979D9 /* IrregularGradient */ = {
 			isa = XCSwiftPackageProductDependency;
