@@ -25,17 +25,51 @@ let points: [DataPoint] = [
 struct FeelingsGraphs: View {
     var body: some View {
         
-        VStack {
-            Text("Mood graph")
-                .font(.system(size: 25, weight: .bold, design: .default))
-                .foregroundColor(.white)
-                .padding(.trailing, 200)
+        ScrollView {
+            ZStack {
+                RoundedRectangle(cornerRadius: 20)
+                    .frame(width: 400, height: 470, alignment: .center)
+                    .opacity(0.2)
                 
+                VStack(alignment: .leading) {
+                    Text("Your ratings this week:")
+                        .font(.system(size: 25, weight: .bold, design: .default))
+                        .foregroundColor(.white)
+                        .padding()
+                    
+                    BarChartView(dataPoints: points)
+                        .chartStyle(
+                            BarChartStyle(
+                                barMinHeight: 1,
+                                showAxis: true,
+                                axisLeadingPadding: 10,
+                                showLabels: true,
+                                labelCount: 10,
+                                showLegends: false
+                            )
+                        )
+                        .frame(width: 350, height: 350, alignment: .center)
+                        .padding()
+                        .accentColor(.white)
+                        .foregroundColor(.white)
+                }
+            }
             
-            LineChartView(dataPoints: points)
-                .frame(width: 400, height: 500, alignment: .center)
-                .padding()
-                .accentColor(.white)
+            ZStack {
+                RoundedRectangle(cornerRadius: 20)
+                    .frame(width: 400, height: 120, alignment: .center)
+                    .opacity(0.2)
+                
+                VStack(alignment: .leading) {
+                    Text("Your mood this week:")
+                        .font(.system(size: 25, weight: .bold, design: .default))
+                        .foregroundColor(.white)
+                        .padding()
+        
+                    
+                    
+                }
+            }
         }
     }
 }

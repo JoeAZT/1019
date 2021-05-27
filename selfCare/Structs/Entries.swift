@@ -12,6 +12,14 @@ struct Entry: Identifiable, Codable {
     let rating: Double
     let reflectionText: String
     let happyText: String
+    
+    enum mood: String {
+        case vsad = "😣"
+        case sad = "😞"
+        case ok = "😐"
+        case good = "😊"
+        case vgood = "😄"
+    }
 }
 
 class EntryStore: ObservableObject {

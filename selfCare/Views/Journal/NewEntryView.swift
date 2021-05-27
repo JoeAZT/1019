@@ -12,6 +12,8 @@ struct NewEntryView: View {
     @State var ratingSlider: Double = 0.0
     @State var reflectionText: String = ""
     @State var happyText: String = ""
+    @State var moodText: String = "😐"
+    @State var mood: Entry.mood = .ok
     @Binding var showNewEntryView: Bool
     @ObservedObject var entryStore: EntryStore
     
@@ -42,7 +44,7 @@ struct NewEntryView: View {
                         .foregroundColor(Color("TextColor"))
                 }
                 .padding(.top, 20)
-                .padding(.horizontal)
+                .padding(.horizontal, 30)
                 
                 //Slider
                 
@@ -110,8 +112,6 @@ struct NewEntryView: View {
                         .overlay(RoundedRectangle(cornerRadius: 16)
                                     .stroke(Color("TextColor"), lineWidth: 4))
                     
-                    //.padding(.vertical)
-                    
                     if happyText.isEmpty {
                         Text("I was happy today because...")
                             .opacity(0.4)
@@ -119,7 +119,87 @@ struct NewEntryView: View {
                             .padding(.trailing, 110)
                     }
                 }
-                
+            
+            VStack {
+                Text("Use an emoji to describe how you felt about today:")
+                    .fontWeight(.bold)
+                    .lineLimit(nil)
+                    .foregroundColor(Color("TextColor"))
+                    .padding(.top, 50)
+                    .padding()
+                HStack {
+                    
+                    Button(action: {
+                        print("😣")
+                        mood = .vsad
+                        
+                    }, label: {
+                        Text("😣")
+                            .font(.system(size: 50, weight: .bold))
+                            .foregroundColor(.white)
+                            .padding(5)
+                            .cornerRadius(15)
+                            .opacity(mood == .vsad ? 1 : 0.5)
+
+                    })
+                    
+                    Button(action: {
+                        print("😞")
+                        mood = .sad
+                        
+                    }, label: {
+                        Text("😞")
+                            .font(.system(size: 50, weight: .bold))
+                            .foregroundColor(.white)
+                            .padding(5)
+                            .cornerRadius(15)
+                            .opacity(mood == .sad ? 1 : 0.5)
+                        
+                    })
+                    
+                    Button(action: {
+                        print("😐")
+                        mood = .ok
+                        
+                    }, label: {
+                        Text("😐")
+                            .font(.system(size: 50, weight: .bold))
+                            .foregroundColor(.white)
+                            .padding(5)
+                            .cornerRadius(15)
+                            .opacity(mood == .ok ? 1 : 0.5)
+                    })
+                    
+                    Button(action: {
+                        print("☺️")
+                        mood = .good
+                        
+                    }, label: {
+                        Text("☺️")
+                            .font(.system(size: 50, weight: .bold))
+                            .foregroundColor(.white)
+                            .padding(5)
+                            .cornerRadius(15)
+                            .opacity(mood == .good ? 1 : 0.5)
+                    })
+                    
+                    Button(action: {
+                        print("😃")
+                        mood = .vgood
+                        
+                    }, label: {
+                        Text("😃")
+                            .font(.system(size: 50, weight: .bold))
+                            .foregroundColor(.white)
+                            .padding(5)
+                            .cornerRadius(15)
+                            .opacity(mood == .vgood ? 1 : 0.5)
+                    })
+                }
+                .padding(.horizontal)
+            }
+            
+                //complete entry button
                 Button(action: {
                     print("Complete Entry")
                     

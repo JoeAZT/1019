@@ -16,7 +16,6 @@
 		714ED70C265E7F9A00007B99 /* FeelingsGraphs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714ED70B265E7F9A00007B99 /* FeelingsGraphs.swift */; };
 		71881EA826473CB900604DAC /* Entries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71881EA726473CB900604DAC /* Entries.swift */; };
 		71A09A92265E886200554FC8 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 71A09A91265E886200554FC8 /* SwiftUICharts */; };
-		71A09A94265EA06D00554FC8 /* MoodGraphs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A09A93265EA06D00554FC8 /* MoodGraphs.swift */; };
 		71C47D13263DAAB300C979D9 /* selfCareApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C47D12263DAAB300C979D9 /* selfCareApp.swift */; };
 		71C47D15263DAAB300C979D9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C47D14263DAAB300C979D9 /* HomeView.swift */; };
 		71C47D17263DAAB800C979D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71C47D16263DAAB800C979D9 /* Assets.xcassets */; };
@@ -37,7 +36,6 @@
 		714ED709265E7E2B00007B99 /* CircleGraphic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleGraphic.swift; sourceTree = "<group>"; };
 		714ED70B265E7F9A00007B99 /* FeelingsGraphs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeelingsGraphs.swift; sourceTree = "<group>"; };
 		71881EA726473CB900604DAC /* Entries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entries.swift; sourceTree = "<group>"; };
-		71A09A93265EA06D00554FC8 /* MoodGraphs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodGraphs.swift; sourceTree = "<group>"; };
 		71C47D0F263DAAB300C979D9 /* selfCare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = selfCare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71C47D12263DAAB300C979D9 /* selfCareApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selfCareApp.swift; sourceTree = "<group>"; };
 		71C47D14263DAAB300C979D9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -88,7 +86,6 @@
 			children = (
 				714ED709265E7E2B00007B99 /* CircleGraphic.swift */,
 				714ED70B265E7F9A00007B99 /* FeelingsGraphs.swift */,
-				71A09A93265EA06D00554FC8 /* MoodGraphs.swift */,
 				71C47D14263DAAB300C979D9 /* HomeView.swift */,
 			);
 			path = Home;
@@ -254,7 +251,6 @@
 				71F54850263F0CF400325490 /* GoalsView.swift in Sources */,
 				71F5484E263F0CCD00325490 /* ProfileView.swift in Sources */,
 				71C47D13263DAAB300C979D9 /* selfCareApp.swift in Sources */,
-				71A09A94265EA06D00554FC8 /* MoodGraphs.swift in Sources */,
 				714ED70C265E7F9A00007B99 /* FeelingsGraphs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
