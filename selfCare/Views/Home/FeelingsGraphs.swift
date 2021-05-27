@@ -66,7 +66,8 @@ struct FeelingsGraphs: View {
                         .foregroundColor(.white)
                         .padding()
         
-                    
+                    //Use this webiste to create array that shows the last 7 days of emojis or graph entries
+                    //https://reactgo.com/swift-get-last-n-elements-array/
                     
                 }
             }
