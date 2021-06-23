@@ -13,10 +13,9 @@ struct NewEntryView: View {
     @State var reflectionText: String = ""
     @State var happyText: String = ""
     @State var moodText: String = "😐"
-    @State var mood: Entry.mood = .ok
+    @State var mood: Entry.Mood = .ok
     @Binding var showNewEntryView: Bool
     @ObservedObject var entryStore: EntryStore
-    
     
     var body: some View {
         
@@ -130,7 +129,6 @@ struct NewEntryView: View {
                 HStack {
                     
                     Button(action: {
-                        print("😣")
                         mood = .vsad
                         
                     }, label: {
@@ -144,7 +142,6 @@ struct NewEntryView: View {
                     })
                     
                     Button(action: {
-                        print("😞")
                         mood = .sad
                         
                     }, label: {
@@ -158,7 +155,6 @@ struct NewEntryView: View {
                     })
                     
                     Button(action: {
-                        print("😐")
                         mood = .ok
                         
                     }, label: {
@@ -171,11 +167,11 @@ struct NewEntryView: View {
                     })
                     
                     Button(action: {
-                        print("☺️")
+
                         mood = .good
                         
                     }, label: {
-                        Text("☺️")
+                        Text("😊")
                             .font(.system(size: 50, weight: .bold))
                             .foregroundColor(.white)
                             .padding(5)
@@ -184,11 +180,10 @@ struct NewEntryView: View {
                     })
                     
                     Button(action: {
-                        print("😃")
                         mood = .vgood
                         
                     }, label: {
-                        Text("😃")
+                        Text("😄")
                             .font(.system(size: 50, weight: .bold))
                             .foregroundColor(.white)
                             .padding(5)
@@ -201,16 +196,10 @@ struct NewEntryView: View {
             
                 //complete entry button
                 Button(action: {
-                    print("Complete Entry")
                     
                     self.showNewEntryView = false
-                    let entry = Entry(id: UUID().uuidString, rating: ratingSlider, reflectionText: reflectionText, happyText: happyText)
+                    let entry = Entry(id: UUID().uuidString, rating: ratingSlider, reflectionText: reflectionText, happyText: happyText, mood: mood, date: Date())
                     entryStore.addEntry(entry)
-                    
-                    //CacheStorageManager.shared.saveEntries()
-                    
-                    print(entry)
-                    
                     
                 }, label: {
                     Text("Complete Entry")
@@ -221,12 +210,10 @@ struct NewEntryView: View {
                         .cornerRadius(15)
                 })
                 .padding()
-                
             }
         }
     }
 }
-
 
 struct NewEntryView_Previews: PreviewProvider {
     static var previews: some View {

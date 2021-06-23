@@ -83,10 +83,7 @@ struct NewGoalView: View {
                 goalStore.addGoal(goal)
                 
                 //CacheStorageManager.shared.saveEntries()
-                
-                print(goal)
-                
-                
+            
             }, label: {
                 Text("Complete Entry")
                     .font(.system(size: 20, weight: .bold))

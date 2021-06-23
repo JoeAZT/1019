@@ -9,17 +9,10 @@ import Foundation
 
 struct Goal: Identifiable {
     
-//    enum importance: Int {
-//        case low = 1
-//        case high = 2
-//        case daily = 3
-//    }
-    
     var id: String
     let title: String
     let goalText: String
     let completed: Bool
-    //let importance:
 }
 
 class GoalStore: ObservableObject {

@@ -11,18 +11,19 @@ import SwiftUICharts
 let chartLegend = Legend(color: .white, label: "Your week")
 
 let points: [DataPoint] = [
-
     .init(value: 3, label: "Mon", legend: chartLegend),
     .init(value: 2, label: "Tue", legend: chartLegend),
     .init(value: 7, label: "Wed", legend: chartLegend),
     .init(value: 10, label: "Thu", legend: chartLegend),
     .init(value: 8, label: "Fri", legend: chartLegend),
     .init(value: 6, label: "Sat", legend: chartLegend),
-    .init(value: 7, label: "Sun", legend: chartLegend),
-    
+    .init(value: 7, label: "Sun", legend: chartLegend), 
 ]
 
 struct FeelingsGraphs: View {
+    
+    @ObservedObject var entryStore: EntryStore
+    
     var body: some View {
         
         ScrollView {
@@ -37,7 +38,7 @@ struct FeelingsGraphs: View {
                         .foregroundColor(.white)
                         .padding()
                     
-                    BarChartView(dataPoints: points)
+                    BarChartView(dataPoints: entryStore.graphEntries)
                         .chartStyle(
                             BarChartStyle(
                                 barMinHeight: 1,
@@ -64,19 +65,27 @@ struct FeelingsGraphs: View {
                     Text("Your mood this week:")
                         .font(.system(size: 25, weight: .bold, design: .default))
                         .foregroundColor(.white)
-                        .padding()
+                        .padding(.leading, 25)
         
                     //Use this webiste to create array that shows the last 7 days of emojis or graph entries
-                    //https://reactgo.com/swift-get-last-n-elements-array/
-                    
+                    ScrollView(.horizontal) {
+                        HStack {
+                            ForEach(entryStore.entries.map(\.value)) { entry in
+                                Text(entry.mood.rawValue)
+                                    .font(.system(size: 40, weight: .regular, design: .default))
+                            }
+                        }
+                        .padding(.horizontal, 20)
+                    }
                 }
+                .padding(.horizontal, 10)
             }
         }
     }
 }
 
-struct FeelingsGraphs_Previews: PreviewProvider {
-    static var previews: some View {
-        FeelingsGraphs()
-    }
-}
+//struct FeelingsGraphs_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FeelingsGraphs()
+//    }
+//}

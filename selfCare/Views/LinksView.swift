@@ -11,9 +11,24 @@ struct LinksView: View {
     
     var body: some View {
         
+        Text("Your Links this week:")
+            .fontWeight(.semibold)
+            .foregroundColor(Color("TextColor"))
+            .font(.title)
+            .padding()
+        
         VStack {
-            Button("Links") {
-                
+            List {
+                ForEach(1..<10) {_ in
+                    HStack {
+                        Image(systemName: "person.circle.fill")
+                            .padding()
+                            .font(.system(size: 50))
+                            .foregroundColor(.white)
+                            .shadow(color: .black.opacity(0.4), radius: 3, x: 0, y: 3)
+                        Text("Lots of text about related article")
+                    }
+                }
             }
         }
     }

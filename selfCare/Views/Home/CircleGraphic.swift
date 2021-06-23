@@ -26,14 +26,14 @@ struct CircleGraphic: View {
                     .foregroundColor(.white)
                     .shadow(color: .black.opacity(0.2), radius: 3, x: 0, y: 3)
                 
-                Text(String(format: "%.1f", rating * 10))
-                    .font(.system(size: 148))
+                Text(String(format: "%.1f", rating))
+                    .font(.system(size: 140))
                     .foregroundColor(.white)
                     .shadow(color: .black.opacity(0.3), radius: 3, x: 0, y: 3)
             }
             
             Circle()
-                .trim(from: 0.0, to: CGFloat(self.rating))
+                .trim(from: 0.0, to: CGFloat(self.rating / 10))
                 .stroke(style: StrokeStyle(lineWidth: 40.0, lineCap: .round, lineJoin: .round))
                 .frame(width: 300, height: 300, alignment: .center)
                 .foregroundColor(.white)

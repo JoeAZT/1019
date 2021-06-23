@@ -10,7 +10,6 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @State private var rating: Double = 0.00001
     @State private var wave = false
     @State private var showJournalView = false
     @State private var showNewEntryView = false
@@ -54,7 +53,6 @@ struct HomeView: View {
                 
                 //Links
                 Button(action: {
-                    
                     showLinksView.toggle()
                     
                 }, label: {
@@ -71,10 +69,10 @@ struct HomeView: View {
             
             //Tab view sections
             TabView(selection: $selectedPage) {
-                CircleGraphic(rating: rating)
+                CircleGraphic(rating: entryStore.average())
                 .tag(0)
                 
-                FeelingsGraphs()
+                FeelingsGraphs(entryStore: entryStore)
                 .tag(1)
             }
             .tabViewStyle(PageTabViewStyle())
@@ -85,8 +83,6 @@ struct HomeView: View {
                 
                 //Journal Button
                 Button(action: {
-                    
-                    self.rating = Double.random(in: 0.0...1.0)
                     showJournalView.toggle()
                 }
                 
@@ -104,8 +100,6 @@ struct HomeView: View {
                 
                 //Add new entry button
                 Button(action: {
-                    
-                    self.rating = Double.random(in: 0.0...1.0)
                     showNewEntryView.toggle()
                     
                 }, label: {
@@ -135,11 +129,8 @@ struct HomeView: View {
                 .sheet(isPresented: $showGoalsView) {
                     GoalsView(goalStore: goalStore)
                 }
-                
             }
-            
         }
-        
         .embedInBackground()
     }
 }

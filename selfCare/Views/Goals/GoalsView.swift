@@ -22,7 +22,6 @@ struct GoalsView: View {
                 .padding()
             
             VStack {
-                
                 ZStack {
                     //List of goals
                     List {
@@ -50,7 +49,7 @@ struct GoalsView: View {
                                 .padding(.horizontal, 60)
                             
                         }
-                            .opacity(0.4)
+                        .opacity(0.4)
                         .padding(.bottom, 50)
                     }
                 }
