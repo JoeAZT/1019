@@ -44,10 +44,31 @@ class EntryStore: ObservableObject {
         return formatter
     }()
     
+    private let cacheStorageManager: CacheStorageManager
+    
+    init() {
+        let manager = CacheStorageManager()
+        let entries = manager.getEntries()
+        
+        self.cacheStorageManager = manager
+        
+        var entriesDict = [String: Entry]()
+        for entry in entries {
+            entriesDict[dateFormatter.string(from: entry.date)] = entry
+        }
+        self.entries = entriesDict
+        updateChartEntries()
+    }
+    
     func addEntry(_ entry: Entry) {
         let dateString = dateFormatter.string(from: entry.date)
         entries[dateString] = entry
         updateChartEntries()
+        saveEntriesToCache()
+    }
+    
+    private func saveEntriesToCache() {
+        cacheStorageManager.saveEntries(entries.map(\.value))
     }
     
     private func updateChartEntries() {
@@ -81,5 +102,10 @@ class EntryStore: ObservableObject {
             let average = total / Double(entries.count)
             return average
         }
+    }
+    
+    func todaysEntry() -> Entry? {
+        let todayString = dateFormatter.string(from: Date())
+        return entries[todayString]
     }
 }

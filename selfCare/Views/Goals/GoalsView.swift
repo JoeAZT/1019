@@ -15,7 +15,7 @@ struct GoalsView: View {
     var body: some View {
         
         VStack {
-            Text("Goals")
+            Text("Targets")
                 .fontWeight(.semibold)
                 .foregroundColor(Color("TextColor"))
                 .font(.title)
@@ -26,16 +26,25 @@ struct GoalsView: View {
                     //List of goals
                     List {
                         ForEach(goalStore.goals) { goal in
-                                VStack(alignment: .center) {
-                                    Text(goal.title)
-                                }
-                                .frame(width: 350, height: 40, alignment: .leading)
-                                .padding()
-                                .overlay(RoundedRectangle(cornerRadius: 16)
-                                .stroke(Color("TextColor"), lineWidth: 4))
-                                .padding(5)
+                            HStack {
+                                Text(goal.title)
+                                    .foregroundColor(goal.completed ? Color.gray : Color("TextColor"))
+                                    .fontWeight(.bold)
+                                Spacer()
+                                Image(systemName: goal.completed ? "checkmark.square" : "square")
+                                    .font(.system(size: 30, weight: .bold, design: .default))
+                                    .onTapGesture {
+                                        goalStore.toggleCompletedFor(goal)
+                                    }
+                            }
+                            .frame(width: 360, height: 40, alignment: .leading)
+                            .padding(8)
+                            .padding(.horizontal, 5)
+                            .overlay(RoundedRectangle(cornerRadius: 16)
+                            .stroke(Color("TextColor"), lineWidth: 4))
                         }
                     }
+                    .padding(.leading, -3)
                     //Empty goal list placeholder
                     if goalStore.goals.isEmpty {
                         VStack {
@@ -53,6 +62,7 @@ struct GoalsView: View {
                         .padding(.bottom, 50)
                     }
                 }
+                
                 Button(action: {
                     showNewGoalView.toggle()
                     

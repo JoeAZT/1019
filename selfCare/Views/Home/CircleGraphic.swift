@@ -19,7 +19,6 @@ struct CircleGraphic: View {
                 .foregroundColor(.black)
                 .frame(width: 300, height: 300, alignment: .center)
             
-            
             VStack {
                 Text("Your average rating:")
                     .font(.system(size: 15, weight: .bold, design: .default))
@@ -27,7 +26,7 @@ struct CircleGraphic: View {
                     .shadow(color: .black.opacity(0.2), radius: 3, x: 0, y: 3)
                 
                 Text(String(format: "%.1f", rating))
-                    .font(.system(size: 140))
+                    .font(.system(size: 130))
                     .foregroundColor(.white)
                     .shadow(color: .black.opacity(0.3), radius: 3, x: 0, y: 3)
             }

@@ -13,11 +13,11 @@ struct NewGoalView: View {
     @State var titleText: String = ""
     @Binding var showGoalView: Bool
     @ObservedObject var goalStore: GoalStore
+    @State var isCompleted: Bool = false
     
     var body: some View {
         
         VStack {
-            
             //Screen Title
             Text("New Goal")
                 .fontWeight(.semibold)
@@ -76,13 +76,11 @@ struct NewGoalView: View {
             }
         }
             Button(action: {
-                print("Complete Entry")
+                print("Add to Targets")
                 
                 self.showGoalView = false
                 let goal = Goal(id: UUID().uuidString, title: titleText, goalText: goalText, completed: false)
                 goalStore.addGoal(goal)
-                
-                //CacheStorageManager.shared.saveEntries()
             
             }, label: {
                 Text("Complete Entry")

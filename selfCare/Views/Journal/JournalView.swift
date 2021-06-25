@@ -25,46 +25,66 @@ struct JournalView: View {
                 ZStack {
                     List {
                         ForEach(entryStore.entries.map(\.value)) { entry in
-                            HStack {
-                                
-                                //Date and description
-                                VStack {
-                                    Text(entry.date, style: .date)
-                                        .fontWeight(.semibold)
-                                    Text(entry.reflectionText)
+                                HStack {
+                                    //Date and description
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .frame(width: 300, height: 200, alignment: .center)
+                                            .foregroundColor(Color("ModeColor"))
+                                            .applyShadow()
+                                        
+                                        VStack {
+                                            HStack{
+                                                Text(entry.date, style: .date)
+                                                    .fontWeight(.semibold)
+                                                Spacer()
+                                            }
+                                            Text(entry.reflectionText)
+                                                .multilineTextAlignment(.leading)
+                                                .padding(.vertical, 5)
+                                                .padding(.trailing, 10)
+                                            Text(entry.happyText)
+                                                .multilineTextAlignment(.leading)
+                                        }
+                                        .frame(width: 280, height: 200, alignment: .leading)
+                                    }
+                                    Spacer()
+                                    
+                                    VStack {
+                                        //Rating
+                                        ZStack {
+                                            RoundedRectangle(cornerRadius: 10)
+                                                .frame(width: 80, height: 95, alignment: .center)
+                                                .foregroundColor(Color("ModeColor"))
+                                                .applyShadow()
+                                            VStack(alignment: .center) {
+                                                Text("Rating")
+                                                    .fontWeight(.semibold)
+                                                    .font(.system(size: 14))
+                                                    .padding(1)
+                                                Text(String(format: "%.1f", entry.rating))
+                                                    .font(.system(size: 24, weight: .bold, design: .default))
+                                            }
+                                            .frame(width: 50, height: 50)
+                                        }
+                                        
+                                        //Mood
+                                        ZStack {
+                                            RoundedRectangle(cornerRadius: 10)
+                                                .frame(width: 80, height: 95, alignment: .center)
+                                                .foregroundColor(Color("ModeColor"))
+                                                .applyShadow()
+                                            VStack(alignment: .center) {
+                                                Text("Mood")
+                                                    .fontWeight(.semibold)
+                                                    .font(.system(size: 15))
+                                                Text(entry.mood.rawValue)
+                                                    .font(.system(size: 40))
+                                            }
+                                            .frame(width: 50, height: 50)
+                                        }
+                                    }
                                 }
-                                .frame(width: 150, height: 50, alignment: .leading)
-                                .padding()
-                                .overlay(RoundedRectangle(cornerRadius: 16)
-                                            .stroke(Color("TextColor"), lineWidth: 4))
-                                
-                                //Rating
-                                VStack(alignment: .center) {
-                                    Text("Rating")
-                                        .fontWeight(.semibold)
-                                        .font(.system(size: 15))
-                                    Text(String(format: "%.1f", entry.rating))
-                                        .font(.system(size: 25))
-                                }
-                                .frame(width: 50, height: 50)
-                                .padding()
-                                .overlay(RoundedRectangle(cornerRadius: 16)
-                                            .stroke(Color("TextColor"), lineWidth: 4))
-                                
-                                //Mood
-                                VStack(alignment: .center) {
-                                    Text("Mood")
-                                        .fontWeight(.semibold)
-                                        .font(.system(size: 15))
-                                    Text(entry.mood.rawValue)
-                                        .font(.system(size: 25))
-                                }
-                                .frame(width: 50, height: 50)
-                                .padding()
-                                .overlay(RoundedRectangle(cornerRadius: 16)
-                                            .stroke(Color("TextColor"), lineWidth: 4))
-                            }
-                            .padding(.horizontal)
                         }
                     }
                     

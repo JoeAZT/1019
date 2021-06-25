@@ -10,7 +10,6 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @State private var wave = false
     @State private var showJournalView = false
     @State private var showNewEntryView = false
     @State private var showGoalsView = false
@@ -18,7 +17,7 @@ struct HomeView: View {
     @State private var showLinksView = false
     @StateObject var entryStore = EntryStore()
     @StateObject var goalStore = GoalStore()
-    
+    @StateObject var profileStore = ProfileStore()
     @State var selectedPage = 0
     
     var body: some View {
@@ -38,7 +37,7 @@ struct HomeView: View {
                         .shadow(color: .black.opacity(0.4), radius: 3, x: 0, y: 3)
                 })
                 .sheet(isPresented: $showProfileView, content: {
-                    ProfileView()
+                    ProfileView(entryStore: entryStore, goalStore: goalStore, profileStore: profileStore)
                 })
                 
                 Spacer()
@@ -80,7 +79,6 @@ struct HomeView: View {
             Spacer()
             
             HStack {
-                
                 //Journal Button
                 Button(action: {
                     showJournalView.toggle()
@@ -120,7 +118,7 @@ struct HomeView: View {
                     showGoalsView.toggle()
                     
                 }, label: {
-                    Image(systemName: "checkmark.circle.fill")
+                    Image(systemName: "target")
                         .padding(.horizontal)
                         .font(.system(size: 70))
                         .foregroundColor(.white)
