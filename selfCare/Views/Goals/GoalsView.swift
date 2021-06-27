@@ -26,6 +26,11 @@ struct GoalsView: View {
                     //List of goals
                     List {
                         ForEach(goalStore.goals) { goal in
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .frame(width: 380, height: 50, alignment: .center)
+                                    .foregroundColor(Color("ModeColor"))
+                                    .applyShadow()
                             HStack {
                                 Text(goal.title)
                                     .foregroundColor(goal.completed ? Color.gray : Color("TextColor"))
@@ -40,10 +45,10 @@ struct GoalsView: View {
                             .frame(width: 360, height: 40, alignment: .leading)
                             .padding(8)
                             .padding(.horizontal, 5)
-                            .overlay(RoundedRectangle(cornerRadius: 16)
-                            .stroke(Color("TextColor"), lineWidth: 4))
+                            }
                         }
                     }
+                    
                     .padding(.leading, -3)
                     //Empty goal list placeholder
                     if goalStore.goals.isEmpty {

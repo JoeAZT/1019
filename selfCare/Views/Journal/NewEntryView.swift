@@ -27,172 +27,200 @@ struct NewEntryView: View {
                 .foregroundColor(Color("TextColor"))
                 .font(.title)
                 .padding()
-        
-        ScrollView {
-                
-                //First line
-                HStack {
-                    Text("How was your day?")
-                        .fontWeight(.bold)
-                        .foregroundColor(Color("TextColor"))
+            
+            ScrollView {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10)
+                        .frame(width: 380, height: 130, alignment: .center)
+                        .foregroundColor(Color("ModeColor"))
+                        .applyShadow()
                     
-                    Spacer()
-                    
-                    Text(String(format: "%.1f", ratingSlider))
-                        .fontWeight(.bold)
-                        .foregroundColor(Color("TextColor"))
-                }
-                .padding(.top, 20)
-                .padding(.horizontal, 30)
-                
-                //Slider
-                
-                HStack {
-                    
-                    Text("0")
-                        .foregroundColor(Color("TextColor"))
-                    ZStack {
+                    VStack {
+                        //First line
+                        HStack {
+                            Text("How was your day?")
+                                .fontWeight(.bold)
+                                .foregroundColor(Color("TextColor"))
+                            Spacer()
+                            
+                            Text(String(format: "%.1f", ratingSlider))
+                                .fontWeight(.bold)
+                                .foregroundColor(Color("TextColor"))
+                        }
+                        .padding(.top, 30)
+                        .padding(.horizontal, 40)
                         
-                        LinearGradient(
-                            gradient: Gradient(colors: [.pink, .blue]),
-                            startPoint: .leading,
-                            endPoint: .trailing
-                        )
-                        .mask(Slider(value: $ratingSlider, in: 0.0...10.0))
+                        //Slider
                         
-                        Slider(value: $ratingSlider, in: 0.0...10.0)
-                            .opacity(0.05)
-                    }
-                    Text("10")
-                        .foregroundColor(Color("TextColor"))
-                }
-                .padding(.horizontal)
-                .padding(.top, 30)
-                
-                //Reflection
-                Text(String(format: "Why was your day %.1f/10?", ratingSlider))
-                    .fontWeight(.bold)
-                    .frame(width: 370, height: 20, alignment: .leading)
-                    .foregroundColor(Color("TextColor"))
-                    .padding(.top, 50)
-                    .padding(.bottom, 15)
-                
-                ZStack(alignment: .top) {
-                    
-                    TextViewWrapper(text: $reflectionText)
-                        .frame(width: 340, height: 300, alignment: .leading)
-                        .padding()
-                        .overlay(RoundedRectangle(cornerRadius: 16)
-                                    .stroke(Color("TextColor"), lineWidth: 4))
-                    
-                    if reflectionText.isEmpty {
-                        Text("Today I felt...")
-                            .opacity(0.3)
-                            .padding(.all, 25)
-                            .padding(.trailing, 230)
+                        HStack {
+                            
+                            Text("0")
+                                .foregroundColor(Color("TextColor"))
+                            ZStack {
+                                
+                                LinearGradient(
+                                    gradient: Gradient(colors: [.pink, .blue]),
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                )
+                                .mask(Slider(value: $ratingSlider, in: 0.0...10.0))
+                                
+                                Slider(value: $ratingSlider, in: 0.0...10.0)
+                                    .opacity(0.05)
+                            }
+                            Text("10")
+                                .foregroundColor(Color("TextColor"))
+                        }
+                        .padding(.horizontal, 40)
                     }
                 }
                 
-                
-                //.padding(.vertical)
-                
-                Text("What made you happy today?")
-                    .fontWeight(.bold)
-                    .frame(width: 370, height: 20, alignment: .leading)
-                    .foregroundColor(Color("TextColor"))
-                    .padding(.top, 50)
-                    .padding()
-                
-                
-                ZStack(alignment: .top) {
-                    TextViewWrapper(text: $happyText)
-                        .frame(width: 340, height: 300, alignment: .center)
-                        .padding()
-                        .overlay(RoundedRectangle(cornerRadius: 16)
-                                    .stroke(Color("TextColor"), lineWidth: 4))
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10)
+                        .frame(width: 380, height: 380, alignment: .center)
+                        .foregroundColor(Color("ModeColor"))
+                        .applyShadow()
                     
-                    if happyText.isEmpty {
-                        Text("I was happy today because...")
-                            .opacity(0.4)
-                            .padding(.all, 25)
-                            .padding(.trailing, 110)
+                    VStack {
+                        //Reflection
+                        Text(String(format: "Why was your day %.1f/10?", ratingSlider))
+                            .fontWeight(.bold)
+                            .foregroundColor(Color("TextColor"))
+                            .padding(.horizontal, 20)
+                            .padding(.top, 10)
+                            .frame(width: 370, height: 20, alignment: .leading)
+                            
+                        ZStack(alignment: .top) {
+                            TextViewWrapper(text: $reflectionText)
+                                .frame(width: 340, height: 290, alignment: .leading)
+                                .cornerRadius(10)
+                                .padding()
+                            
+                            if reflectionText.isEmpty {
+                                Text("Today I felt...")
+                                    .opacity(0.3)
+                                    .padding(.trailing, 220)
+                                    .padding(.top, 10)
+                                    .padding()
+                            }
+                        }
+                    }
+                    .padding(.top, 30)
+                    .padding(.bottom, 20)
+                }
+                
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10)
+                        .frame(width: 380, height: 380, alignment: .center)
+                        .foregroundColor(Color("ModeColor"))
+                        .applyShadow()
+                    
+                    VStack {
+                        Text("What made you happy today?")
+                            .fontWeight(.bold)
+                            .foregroundColor(Color("TextColor"))
+                            .padding(.horizontal, 20)
+                            .frame(width: 370, height: 20, alignment: .leading)
+                        
+                        ZStack {
+                            TextViewWrapper(text: $happyText)
+                                .frame(width: 340, height: 290, alignment: .center)
+                                .cornerRadius(10)
+                                .padding(.top, 10)
+                            
+                            if happyText.isEmpty {
+                                Text("I was happy today because...")
+                                    .opacity(0.3)
+                                    .padding(.trailing, 95)
+                                    .padding(.bottom, 235)
+                                    .padding()
+                            }
+                        }
                     }
                 }
             
-            VStack {
-                Text("Use an emoji to describe how you felt about today:")
-                    .fontWeight(.bold)
-                    .lineLimit(nil)
-                    .foregroundColor(Color("TextColor"))
-                    .padding(.top, 50)
-                    .padding()
-                HStack {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10)
+                        .frame(width: 380, height: 170, alignment: .center)
+                        .foregroundColor(Color("ModeColor"))
+                        .applyShadow()
+                        .padding(.top, 12)
                     
-                    Button(action: {
-                        mood = .vsad
+                    VStack {
+                        Text("Use an emoji to describe how you felt about today:")
+                            .fontWeight(.bold)
+                            .lineLimit(nil)
+                            .foregroundColor(Color("TextColor"))
+                            .frame(width: 340, height: 50, alignment: .center)
+                            .padding()
                         
-                    }, label: {
-                        Text("😣")
-                            .font(.system(size: 50, weight: .bold))
-                            .foregroundColor(.white)
-                            .padding(5)
-                            .cornerRadius(15)
-                            .opacity(mood == .vsad ? 1 : 0.5)
-
-                    })
-                    
-                    Button(action: {
-                        mood = .sad
-                        
-                    }, label: {
-                        Text("😞")
-                            .font(.system(size: 50, weight: .bold))
-                            .foregroundColor(.white)
-                            .padding(5)
-                            .cornerRadius(15)
-                            .opacity(mood == .sad ? 1 : 0.5)
-                        
-                    })
-                    
-                    Button(action: {
-                        mood = .ok
-                        
-                    }, label: {
-                        Text("😐")
-                            .font(.system(size: 50, weight: .bold))
-                            .foregroundColor(.white)
-                            .padding(5)
-                            .cornerRadius(15)
-                            .opacity(mood == .ok ? 1 : 0.5)
-                    })
-                    
-                    Button(action: {
-
-                        mood = .good
-                        
-                    }, label: {
-                        Text("😊")
-                            .font(.system(size: 50, weight: .bold))
-                            .foregroundColor(.white)
-                            .padding(5)
-                            .cornerRadius(15)
-                            .opacity(mood == .good ? 1 : 0.5)
-                    })
-                    
-                    Button(action: {
-                        mood = .vgood
-                        
-                    }, label: {
-                        Text("😄")
-                            .font(.system(size: 50, weight: .bold))
-                            .foregroundColor(.white)
-                            .padding(5)
-                            .cornerRadius(15)
-                            .opacity(mood == .vgood ? 1 : 0.5)
-                    })
+                        HStack {
+                            Button(action: {
+                                mood = .vsad
+                                
+                            }, label: {
+                                Text("😣")
+                                    .font(.system(size: 50, weight: .bold))
+                                    .foregroundColor(.white)
+                                    .padding(2)
+                                    .cornerRadius(15)
+                                    .opacity(mood == .vsad ? 1 : 0.5)
+                                
+                            })
+                            
+                            Button(action: {
+                                mood = .sad
+                                
+                            }, label: {
+                                Text("😞")
+                                    .font(.system(size: 50, weight: .bold))
+                                    .foregroundColor(.white)
+                                    .padding(2)
+                                    .cornerRadius(15)
+                                    .opacity(mood == .sad ? 1 : 0.5)
+                                
+                            })
+                            
+                            Button(action: {
+                                mood = .ok
+                                
+                            }, label: {
+                                Text("😐")
+                                    .font(.system(size: 50, weight: .bold))
+                                    .foregroundColor(.white)
+                                    .padding(2)
+                                    .cornerRadius(15)
+                                    .opacity(mood == .ok ? 1 : 0.5)
+                            })
+                            
+                            Button(action: {
+                                
+                                mood = .good
+                                
+                            }, label: {
+                                Text("😊")
+                                    .font(.system(size: 50, weight: .bold))
+                                    .foregroundColor(.white)
+                                    .padding(2)
+                                    .cornerRadius(15)
+                                    .opacity(mood == .good ? 1 : 0.5)
+                            })
+                            
+                            Button(action: {
+                                mood = .vgood
+                                
+                            }, label: {
+                                Text("😄")
+                                    .font(.system(size: 50, weight: .bold))
+                                    .foregroundColor(.white)
+                                    .padding(2)
+                                    .cornerRadius(15)
+                                    .opacity(mood == .vgood ? 1 : 0.5)
+                            })
+                        }
+                        .padding(.horizontal)
+                    }
                 }
-                .padding(.horizontal)
-            }
             
                 //complete entry button
                 Button(action: {
