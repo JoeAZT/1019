@@ -125,7 +125,7 @@ struct HomeView: View {
                         .shadow(color: .black.opacity(0.4), radius: 3, x: 0, y: 3)
                 })
                 .sheet(isPresented: $showGoalsView) {
-                    GoalsView(goalStore: goalStore)
+                    TargetsView(goalStore: goalStore)
                 }
             }
         }

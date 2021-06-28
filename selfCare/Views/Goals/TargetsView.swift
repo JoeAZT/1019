@@ -6,8 +6,7 @@
 //
 
 import SwiftUI
-
-struct GoalsView: View {
+struct TargetsView: View {
     
     @ObservedObject var goalStore: GoalStore
     @State private var showNewGoalView = false
@@ -47,9 +46,11 @@ struct GoalsView: View {
                             .padding(.horizontal, 5)
                             }
                         }
+                        .onDelete(perform: delete)
                     }
-                    
                     .padding(.leading, -3)
+                    
+                    
                     //Empty goal list placeholder
                     if goalStore.goals.isEmpty {
                         VStack {
@@ -81,10 +82,14 @@ struct GoalsView: View {
                 })
                 
                 .sheet(isPresented: $showNewGoalView) {
-                    NewGoalView(showGoalView: $showNewGoalView, goalStore: goalStore)
+                    NewTargetView(showGoalView: $showNewGoalView, goalStore: goalStore)
                 }
             }
         }
+    }
+    
+    func delete(at offsets: IndexSet) {
+        goalStore.goals.remove(atOffsets: offsets)
     }
 }
 

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NewGoalView: View {
+struct NewTargetView: View {
     
     @State var goalText: String = ""
     @State var titleText: String = ""
@@ -19,7 +19,7 @@ struct NewGoalView: View {
         
         VStack {
             //Screen Title
-            Text("New Goal")
+            Text("New Target")
                 .fontWeight(.semibold)
                 .foregroundColor(Color("TextColor"))
                 .font(.title)
@@ -30,7 +30,7 @@ struct NewGoalView: View {
     
                 VStack() {
                     
-                    Text("What's your goal?")
+                    Text("What's your target?")
                         .fontWeight(.bold)
                         .frame(width: 370, height: 25, alignment: .leading)
                         .foregroundColor(Color("TextColor"))
@@ -44,7 +44,7 @@ struct NewGoalView: View {
                                         .stroke(Color("TextColor"), lineWidth: 4))
                             .padding(.bottom, 10)
                         if titleText.isEmpty {
-                            Text("My goal today is...")
+                            Text("My target today is...")
                                 .opacity(0.4)
                                 .padding(.all, 20)
                                 .padding(.trailing, 110)
@@ -66,7 +66,7 @@ struct NewGoalView: View {
                                         .stroke(Color("TextColor"), lineWidth: 4))
                             .padding(.bottom, 10)
                         if goalText.isEmpty {
-                            Text("Tell me more abut your goal...")
+                            Text("Tell me more abut your target...")
                                 .opacity(0.4)
                                 .padding(.all, 25)
                                 .padding(.trailing, 110)
@@ -76,8 +76,6 @@ struct NewGoalView: View {
             }
         }
             Button(action: {
-                print("Add to Targets")
-                
                 self.showGoalView = false
                 let goal = Goal(id: UUID().uuidString, title: titleText, goalText: goalText, completed: false)
                 goalStore.addGoal(goal)
