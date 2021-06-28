@@ -117,7 +117,6 @@ struct ProfileView: View {
             //Top rectangle
             ZStack {
                 RoundedRectangle(cornerRadius: 25)
-                    .frame(width: 390, height: 150, alignment: .center)
                     .foregroundColor(Color("ModeColor"))
                     .applyShadow()
                 
@@ -149,52 +148,39 @@ struct ProfileView: View {
                     }
                 }
                 .padding(.horizontal)
-                .frame(width: 400, height: 160, alignment: .center)
             }
             
             //Middle rectangle
             HStack {
                 ZStack {
-                    
                     RoundedRectangle(cornerRadius: 25)
-                        .frame(width: 180, height: 160, alignment: .center)
                         .foregroundColor(Color("ModeColor"))
                         .applyShadow()
-                    
                     VStack {
                     Text("Targets Reminder:")
                         .applyMiddleTitleStyle()
                         DatePicker("", selection: $goalTime, displayedComponents: .hourAndMinute)
-                            .frame(minWidth: 50, idealWidth: 50, maxWidth: 50, minHeight: 50, idealHeight: 50, maxHeight: 50, alignment: .center)
                             .labelsHidden()
                     }
-                    .frame(width: 150, height: 130, alignment: .center)
                 }
                 .padding(5)
                 
                 ZStack {
-                    
                     RoundedRectangle(cornerRadius: 25)
-                        .frame(width: 180, height: 160, alignment: .center)
                         .foregroundColor(Color("ModeColor"))
                         .applyShadow()
-                    
                     VStack {
                     Text("Jounral Reminder:")
                         .applyMiddleTitleStyle()
                         DatePicker("", selection: $journalTime, displayedComponents: .hourAndMinute)
-                        .frame(minWidth: 50, idealWidth: 50, maxWidth: 50, minHeight: 50, idealHeight: 50, maxHeight: 50, alignment: .center)
                         .labelsHidden()
                     }
-                    .frame(width: 150, height: 130, alignment: .center)
                 }
                 .padding(5)
             }
             
             ZStack {
-                
                 RoundedRectangle(cornerRadius: 25)
-                    .frame(width: 380, height: 140, alignment: .center)
                     .foregroundColor(Color("ModeColor"))
                     .applyShadow()
                 
@@ -206,7 +192,7 @@ struct ProfileView: View {
                         Text(String(format: "%.1f", entryStore.todaysEntry()?.rating ?? 0))
                             .font(.system(size: 60, weight: .semibold, design: .default))
                     }
-                    .frame(width: 180, height: 120, alignment: .center)
+                    .padding(.trailing, 50)
                     
                     VStack {
                         Text("Your latest mood:")
@@ -214,11 +200,11 @@ struct ProfileView: View {
                         Text("\(entryStore.todaysEntry()?.mood.rawValue ?? "None")")
                             .font(.system(size: 60, weight: .semibold, design: .default))
                     }
-                    .frame(width: 180, height: 120, alignment: .center)
                 }
                 .padding()
             }
         }
+        .padding(.horizontal, 10)
         .navigationBarTitle("Pick a photo")
         .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
             ImagePicker(image: self.$inputImage)

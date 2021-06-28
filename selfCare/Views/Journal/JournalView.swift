@@ -29,7 +29,7 @@ struct JournalView: View {
                                     //Date and description
                                     ZStack {
                                         RoundedRectangle(cornerRadius: 10)
-                                            .frame(width: 300, height: 200, alignment: .center)
+//                                            .frame(width: 300, height: 200, alignment: .center)
                                             .foregroundColor(Color("ModeColor"))
                                             .applyShadow()
                                         
@@ -37,6 +37,7 @@ struct JournalView: View {
                                             HStack{
                                                 Text(entry.date, style: .date)
                                                     .fontWeight(.semibold)
+                                                    .padding(5)
                                                 Spacer()
                                             }
                                             Text(entry.reflectionText)
@@ -46,7 +47,7 @@ struct JournalView: View {
                                             Text(entry.happyText)
                                                 .multilineTextAlignment(.leading)
                                         }
-                                        .frame(width: 280, height: 200, alignment: .leading)
+//                                        .frame(width: 280, height: 200, alignment: .leading)
                                     }
                                     Spacer()
                                     
@@ -54,7 +55,7 @@ struct JournalView: View {
                                         //Rating
                                         ZStack {
                                             RoundedRectangle(cornerRadius: 10)
-                                                .frame(width: 80, height: 95, alignment: .center)
+//                                                .frame(width: 80, height: 95, alignment: .center)
                                                 .foregroundColor(Color("ModeColor"))
                                                 .applyShadow()
                                             VStack(alignment: .center) {
@@ -65,13 +66,13 @@ struct JournalView: View {
                                                 Text(String(format: "%.1f", entry.rating))
                                                     .font(.system(size: 24, weight: .bold, design: .default))
                                             }
-                                            .frame(width: 50, height: 50)
+//                                            .frame(width: 50, height: 50)
                                         }
                                         
                                         //Mood
                                         ZStack {
                                             RoundedRectangle(cornerRadius: 10)
-                                                .frame(width: 80, height: 95, alignment: .center)
+//                                                .frame(width: 80, height: 95, alignment: .center)
                                                 .foregroundColor(Color("ModeColor"))
                                                 .applyShadow()
                                             VStack(alignment: .center) {
@@ -81,7 +82,7 @@ struct JournalView: View {
                                                 Text(entry.mood.rawValue)
                                                     .font(.system(size: 40))
                                             }
-                                            .frame(width: 50, height: 50)
+//                                            .frame(width: 50, height: 50)
                                         }
                                     }
                                 }

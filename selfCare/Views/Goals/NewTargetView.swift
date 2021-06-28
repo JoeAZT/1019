@@ -44,7 +44,6 @@ struct NewTargetView: View {
                             TextViewWrapper(text: $titleText)
                                 .frame(width: 360, height: 40, alignment: .center)
                                 .cornerRadius(10)
-//                                .padding()
                                 .padding(.horizontal, 10)
                             if titleText.isEmpty {
                                 Text("My target today is...")
