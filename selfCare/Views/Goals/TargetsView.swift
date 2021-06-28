@@ -10,6 +10,7 @@ struct TargetsView: View {
     
     @ObservedObject var goalStore: GoalStore
     @State private var showNewGoalView = false
+    @State var expandedID: String?
     
     var body: some View {
         
@@ -27,24 +28,39 @@ struct TargetsView: View {
                         ForEach(goalStore.goals) { goal in
                             ZStack {
                                 RoundedRectangle(cornerRadius: 10)
-                                    .frame(width: 380, height: 50, alignment: .center)
+                                    .frame(width: 380, height: expandedID == goal.id ? 200 : 50, alignment: .center)
                                     .foregroundColor(Color("ModeColor"))
                                     .applyShadow()
-                            HStack {
-                                Text(goal.title)
-                                    .foregroundColor(goal.completed ? Color.gray : Color("TextColor"))
-                                    .fontWeight(.bold)
-                                Spacer()
-                                Image(systemName: goal.completed ? "checkmark.square" : "square")
-                                    .font(.system(size: 30, weight: .bold, design: .default))
-                                    .onTapGesture {
-                                        goalStore.toggleCompletedFor(goal)
+                                HStack {
+                                    VStack(alignment: .leading) {
+                                        Text(goal.title)
+                                            .foregroundColor(goal.completed ? Color.gray : Color("TextColor"))
+                                            .fontWeight(.bold)
+                                            .padding(.vertical, 10)
+                                        if expandedID == goal.id {
+                                            Text(goal.goalText)
+                                        }
                                     }
+                                    .padding(.horizontal, 10)
+                                    Spacer()
+                                    Image(systemName: goal.completed ? "checkmark.square" : "square")
+                                        .font(.system(size: 30, weight: .bold, design: .default))
+                                        .onTapGesture {
+                                            goalStore.toggleCompletedFor(goal)
+                                        }
+                                }
+                                .padding(8)
+                                .padding(.horizontal, 5)
                             }
-                            .frame(width: 360, height: 40, alignment: .leading)
-                            .padding(8)
-                            .padding(.horizontal, 5)
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                if self.expandedID == goal.id {
+                                    self.expandedID = nil
+                                } else {
+                                    self.expandedID = goal.id
+                                }
                             }
+                            .animation(.spring())
                         }
                         .onDelete(perform: delete)
                     }
@@ -87,6 +103,8 @@ struct TargetsView: View {
             }
         }
     }
+    
+    
     
     func delete(at offsets: IndexSet) {
         goalStore.goals.remove(atOffsets: offsets)
