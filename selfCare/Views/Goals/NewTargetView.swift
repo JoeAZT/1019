@@ -27,49 +27,61 @@ struct NewTargetView: View {
                 .padding(.bottom, 10)
             
             ScrollView {
-    
-                VStack() {
-                    
-                    Text("What's your target?")
-                        .fontWeight(.bold)
-                        .frame(width: 370, height: 25, alignment: .leading)
-                        .foregroundColor(Color("TextColor"))
-                        .padding()
-
-                    ZStack(alignment: .topLeading) {
-                        TextViewWrapper(text: $titleText)
-                            .frame(width: 340, height: 25, alignment: .center)
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10)
+                        .foregroundColor(Color("ModeColor"))
+                        .applyShadow()
+                        .padding(.horizontal, 10)
+                    VStack {
+                        Text("What's your target?")
+                            .fontWeight(.bold)
+                            .foregroundColor(Color("TextColor"))
+                            .applyShadow()
                             .padding()
-                            .overlay(RoundedRectangle(cornerRadius: 16)
-                                        .stroke(Color("TextColor"), lineWidth: 4))
-                            .padding(.bottom, 10)
-                        if titleText.isEmpty {
-                            Text("My target today is...")
-                                .opacity(0.4)
-                                .padding(.all, 20)
-                                .padding(.trailing, 110)
+                            .padding(.trailing, 200)
+                        
+                        ZStack {
+                            TextViewWrapper(text: $titleText)
+                                .frame(width: 360, height: 40, alignment: .center)
+                                .cornerRadius(10)
+//                                .padding()
+                                .padding(.horizontal, 10)
+                            if titleText.isEmpty {
+                                Text("My target today is...")
+                                    .opacity(0.4)
+                                    .padding(.all, 20)
+                                    .padding(.trailing, 200)
+                            }
                         }
                     }
-                    .padding(.trailing, 10)
-                    
-                    Text("Description:")
-                        .fontWeight(.bold)
-                        .frame(width: 370, height: 20, alignment: .leading)
-                        .foregroundColor(Color("TextColor"))
-                        .padding()
-                    
-                    ZStack(alignment: .topLeading) {
-                        TextViewWrapper(text: $goalText)
-                            .frame(width: 340, height: 300, alignment: .center)
+                }
+                .padding(.bottom, 10)
+                
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10)
+                        .foregroundColor(Color("ModeColor"))
+                        .applyShadow()
+                        .padding(.horizontal, 10)
+                    VStack {
+                        Text("Description:")
+                            .fontWeight(.bold)
+                            .foregroundColor(Color("TextColor"))
+                            .applyShadow()
                             .padding()
-                            .overlay(RoundedRectangle(cornerRadius: 16)
-                                        .stroke(Color("TextColor"), lineWidth: 4))
-                            .padding(.bottom, 10)
-                        if goalText.isEmpty {
-                            Text("Tell me more abut your target...")
-                                .opacity(0.4)
-                                .padding(.all, 25)
-                                .padding(.trailing, 110)
+                            .padding(.trailing, 255)
+                        
+                        ZStack(alignment: .topLeading) {
+                            TextViewWrapper(text: $goalText)
+                                .frame(width: 360, height: 400, alignment: .center)
+                                .cornerRadius(10)
+                                .padding()
+                                .padding(.horizontal, 10)
+                            if goalText.isEmpty {
+                                Text("Tell me more abut your target...")
+                                    .opacity(0.4)
+                                    .padding(.all, 25)
+                                    .padding(.leading, 8)
+                            }
                         }
                     }
                 }
