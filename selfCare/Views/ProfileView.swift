@@ -74,33 +74,38 @@ struct ProfileView: View {
                 })
             }
             
-            if let image = image {
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFit()
-                    .clipShape(Circle())
-            } else if let imageData = profileStore.profile?.profilePicture, let image = UIImage(data: imageData) {
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFit()
-                    .clipShape(Circle())
-            } else {
-                ZStack {
-                    Circle()
+            Group {
+                if let image = image {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                        .clipShape(Circle())
                         .frame(minWidth: circleSize, idealWidth: circleSize, maxWidth: circleSize, minHeight: circleSize, idealHeight: circleSize, maxHeight: circleSize, alignment: .center)
-                        .foregroundColor(Color("TextColor").opacity(0.4))
-                        .applyShadow()
-                        .padding()
+                } else if let imageData = profileStore.profile?.profilePicture, let image = UIImage(data: imageData) {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                        .clipShape(Circle())
+                        .frame(minWidth: circleSize, idealWidth: circleSize, maxWidth: circleSize, minHeight: circleSize, idealHeight: circleSize, maxHeight: circleSize, alignment: .center)
+                } else {
+                    ZStack {
+                        Circle()
+                            .frame(minWidth: circleSize, idealWidth: circleSize, maxWidth: circleSize, minHeight: circleSize, idealHeight: circleSize, maxHeight: circleSize, alignment: .center)
+                            .foregroundColor(Color("TextColor").opacity(0.4))
+                            .applyShadow()
+                            .padding()
+                        
+                        Text("Tap here to add profile picture")
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(Color("ModeColor"))
+                            .font(.system(size: 13, weight: .regular, design: .default))
+                            .frame(width: 100, height: 50, alignment: .center)
+                    }
                     
-                    Text("Tap here to add profile picture")
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(Color("ModeColor"))
-                        .font(.system(size: 13, weight: .regular, design: .default))
-                        .frame(width: 100, height: 50, alignment: .center)
                 }
-                .onTapGesture {
-                    self.showingImagePicker = true
-                }
+            }
+            .onTapGesture {
+                self.showingImagePicker = true
             }
             
             Text("Your Name")
