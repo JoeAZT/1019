@@ -24,6 +24,7 @@ struct Entry: Identifiable, Codable {
     let fruit: Bool
     let reading: Bool
     let productivity: Bool
+    let outside: Bool
     
     enum Mood: String, Codable {
         case vsad = "😣"

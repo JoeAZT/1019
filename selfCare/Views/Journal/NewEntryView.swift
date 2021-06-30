@@ -22,10 +22,15 @@ struct NewEntryView: View {
     @State var reading = false
     @State var fruit = false
     @State var productivity = false
+    @State var outside = false
     @Binding var showNewEntryView: Bool
     @ObservedObject var entryStore: EntryStore
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
+        
+        let currentMode = colorScheme == .dark ? "ModeColor" : "TextColor"
+        let oppositeMode = colorScheme == .dark ? "TextColor" : "ModeColor"
         
         VStack {
             
@@ -34,15 +39,15 @@ struct NewEntryView: View {
                 .fontWeight(.semibold)
                 .foregroundColor(Color("TextColor"))
                 .font(.title)
+                .padding()
                 
             
             ScrollView {
+                
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
-//                        .frame(width: 380, height: 130, alignment: .center)
                         .foregroundColor(Color("ModeColor"))
                         .applyShadow()
-                        
                     
                     VStack {
                         //First line
@@ -56,6 +61,8 @@ struct NewEntryView: View {
                                 .fontWeight(.bold)
                                 .foregroundColor(Color("TextColor"))
                         }
+                        .padding(.top, 5)
+                        .padding()
                         
                         //Slider
                         HStack {
@@ -76,23 +83,25 @@ struct NewEntryView: View {
                             Text("10")
                                 .foregroundColor(Color("TextColor"))
                         }
+                        .padding()
                     }
+                    .padding(.horizontal, 20)
                 }
+                .padding(10)
                 
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
-//                        .frame(width: 380, height: 380, alignment: .center)
                         .foregroundColor(Color("ModeColor"))
                         .applyShadow()
                     
-                    VStack {
-                        //Reflection
+                    
+                    //Reflection
+                    VStack(alignment: .leading) {
                         Text(String(format: "Why was your day %.1f/10?", ratingSlider))
                             .fontWeight(.bold)
                             .foregroundColor(Color("TextColor"))
-//                            .frame(width: 370, height: 20, alignment: .leading)
                             
-                        ZStack(alignment: .top) {
+                        ZStack(alignment: .topLeading) {
                             TextViewWrapper(text: $reflectionText)
                                 .frame(width: 340, height: 290, alignment: .leading)
                                 .cornerRadius(10)
@@ -100,27 +109,27 @@ struct NewEntryView: View {
                             if reflectionText.isEmpty {
                                 Text("Today I felt...")
                                     .opacity(0.3)
-                                    .padding(.trailing, 220)
-                                    .padding(.top, 10)
                                     .padding()
                             }
                         }
                     }
+                    .padding()
                 }
+                .padding(10)
                 
+                //Happy
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
-//                        .frame(width: 380, height: 380, alignment: .center)
                         .foregroundColor(Color("ModeColor"))
                         .applyShadow()
                     
-                    VStack {
-                        Text("What made you happy today?")
+                    VStack(alignment: .leading) {
+                        Text("Something that made you happy today?")
                             .fontWeight(.bold)
+                            .lineLimit(nil)
                             .foregroundColor(Color("TextColor"))
-//                            .frame(width: 370, height: 20, alignment: .leading)
                         
-                        ZStack {
+                        ZStack(alignment: .topLeading) {
                             TextViewWrapper(text: $happyText)
                                 .frame(width: 340, height: 290, alignment: .center)
                                 .cornerRadius(10)
@@ -128,52 +137,57 @@ struct NewEntryView: View {
                             if happyText.isEmpty {
                                 Text("I was happy today because...")
                                     .opacity(0.3)
-                                    .padding(.trailing, 95)
-                                    .padding(.bottom, 235)
                                     .padding()
                             }
                         }
                     }
+                    .padding()
                 }
+                .padding(10)
                 
+                
+                //Achieve
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
-//                        .frame(width: 380, height: 380, alignment: .center)
                         .foregroundColor(Color("ModeColor"))
                         .applyShadow()
                     
-                    VStack {
+                    VStack(alignment: .leading) {
                         Text("What did you achieve today?")
                             .fontWeight(.bold)
+                            .lineLimit(nil)
                             .foregroundColor(Color("TextColor"))
-//                            .frame(width: 370, height: 20, alignment: .leading)
                         
-                        ZStack {
+                        
+                        ZStack(alignment: .topLeading) {
                             TextViewWrapper(text: $achievementText)
                                 .frame(width: 340, height: 290, alignment: .center)
                                 .cornerRadius(10)
                             
-                            if happyText.isEmpty {
+                            if achievementText.isEmpty {
                                 Text("Today, I...")
                                     .opacity(0.3)
+                                    .padding()
                                 
                             }
                         }
                     }
+                    .padding()
                 }
+                .padding(10)
             
+                
+                //Emoji
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
-//                        .frame(width: 380, height: 170, alignment: .center)
                         .foregroundColor(Color("ModeColor"))
                         .applyShadow()
                     
                     VStack {
-                        Text("Use an emoji to describe how you felt about today:")
+                        Text("Use an emoji to describe your mood:")
                             .fontWeight(.bold)
                             .lineLimit(nil)
                             .foregroundColor(Color("TextColor"))
-//                            .frame(width: 340, height: 50, alignment: .center)
                         
                         HStack {
                             Button(action: {
@@ -240,147 +254,201 @@ struct NewEntryView: View {
                             })
                         }
                     }
+                    .padding()
                 }
+                .padding(10)
                 
+                
+                //Well-being
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
-//                        .frame(width: 380, height: 170, alignment: .center)
                         .foregroundColor(Color("ModeColor"))
                         .applyShadow()
                     
                     VStack {
-                        Text("Your daily wellbeing checklist:")
+                        Text("Your daily well-being checklist:")
                             .fontWeight(.bold)
                             .lineLimit(nil)
                             .foregroundColor(Color("TextColor"))
-//                            .frame(width: 340, height: 50, alignment: .center)
-                            .padding()
+                            .padding(.top, 20)
                         
                         HStack {
-                            //exercise
-                            Button(action: {
-                                if exercise == true {
-                                    exercise = false
-                                } else {
-                                    exercise = true
-                                }
-                            }, label: {
-                                Text("🏋️ Exercise")
-                                    .font(.system(size: 20, weight: .bold))
-                                    .foregroundColor(Color("TextColor"))
-                                    .padding(2)
-                                    .cornerRadius(15)
-                                    .opacity(exercise == true ? 1 : 0.5)
-                            })
+                            VStack {
+                                //exercise
+                                Button(action: {
+                                    if exercise == true {
+                                        exercise = false
+                                    } else {
+                                        exercise = true
+                                    }
+                                }, label: {
+                                    ZStack {
+                                        
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .foregroundColor(exercise == true ? Color(currentMode) : Color(oppositeMode))
+                                                    .padding(.horizontal, 10)
+                                            .applyShadow()
+                                    Text("🏋️ Exercise")
+                                        .font(.system(size: 19, weight: .bold))
+                                        .foregroundColor(exercise == true ? Color(oppositeMode) : Color(currentMode))
+                                        .padding(5)
+                                        .opacity(exercise == true ? 1 : 0.5)
+                                    }
+                                })
+                                
+                                Button(action: {
+                                    if sleep == true {
+                                        sleep = false
+                                    } else {
+                                        sleep = true
+                                    }
+                                }, label: {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .foregroundColor(sleep == true ? Color(currentMode) : Color(oppositeMode))
+                                            .padding(.horizontal, 10)
+                                            .applyShadow()
+                                    Text("🛌 Quality Sleep")
+                                        .font(.system(size: 19, weight: .bold))
+                                        .foregroundColor(sleep == true ? Color(oppositeMode) : Color(currentMode))
+                                        .padding(5)
+                                        .opacity(sleep == true ? 1 : 0.5)
+                                    }
+                                })
+                                
+                                Button(action: {
+                                    if water == true {
+                                        water = false
+                                    } else {
+                                        water = true
+                                    }
+                                }, label: {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .foregroundColor(water == true ? Color(currentMode) : Color(oppositeMode))
+                                            .padding(.horizontal, 10)
+                                            .applyShadow()
+                                    Text("🚰 Water intake")
+                                        .font(.system(size: 19, weight: .bold))
+                                        .foregroundColor(water == true ? Color(oppositeMode) : Color(currentMode))
+                                        .padding(5)
+                                        .opacity(water == true ? 1 : 0.5)
+                                    }
+                                })
+                                
+                                Button(action: {
+                                    if fruit == true {
+                                        fruit = false
+                                    } else {
+                                        fruit = true
+                                    }
+                                }, label: {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .foregroundColor(fruit == true ? Color(currentMode) : Color(oppositeMode))
+                                            .padding(.horizontal, 10)
+                                            .applyShadow()
+                                    Text("🍎 5 Fruit & Veg")
+                                        .font(.system(size: 19, weight: .bold))
+                                        .foregroundColor(fruit == true ? Color(oppositeMode) : Color(currentMode))
+                                        .padding(5)
+                                        .opacity(fruit == true ? 1 : 0.5)
+                                    }
+                                })
+                            }
                             
-                            //exercise
-                            Button(action: {
-                                if water == true {
-                                    water = false
-                                } else {
-                                    water = true
-                                }
-                            }, label: {
-                                Text("🚰 Water Intake")
-                                    .font(.system(size: 20, weight: .bold))
-                                    .foregroundColor(Color("TextColor"))
-                                    .padding(2)
-                                    .cornerRadius(15)
-                                    .opacity(water == true ? 1 : 0.5)
-                            })
+                            VStack {
+                                Button(action: {
+                                    if reading == true {
+                                        reading = false
+                                    } else {
+                                        reading = true
+                                    }
+                                }, label: {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .foregroundColor(reading == true ? Color(currentMode) : Color(oppositeMode))
+                                            .padding(.horizontal, 10)
+                                            .applyShadow()
+                                    Text("📚 Reading")
+                                        .font(.system(size: 19, weight: .bold))
+                                        .foregroundColor(reading == true ? Color(oppositeMode) : Color(currentMode))
+                                        .padding(5)
+                                        .opacity(reading == true ? 1 : 0.5)
+                                    }
+                                })
+                                
+                                Button(action: {
+                                    if productivity == true {
+                                        productivity = false
+                                    } else {
+                                        productivity = true
+                                    }
+                                }, label: {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .foregroundColor(productivity == true ? Color(currentMode) : Color(oppositeMode))
+                                            .padding(.horizontal, 10)
+                                            .applyShadow()
+                                    Text("📈 Productivity")
+                                        .font(.system(size: 19, weight: .bold))
+                                        .foregroundColor(productivity == true ? Color(oppositeMode) : Color(currentMode))
+                                        .padding(5)
+                                        .opacity(productivity == true ? 1 : 0.5)
+                                    }
+                                })
+                                
+                                Button(action: {
+                                    if meditation == true {
+                                        meditation = false
+                                    } else {
+                                        meditation = true
+                                    }
+                                }, label: {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .foregroundColor(meditation == true ? Color(currentMode) : Color(oppositeMode))
+                                            .padding(.horizontal, 10)
+                                            .applyShadow()
+                                    Text("🧘 Medititaion")
+                                        .font(.system(size: 19, weight: .bold))
+                                        .foregroundColor(meditation == true ? Color(oppositeMode) : Color(currentMode))
+                                        .padding(5)
+                                        .opacity(meditation == true ? 1 : 0.5)
+                                    }
+                                })
+                                
+                                Button(action: {
+                                    if outside == true {
+                                        outside = false
+                                    } else {
+                                        outside = true
+                                    }
+                                }, label: {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .foregroundColor(outside == true ? Color(currentMode) : Color(oppositeMode))
+                                            .padding(.horizontal, 10)
+                                            .applyShadow()
+                                    Text("☀️ Go Outside")
+                                        .font(.system(size: 19, weight: .bold))
+                                        .foregroundColor(outside == true ? Color(oppositeMode) : Color(currentMode))
+                                        .padding(5)
+                                        .opacity(outside == true ? 1 : 0.5)
+                                    }
+                                })
+                            }
                         }
-                            
-                        HStack {
-                            Button(action: {
-                                if sleep == true {
-                                    sleep = false
-                                } else {
-                                    sleep = true
-                                }
-                            }, label: {
-                                Text("💤 8 hours of sleep")
-                                    .font(.system(size: 20, weight: .bold))
-                                    .foregroundColor(Color("TextColor"))
-                                    .padding(2)
-                                    .cornerRadius(15)
-                                    .opacity(sleep == true ? 1 : 0.5)
-                            })
-                            
-                            
-                            Button(action: {
-                                if fruit == true {
-                                    fruit = false
-                                } else {
-                                    fruit = true
-                                }
-                            }, label: {
-                                Text("🍎 5 Fruit & Veg")
-                                    .font(.system(size: 20, weight: .bold))
-                                    .foregroundColor(Color("TextColor"))
-                                    .padding(2)
-                                    .cornerRadius(15)
-                                    .opacity(fruit == true ? 1 : 0.5)
-                            })
-                        }
-                        
-                        HStack {
-                            Button(action: {
-                                if reading == true {
-                                    reading = false
-                                } else {
-                                    reading = true
-                                }
-                            }, label: {
-                                Text("📚 Reading")
-                                    .font(.system(size: 20, weight: .bold))
-                                    .foregroundColor(Color("TextColor"))
-                                    .padding(2)
-                                    .cornerRadius(15)
-                                    .opacity(reading == true ? 1 : 0.5)
-                            })
-                            
-                            Button(action: {
-                                if productivity == true {
-                                    productivity = false
-                                } else {
-                                    productivity = true
-                                }
-                            }, label: {
-                                Text("📈 Productivity")
-                                    .font(.system(size: 20, weight: .bold))
-                                    .foregroundColor(Color("TextColor"))
-                                    .padding(2)
-                                    .cornerRadius(15)
-                                    .opacity(productivity == true ? 1 : 0.5)
-                            })
-                        }
-                            
-                            HStack {
-                            Button(action: {
-                                if meditation == true {
-                                    meditation = false
-                                } else {
-                                    meditation = true
-                                }
-                            }, label: {
-                                Text("🧘 Meditation")
-                                    .font(.system(size: 20, weight: .bold))
-                                    .foregroundColor(Color("TextColor"))
-                                    .padding(2)
-                                    .cornerRadius(15)
-                                    .opacity(meditation == true ? 1 : 0.5)
-                            })
-                            
-                        }
-                        .padding(.horizontal)
+                        .padding()
                     }
                 }
+                .padding(10)
             
                 //complete entry button
                 Button(action: {
                     
                     self.showNewEntryView = false
-                    let entry = Entry(id: UUID().uuidString, rating: ratingSlider, reflectionText: reflectionText, happyText: happyText, achievementText: achievementText, mood: mood, date: Date(), exercise: exercise, water: water, sleep: sleep, meditation: meditation, fruit: fruit, reading: reading, productivity: productivity)
+                    let entry = Entry(id: UUID().uuidString, rating: ratingSlider, reflectionText: reflectionText, happyText: happyText, achievementText: achievementText, mood: mood, date: Date(), exercise: exercise, water: water, sleep: sleep, meditation: meditation, fruit: fruit, reading: reading, productivity: productivity, outside: outside)
                     entryStore.addEntry(entry)
                     
                 }, label: {
