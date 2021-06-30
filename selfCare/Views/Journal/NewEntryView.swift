@@ -12,8 +12,16 @@ struct NewEntryView: View {
     @State var ratingSlider: Double = 0.0
     @State var reflectionText: String = ""
     @State var happyText: String = ""
+    @State var achievementText = ""
     @State var moodText: String = "😐"
     @State var mood: Entry.Mood = .ok
+    @State var exercise = false
+    @State var water = false
+    @State var sleep = false
+    @State var meditation = false
+    @State var reading = false
+    @State var fruit = false
+    @State var productivity = false
     @Binding var showNewEntryView: Bool
     @ObservedObject var entryStore: EntryStore
     
@@ -26,14 +34,15 @@ struct NewEntryView: View {
                 .fontWeight(.semibold)
                 .foregroundColor(Color("TextColor"))
                 .font(.title)
-                .padding()
+                
             
             ScrollView {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
-                        .frame(width: 380, height: 130, alignment: .center)
+//                        .frame(width: 380, height: 130, alignment: .center)
                         .foregroundColor(Color("ModeColor"))
                         .applyShadow()
+                        
                     
                     VStack {
                         //First line
@@ -47,13 +56,9 @@ struct NewEntryView: View {
                                 .fontWeight(.bold)
                                 .foregroundColor(Color("TextColor"))
                         }
-                        .padding(.top, 30)
-                        .padding(.horizontal, 40)
                         
                         //Slider
-                        
                         HStack {
-                            
                             Text("0")
                                 .foregroundColor(Color("TextColor"))
                             ZStack {
@@ -71,13 +76,12 @@ struct NewEntryView: View {
                             Text("10")
                                 .foregroundColor(Color("TextColor"))
                         }
-                        .padding(.horizontal, 40)
                     }
                 }
                 
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
-                        .frame(width: 380, height: 380, alignment: .center)
+//                        .frame(width: 380, height: 380, alignment: .center)
                         .foregroundColor(Color("ModeColor"))
                         .applyShadow()
                     
@@ -86,15 +90,12 @@ struct NewEntryView: View {
                         Text(String(format: "Why was your day %.1f/10?", ratingSlider))
                             .fontWeight(.bold)
                             .foregroundColor(Color("TextColor"))
-                            .padding(.horizontal, 20)
-                            .padding(.top, 10)
-                            .frame(width: 370, height: 20, alignment: .leading)
+//                            .frame(width: 370, height: 20, alignment: .leading)
                             
                         ZStack(alignment: .top) {
                             TextViewWrapper(text: $reflectionText)
                                 .frame(width: 340, height: 290, alignment: .leading)
                                 .cornerRadius(10)
-                                .padding()
                             
                             if reflectionText.isEmpty {
                                 Text("Today I felt...")
@@ -105,13 +106,11 @@ struct NewEntryView: View {
                             }
                         }
                     }
-                    .padding(.top, 30)
-                    .padding(.bottom, 20)
                 }
                 
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
-                        .frame(width: 380, height: 380, alignment: .center)
+//                        .frame(width: 380, height: 380, alignment: .center)
                         .foregroundColor(Color("ModeColor"))
                         .applyShadow()
                     
@@ -119,14 +118,12 @@ struct NewEntryView: View {
                         Text("What made you happy today?")
                             .fontWeight(.bold)
                             .foregroundColor(Color("TextColor"))
-                            .padding(.horizontal, 20)
-                            .frame(width: 370, height: 20, alignment: .leading)
+//                            .frame(width: 370, height: 20, alignment: .leading)
                         
                         ZStack {
                             TextViewWrapper(text: $happyText)
                                 .frame(width: 340, height: 290, alignment: .center)
                                 .cornerRadius(10)
-                                .padding(.top, 10)
                             
                             if happyText.isEmpty {
                                 Text("I was happy today because...")
@@ -138,21 +135,45 @@ struct NewEntryView: View {
                         }
                     }
                 }
+                
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10)
+//                        .frame(width: 380, height: 380, alignment: .center)
+                        .foregroundColor(Color("ModeColor"))
+                        .applyShadow()
+                    
+                    VStack {
+                        Text("What did you achieve today?")
+                            .fontWeight(.bold)
+                            .foregroundColor(Color("TextColor"))
+//                            .frame(width: 370, height: 20, alignment: .leading)
+                        
+                        ZStack {
+                            TextViewWrapper(text: $achievementText)
+                                .frame(width: 340, height: 290, alignment: .center)
+                                .cornerRadius(10)
+                            
+                            if happyText.isEmpty {
+                                Text("Today, I...")
+                                    .opacity(0.3)
+                                
+                            }
+                        }
+                    }
+                }
             
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
-                        .frame(width: 380, height: 170, alignment: .center)
+//                        .frame(width: 380, height: 170, alignment: .center)
                         .foregroundColor(Color("ModeColor"))
                         .applyShadow()
-                        .padding(.top, 12)
                     
                     VStack {
                         Text("Use an emoji to describe how you felt about today:")
                             .fontWeight(.bold)
                             .lineLimit(nil)
                             .foregroundColor(Color("TextColor"))
-                            .frame(width: 340, height: 50, alignment: .center)
-                            .padding()
+//                            .frame(width: 340, height: 50, alignment: .center)
                         
                         HStack {
                             Button(action: {
@@ -218,6 +239,139 @@ struct NewEntryView: View {
                                     .opacity(mood == .vgood ? 1 : 0.5)
                             })
                         }
+                    }
+                }
+                
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10)
+//                        .frame(width: 380, height: 170, alignment: .center)
+                        .foregroundColor(Color("ModeColor"))
+                        .applyShadow()
+                    
+                    VStack {
+                        Text("Your daily wellbeing checklist:")
+                            .fontWeight(.bold)
+                            .lineLimit(nil)
+                            .foregroundColor(Color("TextColor"))
+//                            .frame(width: 340, height: 50, alignment: .center)
+                            .padding()
+                        
+                        HStack {
+                            //exercise
+                            Button(action: {
+                                if exercise == true {
+                                    exercise = false
+                                } else {
+                                    exercise = true
+                                }
+                            }, label: {
+                                Text("🏋️ Exercise")
+                                    .font(.system(size: 20, weight: .bold))
+                                    .foregroundColor(Color("TextColor"))
+                                    .padding(2)
+                                    .cornerRadius(15)
+                                    .opacity(exercise == true ? 1 : 0.5)
+                            })
+                            
+                            //exercise
+                            Button(action: {
+                                if water == true {
+                                    water = false
+                                } else {
+                                    water = true
+                                }
+                            }, label: {
+                                Text("🚰 Water Intake")
+                                    .font(.system(size: 20, weight: .bold))
+                                    .foregroundColor(Color("TextColor"))
+                                    .padding(2)
+                                    .cornerRadius(15)
+                                    .opacity(water == true ? 1 : 0.5)
+                            })
+                        }
+                            
+                        HStack {
+                            Button(action: {
+                                if sleep == true {
+                                    sleep = false
+                                } else {
+                                    sleep = true
+                                }
+                            }, label: {
+                                Text("💤 8 hours of sleep")
+                                    .font(.system(size: 20, weight: .bold))
+                                    .foregroundColor(Color("TextColor"))
+                                    .padding(2)
+                                    .cornerRadius(15)
+                                    .opacity(sleep == true ? 1 : 0.5)
+                            })
+                            
+                            
+                            Button(action: {
+                                if fruit == true {
+                                    fruit = false
+                                } else {
+                                    fruit = true
+                                }
+                            }, label: {
+                                Text("🍎 5 Fruit & Veg")
+                                    .font(.system(size: 20, weight: .bold))
+                                    .foregroundColor(Color("TextColor"))
+                                    .padding(2)
+                                    .cornerRadius(15)
+                                    .opacity(fruit == true ? 1 : 0.5)
+                            })
+                        }
+                        
+                        HStack {
+                            Button(action: {
+                                if reading == true {
+                                    reading = false
+                                } else {
+                                    reading = true
+                                }
+                            }, label: {
+                                Text("📚 Reading")
+                                    .font(.system(size: 20, weight: .bold))
+                                    .foregroundColor(Color("TextColor"))
+                                    .padding(2)
+                                    .cornerRadius(15)
+                                    .opacity(reading == true ? 1 : 0.5)
+                            })
+                            
+                            Button(action: {
+                                if productivity == true {
+                                    productivity = false
+                                } else {
+                                    productivity = true
+                                }
+                            }, label: {
+                                Text("📈 Productivity")
+                                    .font(.system(size: 20, weight: .bold))
+                                    .foregroundColor(Color("TextColor"))
+                                    .padding(2)
+                                    .cornerRadius(15)
+                                    .opacity(productivity == true ? 1 : 0.5)
+                            })
+                        }
+                            
+                            HStack {
+                            Button(action: {
+                                if meditation == true {
+                                    meditation = false
+                                } else {
+                                    meditation = true
+                                }
+                            }, label: {
+                                Text("🧘 Meditation")
+                                    .font(.system(size: 20, weight: .bold))
+                                    .foregroundColor(Color("TextColor"))
+                                    .padding(2)
+                                    .cornerRadius(15)
+                                    .opacity(meditation == true ? 1 : 0.5)
+                            })
+                            
+                        }
                         .padding(.horizontal)
                     }
                 }
@@ -226,7 +380,7 @@ struct NewEntryView: View {
                 Button(action: {
                     
                     self.showNewEntryView = false
-                    let entry = Entry(id: UUID().uuidString, rating: ratingSlider, reflectionText: reflectionText, happyText: happyText, mood: mood, date: Date())
+                    let entry = Entry(id: UUID().uuidString, rating: ratingSlider, reflectionText: reflectionText, happyText: happyText, achievementText: achievementText, mood: mood, date: Date(), exercise: exercise, water: water, sleep: sleep, meditation: meditation, fruit: fruit, reading: reading, productivity: productivity)
                     entryStore.addEntry(entry)
                     
                 }, label: {

@@ -29,15 +29,12 @@ struct ProfileView: View {
         let circleSize = CGFloat(150)
     
         VStack {
-            
             HStack {
                 Button(action: {
                     guard hasChanges else {
                         self.presentationMode.wrappedValue.dismiss()
                         return
                     }
-                    
-                    print("Dismiss view")
                     if let data = image?.pngData() {
                         let profile = Profile(profilePicture: data,
                                               name: "Joe Taylor",

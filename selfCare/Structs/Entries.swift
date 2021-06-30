@@ -14,9 +14,16 @@ struct Entry: Identifiable, Codable {
     let rating: Double
     let reflectionText: String
     let happyText: String
+    let achievementText: String
     let mood: Mood
     let date: Date
-    
+    let exercise: Bool
+    let water: Bool
+    let sleep: Bool
+    let meditation: Bool
+    let fruit: Bool
+    let reading: Bool
+    let productivity: Bool
     
     enum Mood: String, Codable {
         case vsad = "😣"
