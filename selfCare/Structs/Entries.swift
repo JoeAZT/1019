@@ -90,7 +90,17 @@ class EntryStore: ObservableObject {
             let formattedDayString = weekdayFormatter.string(from: date) // Tue
             
             if let entry = entries[dayString] {
-                let dataPoint = DataPoint(value: entry.rating, label: LocalizedStringKey(formattedDayString), legend: chartLegend)
+                
+                let legend: Legend
+                if entry.rating < 4 {
+                    legend = Legend(color: .pink, label: "")
+                } else if  entry.rating < 7 {
+                    legend = Legend(color: .purple, label: "")
+                } else {
+                    legend = Legend(color: .blue, label: "")
+                }
+                
+                let dataPoint = DataPoint(value: entry.rating, label: LocalizedStringKey(formattedDayString), legend: legend)
                 dataPoints.insert(dataPoint, at: 0)
             } else {
                 let dataPoint = DataPoint(value: 0, label: LocalizedStringKey(formattedDayString), legend: chartLegend)

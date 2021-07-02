@@ -25,13 +25,9 @@ struct NewEntryView: View {
     @State var outside = false
     @Binding var showNewEntryView: Bool
     @ObservedObject var entryStore: EntryStore
-    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
-        
-        let currentMode = colorScheme == .dark ? "ModeColor" : "TextColor"
-        let oppositeMode = colorScheme == .dark ? "TextColor" : "ModeColor"
-        
+    
         VStack {
             
             //Screen Title
@@ -285,12 +281,12 @@ struct NewEntryView: View {
                                     ZStack {
                                         
                                         RoundedRectangle(cornerRadius: 5)
-                                            .foregroundColor(exercise == true ? Color(currentMode) : Color(oppositeMode))
+                                            .foregroundColor(exercise == true ? Color("ModeColor") : Color.gray.opacity(0.1))
                                                     .padding(.horizontal, 10)
                                             .applyShadow()
                                     Text("🏋️ Exercise")
                                         .font(.system(size: 19, weight: .bold))
-                                        .foregroundColor(exercise == true ? Color(oppositeMode) : Color(currentMode))
+                                        .foregroundColor(Color("TextColor"))
                                         .padding(5)
                                         .opacity(exercise == true ? 1 : 0.5)
                                     }
@@ -305,12 +301,12 @@ struct NewEntryView: View {
                                 }, label: {
                                     ZStack {
                                         RoundedRectangle(cornerRadius: 5)
-                                            .foregroundColor(sleep == true ? Color(currentMode) : Color(oppositeMode))
+                                            .foregroundColor(sleep == true ? Color("ModeColor") : Color.gray.opacity(0.1))
                                             .padding(.horizontal, 10)
                                             .applyShadow()
                                     Text("🛌 Quality Sleep")
                                         .font(.system(size: 19, weight: .bold))
-                                        .foregroundColor(sleep == true ? Color(oppositeMode) : Color(currentMode))
+                                        .foregroundColor(Color("TextColor"))
                                         .padding(5)
                                         .opacity(sleep == true ? 1 : 0.5)
                                     }
@@ -325,12 +321,12 @@ struct NewEntryView: View {
                                 }, label: {
                                     ZStack {
                                         RoundedRectangle(cornerRadius: 5)
-                                            .foregroundColor(water == true ? Color(currentMode) : Color(oppositeMode))
+                                            .foregroundColor(water == true ? Color("ModeColor") : Color.gray.opacity(0.1))
                                             .padding(.horizontal, 10)
                                             .applyShadow()
                                     Text("🚰 Water intake")
                                         .font(.system(size: 19, weight: .bold))
-                                        .foregroundColor(water == true ? Color(oppositeMode) : Color(currentMode))
+                                        .foregroundColor(Color("TextColor"))
                                         .padding(5)
                                         .opacity(water == true ? 1 : 0.5)
                                     }
@@ -345,12 +341,12 @@ struct NewEntryView: View {
                                 }, label: {
                                     ZStack {
                                         RoundedRectangle(cornerRadius: 5)
-                                            .foregroundColor(fruit == true ? Color(currentMode) : Color(oppositeMode))
+                                            .foregroundColor(fruit == true ? Color("ModeColor") : Color.gray.opacity(0.1))
                                             .padding(.horizontal, 10)
                                             .applyShadow()
                                     Text("🍎 5 Fruit & Veg")
                                         .font(.system(size: 19, weight: .bold))
-                                        .foregroundColor(fruit == true ? Color(oppositeMode) : Color(currentMode))
+                                        .foregroundColor(Color("TextColor"))
                                         .padding(5)
                                         .opacity(fruit == true ? 1 : 0.5)
                                     }
@@ -367,12 +363,12 @@ struct NewEntryView: View {
                                 }, label: {
                                     ZStack {
                                         RoundedRectangle(cornerRadius: 5)
-                                            .foregroundColor(reading == true ? Color(currentMode) : Color(oppositeMode))
+                                            .foregroundColor(reading == true ? Color("ModeColor") : Color.gray.opacity(0.1))
                                             .padding(.horizontal, 10)
                                             .applyShadow()
                                     Text("📚 Reading")
                                         .font(.system(size: 19, weight: .bold))
-                                        .foregroundColor(reading == true ? Color(oppositeMode) : Color(currentMode))
+                                        .foregroundColor(Color("TextColor"))
                                         .padding(5)
                                         .opacity(reading == true ? 1 : 0.5)
                                     }
@@ -387,12 +383,12 @@ struct NewEntryView: View {
                                 }, label: {
                                     ZStack {
                                         RoundedRectangle(cornerRadius: 5)
-                                            .foregroundColor(productivity == true ? Color(currentMode) : Color(oppositeMode))
+                                            .foregroundColor(productivity == true ? Color("ModeColor") : Color.gray.opacity(0.1))
                                             .padding(.horizontal, 10)
                                             .applyShadow()
                                     Text("📈 Productivity")
                                         .font(.system(size: 19, weight: .bold))
-                                        .foregroundColor(productivity == true ? Color(oppositeMode) : Color(currentMode))
+                                        .foregroundColor(Color("TextColor"))
                                         .padding(5)
                                         .opacity(productivity == true ? 1 : 0.5)
                                     }
@@ -407,12 +403,12 @@ struct NewEntryView: View {
                                 }, label: {
                                     ZStack {
                                         RoundedRectangle(cornerRadius: 5)
-                                            .foregroundColor(meditation == true ? Color(currentMode) : Color(oppositeMode))
+                                            .foregroundColor(meditation == true ? Color("ModeColor") : Color.gray.opacity(0.1))
                                             .padding(.horizontal, 10)
                                             .applyShadow()
                                     Text("🧘 Medititaion")
                                         .font(.system(size: 19, weight: .bold))
-                                        .foregroundColor(meditation == true ? Color(oppositeMode) : Color(currentMode))
+                                        .foregroundColor(Color("TextColor"))
                                         .padding(5)
                                         .opacity(meditation == true ? 1 : 0.5)
                                     }
@@ -427,12 +423,12 @@ struct NewEntryView: View {
                                 }, label: {
                                     ZStack {
                                         RoundedRectangle(cornerRadius: 5)
-                                            .foregroundColor(outside == true ? Color(currentMode) : Color(oppositeMode))
+                                            .foregroundColor(outside == true ? Color("ModeColor") : Color.gray.opacity(0.1))
                                             .padding(.horizontal, 10)
                                             .applyShadow()
                                     Text("☀️ Go Outside")
                                         .font(.system(size: 19, weight: .bold))
-                                        .foregroundColor(outside == true ? Color(oppositeMode) : Color(currentMode))
+                                        .foregroundColor(Color("TextColor"))
                                         .padding(5)
                                         .opacity(outside == true ? 1 : 0.5)
                                     }

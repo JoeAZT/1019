@@ -11,6 +11,7 @@ struct JournalView: View {
     
     @ObservedObject var entryStore: EntryStore
     @State private var showNewEntryView = false
+    @State var expandedEntry: String?
     
     var body: some View {
         
@@ -21,108 +22,122 @@ struct JournalView: View {
                 .font(.title)
                 .padding()
             
-            VStack {
-                ZStack {
-                    List {
-                        ForEach(entryStore.entries.map(\.value)) { entry in
-                                HStack {
-                                    //Date and description
-                                    ZStack {
-                                        RoundedRectangle(cornerRadius: 10)
-//                                            .frame(width: 300, height: 200, alignment: .center)
-                                            .foregroundColor(Color("ModeColor"))
-                                            .applyShadow()
-                                        
-                                        VStack {
-                                            HStack{
-                                                Text(entry.date, style: .date)
-                                                    .fontWeight(.semibold)
-                                                    .padding(5)
-                                                Spacer()
-                                            }
-                                            Text(entry.reflectionText)
-                                                .multilineTextAlignment(.leading)
-                                                .padding(.vertical, 5)
-                                                .padding(.trailing, 10)
-                                            Text(entry.happyText)
-                                                .multilineTextAlignment(.leading)
-                                        }
-//                                        .frame(width: 280, height: 200, alignment: .leading)
-                                    }
-                                    Spacer()
-                                    
-                                    VStack {
-                                        //Rating
-                                        ZStack {
-                                            RoundedRectangle(cornerRadius: 10)
-//                                                .frame(width: 80, height: 95, alignment: .center)
-                                                .foregroundColor(Color("ModeColor"))
-                                                .applyShadow()
-                                            VStack(alignment: .center) {
-                                                Text("Rating")
-                                                    .fontWeight(.semibold)
-                                                    .font(.system(size: 14))
-                                                    .padding(1)
-                                                Text(String(format: "%.1f", entry.rating))
-                                                    .font(.system(size: 24, weight: .bold, design: .default))
-                                            }
-//                                            .frame(width: 50, height: 50)
-                                        }
-                                        
-                                        //Mood
-                                        ZStack {
-                                            RoundedRectangle(cornerRadius: 10)
-//                                                .frame(width: 80, height: 95, alignment: .center)
-                                                .foregroundColor(Color("ModeColor"))
-                                                .applyShadow()
-                                            VStack(alignment: .center) {
-                                                Text("Mood")
-                                                    .fontWeight(.semibold)
-                                                    .font(.system(size: 15))
-                                                Text(entry.mood.rawValue)
-                                                    .font(.system(size: 40))
-                                            }
-//                                            .frame(width: 50, height: 50)
-                                        }
-                                    }
-                                }
-                        }
-                    }
-                    
-                    if entryStore.entries.isEmpty {
-                        VStack {
-                            Image(systemName: "plus.circle")
-                                .font(.system(size: 200, weight: .regular, design: .default))
-                                .padding(30)
+                List {
+                    ForEach(entryStore.entries.map(\.value)) { entry in
+                        
+                        VStack(alignment: .leading) {
+                        Text(entry.date, style: .date)
+                            .fontWeight(.bold)
                             
-                            Text("When you create journal entries they will appear on this screen. It's ok if you dont want to write anything down some days, you just have to give me a rating.")
-                                .font(.system(size: 20, weight: .regular, design: .default))
-                                .multilineTextAlignment(.center)
-                                .padding(.horizontal, 60)
+                            HStack {
+                                VStack {
+                                    Text("Mood")
+                                        .font(.system(size: 30, weight: .semibold, design: .default))
+                                    Text(entry.mood.rawValue)
+                                        .font(.system(size: 50, weight: .bold, design: .default))
+                                }
+                                VStack {
+                                    Text("Rating")
+                                        .font(.system(size: 30, weight: .semibold, design: .default))
+                                    Text(String(format: "%.1f", entry.rating))
+                                        .font(.system(size: 50, weight: .bold, design: .default))
+                                }
+                            }
+                            ScrollView(.horizontal) {
+                                HStack(spacing: 40) {
+                                    Text("🏋️")
+                                        .font(.system(size: 20, weight: .bold, design: .default))
+                                        .opacity(entry.exercise == true ? 1 : 0.2)
+                                    Text("🛌")
+                                        .font(.system(size: 20, weight: .bold, design: .default))
+                                        .opacity(entry.water == true ? 1 : 0.2)
+                                    Text("🚰")
+                                        .font(.system(size: 20, weight: .bold, design: .default))
+                                        .opacity(entry.water == true ? 1 : 0.2)
+                                    Text("🍎")
+                                        .font(.system(size: 20, weight: .bold, design: .default))
+                                        .opacity(entry.fruit == true ? 1 : 0.2)
+                                    Text("📚")
+                                        .font(.system(size: 20, weight: .bold, design: .default))
+                                        .opacity(entry.reading == true ? 1 : 0.2)
+                                    Text("📈")
+                                        .font(.system(size: 20, weight: .bold, design: .default))
+                                        .opacity(entry.productivity == true ? 1 : 0.2)
+                                    Text("🧘")
+                                        .font(.system(size: 20, weight: .bold, design: .default))
+                                        .opacity(entry.meditation == true ? 1 : 0.2)
+                                    Text("☀️")
+                                        .font(.system(size: 20, weight: .bold, design: .default))
+                                        .opacity(entry.outside == true ? 1 : 0.2)
+                                }
+                            }
+                            VStack {
+                                if self.expandedEntry != entry.id {
+                                    HStack{
+                                        Spacer()
+                                    Image(systemName: "chevron.compact.down")
+                                        Spacer()
+                                    }
+                                } else {
+                                    HStack{
+                                        Spacer()
+                                    Image(systemName: "chevron.compact.up")
+                                        Spacer()
+                                    }
+                                    Text("Rating")
+                                        .fontWeight(.bold)
+                                    Text(entry.reflectionText)
+                                    Text("Happy")
+                                        .fontWeight(.bold)
+                                    Text(entry.happyText)
+                                    Text("Achieve")
+                                        .fontWeight(.bold)
+                                    Text(entry.achievementText)
+                                }
+                            }
+                            .onTapGesture {
+                                if self.expandedEntry == entry.id {
+                                    self.expandedEntry = nil
+                                } else {
+                                    self.expandedEntry = entry.id
+                                }
+                            }
                         }
-                        .opacity(0.4)
-                        .padding(.bottom, 50)
                     }
+                        
+                        
+                if entryStore.entries.isEmpty {
+                    VStack {
+                        Image(systemName: "plus.circle")
+                            .font(.system(size: 200, weight: .regular, design: .default))
+                            .padding(30)
+                        
+                        Text("When you create journal entries they will appear on this screen. It's ok if you dont want to write anything down some days, you just have to give me a rating.")
+                            .font(.system(size: 20, weight: .regular, design: .default))
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 60)
+                    }
+                    .opacity(0.4)
+                    .padding(.bottom, 50)
                 }
-                
-                Button(action: {
-                    showNewEntryView.toggle()
-                    
-                }, label: {
-                    Text("Create Entry")
-                        .font(.system(size: 20, weight: .bold))
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(LinearGradient(gradient: Gradient(colors: [Color .blue, .pink]), startPoint: .leading, endPoint: .trailing))
-                        .cornerRadius(15)
-                })
             }
+            
+            Button(action: {
+                showNewEntryView.toggle()
+                
+            }, label: {
+                Text("Create Entry")
+                    .font(.system(size: 20, weight: .bold))
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(LinearGradient(gradient: Gradient(colors: [Color .blue, .pink]), startPoint: .leading, endPoint: .trailing))
+                    .cornerRadius(15)
+            })
         }
         
         .sheet(isPresented: $showNewEntryView) {
             NewEntryView(showNewEntryView: $showNewEntryView, entryStore: entryStore)
         }
-        
     }
 }
 

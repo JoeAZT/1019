@@ -8,17 +8,7 @@
 import SwiftUI
 import SwiftUICharts
 
-let chartLegend = Legend(color: .white, label: "Your week")
-
-let points: [DataPoint] = [
-    .init(value: 3, label: "Mon", legend: chartLegend),
-    .init(value: 2, label: "Tue", legend: chartLegend),
-    .init(value: 7, label: "Wed", legend: chartLegend),
-    .init(value: 10, label: "Thu", legend: chartLegend),
-    .init(value: 8, label: "Fri", legend: chartLegend),
-    .init(value: 6, label: "Sat", legend: chartLegend),
-    .init(value: 7, label: "Sun", legend: chartLegend), 
-]
+let chartLegend = Legend(color: .white, label: "")
 
 struct FeelingsGraphs: View {
     
@@ -38,14 +28,14 @@ struct FeelingsGraphs: View {
                         .foregroundColor(.white)
                         .padding()
                     
-                    BarChartView(dataPoints: entryStore.graphEntries)
+                    LineChartView(dataPoints: entryStore.graphEntries)
                         .chartStyle(
-                            BarChartStyle(
-                                barMinHeight: 1,
+                            LineChartStyle(
+                                lineMinHeight: 1,
                                 showAxis: true,
                                 axisLeadingPadding: 10,
                                 showLabels: true,
-                                labelCount: 10,
+                                labelCount: 7,
                                 showLegends: false
                             )
                         )
