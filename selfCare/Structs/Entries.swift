@@ -48,7 +48,7 @@ class EntryStore: ObservableObject {
     
     private lazy var weekdayFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "EEE"
+        formatter.dateFormat = "EEEEE"
         return formatter
     }()
     

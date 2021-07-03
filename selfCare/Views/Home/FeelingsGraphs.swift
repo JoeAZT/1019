@@ -16,15 +16,15 @@ struct FeelingsGraphs: View {
     
     var body: some View {
         
-        ScrollView {
+//        ScrollView {
             ZStack {
                 RoundedRectangle(cornerRadius: 20)
-                    .frame(width: 400, height: 470, alignment: .center)
+                    .foregroundColor(Color("ModeColor"))
                     .opacity(0.2)
                 
                 VStack(alignment: .leading) {
                     Text("Your ratings this week:")
-                        .font(.system(size: 25, weight: .bold, design: .default))
+                        .font(.system(size: 20, weight: .bold, design: .default))
                         .foregroundColor(.white)
                         .padding()
                     
@@ -39,38 +39,12 @@ struct FeelingsGraphs: View {
                                 showLegends: false
                             )
                         )
-                        .frame(width: 350, height: 350, alignment: .center)
                         .padding()
                         .accentColor(.white)
                         .foregroundColor(.white)
                 }
             }
-            
-            ZStack {
-                RoundedRectangle(cornerRadius: 20)
-                    .frame(width: 400, height: 120, alignment: .center)
-                    .opacity(0.2)
-                
-                VStack(alignment: .leading) {
-                    Text("Your mood this week:")
-                        .font(.system(size: 25, weight: .bold, design: .default))
-                        .foregroundColor(.white)
-                        .padding(.leading, 25)
-        
-                    //Use this webiste to create array that shows the last 7 days of emojis or graph entries
-                    ScrollView(.horizontal) {
-                        HStack {
-                            ForEach(entryStore.entries.map(\.value)) { entry in
-                                Text(entry.mood.rawValue)
-                                    .font(.system(size: 40, weight: .regular, design: .default))
-                            }
-                        }
-                        .padding(.horizontal, 20)
-                    }
-                }
-                .padding(.horizontal, 10)
-            }
-        }
+//        }
     }
 }
 

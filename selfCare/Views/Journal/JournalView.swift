@@ -25,104 +25,115 @@ struct JournalView: View {
             List {
                 ForEach(entryStore.entries.map(\.value)) { entry in
                     
-                    VStack(alignment: .leading) {
-                        
-                        HStack {
-                            Text(entry.mood.rawValue)
-                                .font(.system(size: 60, weight: .bold, design: .default))
-                            
-                            VStack(alignment: .leading) {
-                                Text(entry.date, style: .date)
-                                HStack {
-                                    Text("Rating:")
-                                        .font(.system(size: 20, weight: .bold, design: .default))
-                                    Text(String(format: "%.1f", entry.rating))
-                                        .font(.system(size: 20, weight: .bold, design: .default))
-                                }
-                            }
-                            .padding()
-                            
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 10)
-                                    .foregroundColor(.gray)
-                                    .opacity(0.1)
-                                    .frame(height: 70)
-                                VStack {
-                                    HStack {
-                                        Text("🏋️")
-                                            .font(.system(size: 20, weight: .bold, design: .default))
-                                            .opacity(entry.exercise == true ? 1 : 0.2)
-                                        Text("🛌")
-                                            .font(.system(size: 20, weight: .bold, design: .default))
-                                            .opacity(entry.water == true ? 1 : 0.2)
-                                        Text("🚰")
-                                            .font(.system(size: 20, weight: .bold, design: .default))
-                                            .opacity(entry.water == true ? 1 : 0.2)
-                                        Text("🍎")
-                                            .font(.system(size: 20, weight: .bold, design: .default))
-                                            .opacity(entry.fruit == true ? 1 : 0.2)
-                                    }
-                                    HStack {
-                                        Text("📚")
-                                            .font(.system(size: 20, weight: .bold, design: .default))
-                                            .opacity(entry.reading == true ? 1 : 0.2)
-                                        Text("📈")
-                                            .font(.system(size: 20, weight: .bold, design: .default))
-                                            .opacity(entry.productivity == true ? 1 : 0.2)
-                                        Text("🧘")
-                                            .font(.system(size: 20, weight: .bold, design: .default))
-                                            .opacity(entry.meditation == true ? 1 : 0.2)
-                                        Text("☀️")
-                                            .font(.system(size: 20, weight: .bold, design: .default))
-                                            .opacity(entry.outside == true ? 1 : 0.2)
-                                    }
-                                }
-                            }
-                        }
-                        
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10)
+                            .foregroundColor(.gray)
+                            .applyShadow()
+                            .opacity(0.1)
                         
                         VStack(alignment: .leading) {
-                            if self.expandedEntry != entry.id {
-                                HStack{
-                                    Spacer()
-                                    Image(systemName: "chevron.compact.down")
-                                        .font(.system(size: 20, weight: .bold, design: .default))
-                                    Spacer()
+                            
+                            HStack {
+                                Text(entry.mood.rawValue)
+                                    .font(.system(size: 60, weight: .bold, design: .default))
+                                
+                                VStack(alignment: .leading) {
+                                    Text(entry.date, style: .date)
+                                        .font(.system(size: 15, weight: .medium, design: .default))
+                                    HStack {
+                                        Text("Rating:")
+                                            .font(.system(size: 18, weight: .bold, design: .default))
+                                        Text(String(format: "%.1f", entry.rating))
+                                            .font(.system(size: 18, weight: .bold, design: .default))
+                                    }
                                 }
-                            } else {
-                                Text("How was your day?:")
-                                    .fontWeight(.bold)
-                                Text(entry.reflectionText)
-                                    .padding(.bottom)
-                                Text("What made you happy?:")
-                                    .fontWeight(.bold)
-                                Text(entry.happyText)
-                                    .padding(.bottom)
-                                Text("What did you achieve?:")
-                                    .fontWeight(.bold)
-                                Text(entry.achievementText)
-                                    .padding(.bottom)
-                                HStack{
-                                    Spacer()
-                                    Image(systemName: "chevron.compact.up")
-                                        .font(.system(size: 20, weight: .bold, design: .default))
-                                    Spacer()
+                                .padding()
+                                
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .foregroundColor(.gray)
+                                        .opacity(0.1)
+                                        .frame(height: 60)
+                                    VStack {
+                                        HStack {
+                                            Text("🏋️")
+                                                .font(.system(size: 20, weight: .bold, design: .default))
+                                                .opacity(entry.exercise == true ? 1 : 0.2)
+                                            Text("🛌")
+                                                .font(.system(size: 20, weight: .bold, design: .default))
+                                                .opacity(entry.water == true ? 1 : 0.2)
+                                            Text("🚰")
+                                                .font(.system(size: 20, weight: .bold, design: .default))
+                                                .opacity(entry.water == true ? 1 : 0.2)
+                                            Text("🍎")
+                                                .font(.system(size: 20, weight: .bold, design: .default))
+                                                .opacity(entry.fruit == true ? 1 : 0.2)
+                                        }
+                                        HStack {
+                                            Text("📚")
+                                                .font(.system(size: 20, weight: .bold, design: .default))
+                                                .opacity(entry.reading == true ? 1 : 0.2)
+                                            Text("📈")
+                                                .font(.system(size: 20, weight: .bold, design: .default))
+                                                .opacity(entry.productivity == true ? 1 : 0.2)
+                                            Text("🧘")
+                                                .font(.system(size: 20, weight: .bold, design: .default))
+                                                .opacity(entry.meditation == true ? 1 : 0.2)
+                                            Text("☀️")
+                                                .font(.system(size: 20, weight: .bold, design: .default))
+                                                .opacity(entry.outside == true ? 1 : 0.2)
+                                        }
+                                    }
                                 }
-
                             }
-                        }
-                        .layoutPriority(1)
-                        .onTapGesture {
-                            if self.expandedEntry == entry.id {
-                                self.expandedEntry = nil
-                            } else {
-                                self.expandedEntry = entry.id
+                            .padding(.horizontal, 10)
+                            .padding(.top, 5)
+                            
+                            
+                            VStack(alignment: .leading) {
+                                if self.expandedEntry != entry.id {
+                                    HStack{
+                                        Spacer()
+                                        Image(systemName: "chevron.compact.down")
+                                            .font(.system(size: 20, weight: .bold, design: .default))
+                                            .opacity(0.4)
+                                            .padding(.bottom, 1)
+                                        Spacer()
+                                    }
+                                } else {
+                                    Text("How was your day?:")
+                                        .fontWeight(.bold)
+                                    Text(entry.reflectionText)
+                                        .padding(.bottom)
+                                    Text("What made you happy?:")
+                                        .fontWeight(.bold)
+                                    Text(entry.happyText)
+                                        .padding(.bottom)
+                                    Text("What did you achieve?:")
+                                        .fontWeight(.bold)
+                                    Text(entry.achievementText)
+                                        .padding(.bottom)
+                                    HStack{
+                                        Spacer()
+                                        Image(systemName: "chevron.compact.up")
+                                            .font(.system(size: 20, weight: .bold, design: .default))
+                                        Spacer()
+                                    }
+                                    
+                                }
                             }
+                            .layoutPriority(1)
+                            .onTapGesture {
+                                if self.expandedEntry == entry.id {
+                                    self.expandedEntry = nil
+                                } else {
+                                    self.expandedEntry = entry.id
+                                }
+                            }
+                            .animation(.spring())
                         }
-                        .animation(.spring())
                     }
                 }
-                
                         
                 if entryStore.entries.isEmpty {
                     VStack {

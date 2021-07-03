@@ -66,17 +66,80 @@ struct HomeView: View {
                 })
             }
             
-            //Tab view sections
-            TabView(selection: $selectedPage) {
-                CircleGraphic(rating: entryStore.average())
-                .tag(0)
+            VStack(alignment: .leading) {
+                Text("Welcome back, Joe")
+                    .font(.system(size: 25, weight: .black, design: .default))
+                    .foregroundColor(.white)
+                HStack {
+                    CircleGraphic(rating: entryStore.average())
+                    
+                    FeelingsGraphs(entryStore: entryStore)
+                }
                 
-                FeelingsGraphs(entryStore: entryStore)
-                .tag(1)
-            }
-            .tabViewStyle(PageTabViewStyle())
+                ZStack {
+                    RoundedRectangle(cornerRadius: 20)
+                        .foregroundColor(Color("ModeColor"))
+                        .opacity(0.2)
+                    
+                    VStack(alignment: .leading) {
+                        Text("Your mood this week:")
+                            .font(.system(size: 20, weight: .bold, design: .default))
+                            .foregroundColor(.white)
             
-            Spacer()
+                        //Use this webiste to create array that shows the last 7 days of emojis or graph entries
+                        ScrollView(.horizontal) {
+                            HStack(spacing: 20) {
+                                ForEach(entryStore.entries.map(\.value)) { entry in
+                                    Text(entry.mood.rawValue)
+                                        .font(.system(size: 30, weight: .regular, design: .default))
+                                }
+                            }
+//                            .padding(.horizontal, 20)
+                        }
+                    }
+                    .padding(.horizontal, 10)
+                }
+                .frame(height: 100)
+                
+                ZStack {
+                    RoundedRectangle(cornerRadius: 20)
+                        .foregroundColor(Color("ModeColor"))
+                        .opacity(0.2)
+                    VStack(alignment: .leading) {
+                        Text("Your daily targets:")
+                            .font(.system(size: 20, weight: .bold, design: .default))
+                            .foregroundColor(.white)
+                        
+                        ScrollView {
+                            ForEach(goalStore.goals) { goal in
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .foregroundColor(Color("ModeColor"))
+                                        .opacity(0.1)
+                                    HStack {
+                                        Text(goal.title)
+                                            .fontWeight(.semibold)
+                                            .foregroundColor(.white)
+                                            .padding(5)
+                                        Spacer()
+                                        Image(systemName: goal.completed ? "checkmark.square" : "square")
+                                            .font(.system(size: 20, weight: .bold, design: .default))
+                                            .foregroundColor(.white)
+                                            .padding(5)
+                                    }
+                                    .onTapGesture {
+                                        goalStore.toggleCompletedFor(goal)
+                                    }
+                                }
+                            }
+                            
+                        }
+                    }
+                    .padding()
+                }
+                .frame(height: 200)
+            }
+            .padding()
             
             HStack {
                 //Journal Button
