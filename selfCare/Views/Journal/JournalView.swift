@@ -22,89 +22,107 @@ struct JournalView: View {
                 .font(.title)
                 .padding()
             
-                List {
-                    ForEach(entryStore.entries.map(\.value)) { entry in
+            List {
+                ForEach(entryStore.entries.map(\.value)) { entry in
+                    
+                    VStack(alignment: .leading) {
                         
-                        VStack(alignment: .leading) {
-                        Text(entry.date, style: .date)
-                            .fontWeight(.bold)
+                        HStack {
+                            Text(entry.mood.rawValue)
+                                .font(.system(size: 60, weight: .bold, design: .default))
                             
-                            HStack {
-                                VStack {
-                                    Text("Mood")
-                                        .font(.system(size: 30, weight: .semibold, design: .default))
-                                    Text(entry.mood.rawValue)
-                                        .font(.system(size: 50, weight: .bold, design: .default))
-                                }
-                                VStack {
-                                    Text("Rating")
-                                        .font(.system(size: 30, weight: .semibold, design: .default))
+                            VStack(alignment: .leading) {
+                                Text(entry.date, style: .date)
+                                HStack {
+                                    Text("Rating:")
+                                        .font(.system(size: 20, weight: .bold, design: .default))
                                     Text(String(format: "%.1f", entry.rating))
-                                        .font(.system(size: 50, weight: .bold, design: .default))
+                                        .font(.system(size: 20, weight: .bold, design: .default))
                                 }
                             }
-                            ScrollView(.horizontal) {
-                                HStack(spacing: 40) {
-                                    Text("🏋️")
-                                        .font(.system(size: 20, weight: .bold, design: .default))
-                                        .opacity(entry.exercise == true ? 1 : 0.2)
-                                    Text("🛌")
-                                        .font(.system(size: 20, weight: .bold, design: .default))
-                                        .opacity(entry.water == true ? 1 : 0.2)
-                                    Text("🚰")
-                                        .font(.system(size: 20, weight: .bold, design: .default))
-                                        .opacity(entry.water == true ? 1 : 0.2)
-                                    Text("🍎")
-                                        .font(.system(size: 20, weight: .bold, design: .default))
-                                        .opacity(entry.fruit == true ? 1 : 0.2)
-                                    Text("📚")
-                                        .font(.system(size: 20, weight: .bold, design: .default))
-                                        .opacity(entry.reading == true ? 1 : 0.2)
-                                    Text("📈")
-                                        .font(.system(size: 20, weight: .bold, design: .default))
-                                        .opacity(entry.productivity == true ? 1 : 0.2)
-                                    Text("🧘")
-                                        .font(.system(size: 20, weight: .bold, design: .default))
-                                        .opacity(entry.meditation == true ? 1 : 0.2)
-                                    Text("☀️")
-                                        .font(.system(size: 20, weight: .bold, design: .default))
-                                        .opacity(entry.outside == true ? 1 : 0.2)
-                                }
-                            }
-                            VStack {
-                                if self.expandedEntry != entry.id {
-                                    HStack{
-                                        Spacer()
-                                    Image(systemName: "chevron.compact.down")
-                                        Spacer()
+                            .padding()
+                            
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .foregroundColor(.gray)
+                                    .opacity(0.1)
+                                    .frame(height: 70)
+                                VStack {
+                                    HStack {
+                                        Text("🏋️")
+                                            .font(.system(size: 20, weight: .bold, design: .default))
+                                            .opacity(entry.exercise == true ? 1 : 0.2)
+                                        Text("🛌")
+                                            .font(.system(size: 20, weight: .bold, design: .default))
+                                            .opacity(entry.water == true ? 1 : 0.2)
+                                        Text("🚰")
+                                            .font(.system(size: 20, weight: .bold, design: .default))
+                                            .opacity(entry.water == true ? 1 : 0.2)
+                                        Text("🍎")
+                                            .font(.system(size: 20, weight: .bold, design: .default))
+                                            .opacity(entry.fruit == true ? 1 : 0.2)
                                     }
-                                } else {
-                                    HStack{
-                                        Spacer()
-                                    Image(systemName: "chevron.compact.up")
-                                        Spacer()
+                                    HStack {
+                                        Text("📚")
+                                            .font(.system(size: 20, weight: .bold, design: .default))
+                                            .opacity(entry.reading == true ? 1 : 0.2)
+                                        Text("📈")
+                                            .font(.system(size: 20, weight: .bold, design: .default))
+                                            .opacity(entry.productivity == true ? 1 : 0.2)
+                                        Text("🧘")
+                                            .font(.system(size: 20, weight: .bold, design: .default))
+                                            .opacity(entry.meditation == true ? 1 : 0.2)
+                                        Text("☀️")
+                                            .font(.system(size: 20, weight: .bold, design: .default))
+                                            .opacity(entry.outside == true ? 1 : 0.2)
                                     }
-                                    Text("Rating")
-                                        .fontWeight(.bold)
-                                    Text(entry.reflectionText)
-                                    Text("Happy")
-                                        .fontWeight(.bold)
-                                    Text(entry.happyText)
-                                    Text("Achieve")
-                                        .fontWeight(.bold)
-                                    Text(entry.achievementText)
-                                }
-                            }
-                            .onTapGesture {
-                                if self.expandedEntry == entry.id {
-                                    self.expandedEntry = nil
-                                } else {
-                                    self.expandedEntry = entry.id
                                 }
                             }
                         }
-                    }
                         
+                        
+                        VStack(alignment: .leading) {
+                            if self.expandedEntry != entry.id {
+                                HStack{
+                                    Spacer()
+                                    Image(systemName: "chevron.compact.down")
+                                        .font(.system(size: 20, weight: .bold, design: .default))
+                                    Spacer()
+                                }
+                            } else {
+                                Text("How was your day?:")
+                                    .fontWeight(.bold)
+                                Text(entry.reflectionText)
+                                    .padding(.bottom)
+                                Text("What made you happy?:")
+                                    .fontWeight(.bold)
+                                Text(entry.happyText)
+                                    .padding(.bottom)
+                                Text("What did you achieve?:")
+                                    .fontWeight(.bold)
+                                Text(entry.achievementText)
+                                    .padding(.bottom)
+                                HStack{
+                                    Spacer()
+                                    Image(systemName: "chevron.compact.up")
+                                        .font(.system(size: 20, weight: .bold, design: .default))
+                                    Spacer()
+                                }
+
+                            }
+                        }
+                        .layoutPriority(1)
+                        .onTapGesture {
+                            if self.expandedEntry == entry.id {
+                                self.expandedEntry = nil
+                            } else {
+                                self.expandedEntry = entry.id
+                            }
+                        }
+                        .animation(.spring())
+                    }
+                }
+                
                         
                 if entryStore.entries.isEmpty {
                     VStack {
