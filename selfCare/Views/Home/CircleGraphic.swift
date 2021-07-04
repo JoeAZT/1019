@@ -51,9 +51,3 @@ struct CircleGraphic: View {
         }
     }
 }
-
-struct CircleGraphic_Previews: PreviewProvider {
-    static var previews: some View {
-        CircleGraphic(rating: 0.5)
-    }
-}

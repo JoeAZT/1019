@@ -16,40 +16,33 @@ struct FeelingsGraphs: View {
     
     var body: some View {
         
-//        ScrollView {
-            ZStack {
-                RoundedRectangle(cornerRadius: 20)
-                    .foregroundColor(Color("ModeColor"))
-                    .opacity(0.2)
+        ZStack {
+            RoundedRectangle(cornerRadius: 20)
+                .foregroundColor(Color("ModeColor"))
+                .opacity(0.2)
+            
+            VStack(alignment: .leading) {
+                Text("Your ratings this week:")
+                    .font(.system(size: 20, weight: .bold, design: .default))
+                    .foregroundColor(.white)
+                    .padding()
                 
-                VStack(alignment: .leading) {
-                    Text("Your ratings this week:")
-                        .font(.system(size: 20, weight: .bold, design: .default))
-                        .foregroundColor(.white)
-                        .padding()
-                    
-                    LineChartView(dataPoints: entryStore.graphEntries)
-                        .chartStyle(
-                            LineChartStyle(
-                                lineMinHeight: 1,
-                                showAxis: true,
-                                axisLeadingPadding: 10,
-                                showLabels: true,
-                                labelCount: 7,
-                                showLegends: false
-                            )
+                LineChartView(dataPoints: entryStore.graphEntries)
+                    .chartStyle(
+                        LineChartStyle(
+                            lineMinHeight: 1,
+                            showAxis: true,
+                            axisLeadingPadding: 10,
+                            showLabels: true,
+                            labelCount: 7,
+                            showLegends: false
                         )
-                        .padding()
-                        .accentColor(.white)
-                        .foregroundColor(.white)
-                }
+                    )
+                    .padding()
+                    .accentColor(.white)
+                    .foregroundColor(.white)
             }
-//        }
+        }
+        
     }
 }
-
-//struct FeelingsGraphs_Previews: PreviewProvider {
-//    static var previews: some View {
-//        FeelingsGraphs()
-//    }
-//}

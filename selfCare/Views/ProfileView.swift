@@ -21,6 +21,7 @@ struct ProfileView: View {
     @ObservedObject var goalStore: GoalStore
     @ObservedObject var profileStore: ProfileStore
     @State var toggleApperance = false
+    @State var nameExpand = false
     
     @State var hasChanges = false
     
@@ -37,7 +38,7 @@ struct ProfileView: View {
                     }
                     if let data = image?.pngData() {
                         let profile = Profile(profilePicture: data,
-                                              name: "Joe Taylor",
+                                              name: nameText,
                                               targetReminder: Date(),
                                               journalReminder: Date())
                         profileStore.updateProfile(profile)
@@ -98,18 +99,47 @@ struct ProfileView: View {
                             .font(.system(size: 13, weight: .regular, design: .default))
                             .frame(width: 100, height: 50, alignment: .center)
                     }
-                    
                 }
             }
             .onTapGesture {
                 self.showingImagePicker = true
             }
             
-            Text("Your Name")
-                .fontWeight(.semibold)
-                .foregroundColor(Color("TextColor"))
-                .font(.title2)
-                .padding(.bottom, 20)
+            VStack {
+                if nameExpand == false {
+                    Text(nameText == "" ? "Add Your Name" : nameText)
+                        .font(.system(size: 40, weight: .semibold, design: .default))
+                        .onTapGesture {
+                            nameExpand = true
+                        }
+                } else {
+                    HStack {
+                    TextViewWrapper(text: $nameText)
+                        .frame(height: 40, alignment: .center)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color("ModeColor"), lineWidth: 4)
+                        )
+                        Button(action: {
+                            nameExpand = false
+//                            let profile = Profile(profilePicture: data,
+//                                                  name: nameText,
+//                                                  targetReminder: Date(),
+//                                                  journalReminder: Date())
+//                            profileStore.updateProfile(profile)
+                        }, label: {
+                            Text("Done")
+                                .font(.system(size: 12, weight: .bold))
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(LinearGradient(gradient: Gradient(colors: [Color .blue, .pink]), startPoint: .leading, endPoint: .trailing))
+                                .cornerRadius(15)
+                        })
+                    }
+                    .padding()
+                    .padding(.horizontal, 10)
+                }
+            }
             
             //Top rectangle
             ZStack {

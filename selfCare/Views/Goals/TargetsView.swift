@@ -69,7 +69,7 @@ struct TargetsView: View {
                     
                     //Empty goal list placeholder
                     if goalStore.goals.isEmpty {
-                        VStack {
+                        VStack(alignment: .center) {
                             Image(systemName: "plus.circle")
                                 .font(.system(size: 200, weight: .regular, design: .default))
                                 .padding(30)
@@ -78,7 +78,6 @@ struct TargetsView: View {
                                 .font(.system(size: 20, weight: .regular, design: .default))
                                 .multilineTextAlignment(.center)
                                 .padding(.horizontal, 60)
-                            
                         }
                         .opacity(0.4)
                         .padding(.bottom, 50)
@@ -96,7 +95,6 @@ struct TargetsView: View {
                         .background(LinearGradient(gradient: Gradient(colors: [Color .blue, .pink]), startPoint: .leading, endPoint: .trailing))
                         .cornerRadius(15)
                 })
-                
                 .sheet(isPresented: $showNewGoalView) {
                     NewTargetView(showGoalView: $showNewGoalView, goalStore: goalStore)
                 }
@@ -104,13 +102,10 @@ struct TargetsView: View {
         }
     }
     
-    
-    
     func delete(at offsets: IndexSet) {
         goalStore.goals.remove(atOffsets: offsets)
     }
 }
-
 
 struct GoalsView_Previews: PreviewProvider {
     static var previews: some View {

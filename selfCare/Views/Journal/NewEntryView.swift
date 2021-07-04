@@ -460,10 +460,3 @@ struct NewEntryView: View {
         }
     }
 }
-
-struct NewEntryView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView()
-    }
-}
-

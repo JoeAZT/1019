@@ -20,7 +20,15 @@ struct HomeView: View {
     @StateObject var profileStore = ProfileStore()
     @State var selectedPage = 0
     
+//    let greeting = profileStore.profile?.name = "" : "Welcome to selfCare" ? "Welcome back, \(profileStore.profile?.name)
+//    if profileStore.profile?.name != "" {
+//        let greeting = "Welcome back"
+//    } else {
+//        let greeting = "Welcome to selfCare"
+//    }
+    
     var body: some View {
+        
         VStack {
             
             HStack {
@@ -67,7 +75,8 @@ struct HomeView: View {
             }
             
             VStack(alignment: .leading) {
-                Text("Welcome back, Joe")
+//                Text("Welcome back, \(profileStore.profile?.name)")
+                Text("Welcome back")
                     .font(.system(size: 25, weight: .black, design: .default))
                     .foregroundColor(.white)
                 HStack {
@@ -86,7 +95,6 @@ struct HomeView: View {
                             .font(.system(size: 20, weight: .bold, design: .default))
                             .foregroundColor(.white)
             
-                        //Use this webiste to create array that shows the last 7 days of emojis or graph entries
                         ScrollView(.horizontal) {
                             HStack(spacing: 20) {
                                 ForEach(entryStore.entries.map(\.value)) { entry in
@@ -94,10 +102,9 @@ struct HomeView: View {
                                         .font(.system(size: 30, weight: .regular, design: .default))
                                 }
                             }
-//                            .padding(.horizontal, 20)
                         }
                     }
-                    .padding(.horizontal, 10)
+                    .padding(.horizontal, 30)
                 }
                 .frame(height: 100)
                 
@@ -136,6 +143,7 @@ struct HomeView: View {
                         }
                     }
                     .padding()
+                    .padding(.horizontal, 10)
                 }
                 .frame(height: 200)
             }
@@ -220,5 +228,3 @@ extension View {
         self.modifier(GradientBackgroundModifier())
     }
 }
-
-

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct Profile: Codable {
     let profilePicture: Data
-    let name: String
+    var name: String
     let targetReminder: Date
     let journalReminder: Date
 }

@@ -27,9 +27,8 @@ struct JournalView: View {
                     
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
-                            .foregroundColor(.gray)
+                            .foregroundColor(Color("ModeColor"))
                             .applyShadow()
-                            .opacity(0.1)
                         
                         VStack(alignment: .leading) {
                             
@@ -42,9 +41,9 @@ struct JournalView: View {
                                         .font(.system(size: 15, weight: .medium, design: .default))
                                     HStack {
                                         Text("Rating:")
-                                            .font(.system(size: 18, weight: .bold, design: .default))
+                                            .font(.system(size: 17, weight: .bold, design: .default))
                                         Text(String(format: "%.1f", entry.rating))
-                                            .font(.system(size: 18, weight: .bold, design: .default))
+                                            .font(.system(size: 17, weight: .bold, design: .default))
                                     }
                                 }
                                 .padding()
@@ -97,7 +96,7 @@ struct JournalView: View {
                                         Image(systemName: "chevron.compact.down")
                                             .font(.system(size: 20, weight: .bold, design: .default))
                                             .opacity(0.4)
-                                            .padding(.bottom, 1)
+                                            .padding(.bottom, 2)
                                         Spacer()
                                     }
                                 } else {
@@ -117,22 +116,23 @@ struct JournalView: View {
                                         Spacer()
                                         Image(systemName: "chevron.compact.up")
                                             .font(.system(size: 20, weight: .bold, design: .default))
+                                            .padding(.bottom, 5)
                                         Spacer()
                                     }
-                                    
                                 }
                             }
+                            .padding(.horizontal)
                             .layoutPriority(1)
-                            .onTapGesture {
-                                if self.expandedEntry == entry.id {
-                                    self.expandedEntry = nil
-                                } else {
-                                    self.expandedEntry = entry.id
-                                }
-                            }
-                            .animation(.spring())
                         }
                     }
+                    .onTapGesture {
+                        if self.expandedEntry == entry.id {
+                            self.expandedEntry = nil
+                        } else {
+                            self.expandedEntry = entry.id
+                        }
+                    }
+                    .animation(.spring())
                 }
                         
                 if entryStore.entries.isEmpty {

@@ -14,6 +14,7 @@ struct NewTargetView: View {
     @Binding var showGoalView: Bool
     @ObservedObject var goalStore: GoalStore
     @State var isCompleted: Bool = false
+    @State var targetType: String = "Daily"
     
     var body: some View {
         
@@ -27,20 +28,20 @@ struct NewTargetView: View {
                 .padding(.bottom, 10)
             
             ScrollView {
+                
+                //Target Title
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
                         .foregroundColor(Color("ModeColor"))
                         .applyShadow()
                         .padding(.horizontal, 10)
-                    VStack {
+                    VStack(alignment: .leading) {
                         Text("What's your target?")
                             .fontWeight(.bold)
                             .foregroundColor(Color("TextColor"))
-                            .applyShadow()
                             .padding()
-                            .padding(.trailing, 200)
                         
-                        ZStack {
+                        ZStack(alignment: .leading) {
                             TextViewWrapper(text: $titleText)
                                 .frame(width: 360, height: 40, alignment: .center)
                                 .cornerRadius(10)
@@ -49,25 +50,87 @@ struct NewTargetView: View {
                                 Text("My target today is...")
                                     .opacity(0.4)
                                     .padding(.all, 20)
-                                    .padding(.trailing, 200)
                             }
                         }
                     }
                 }
                 .padding(.bottom, 10)
                 
+                //Target Type
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10)
+                        .foregroundColor(Color("ModeColor"))
+                        .padding(.horizontal, 10)
+                        .applyShadow()
+    
+                    VStack(alignment: .leading) {
+                        Text("Target Type:")
+                            .fontWeight(.bold)
+                            .foregroundColor(Color("TextColor"))
+                            .padding()
+                            .padding(.horizontal, 10)
+                        
+                        HStack {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .foregroundColor(Color.blue)
+                                    .opacity(targetType == "Daily" ? 1 : 0.5)
+                                    .applyShadow()
+                                Button(action: {
+                                    targetType = "Daily"
+                                }, label: {
+                                    Text("Daily")
+                                        .applyButtonModifier()
+                                })
+                            }
+                            
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .foregroundColor(Color.purple)
+                                    .opacity(targetType == "Weekly" ? 1 : 0.5)
+                                    .applyShadow()
+                                Button(action: {
+                                    targetType = "Weekly"
+                                }, label: {
+                                    Text("Weekly")
+                                        .applyButtonModifier()
+                                        .padding()
+                                        .cornerRadius(15)
+                                })
+                            }
+                            
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .foregroundColor(Color.pink)
+                                    .opacity(targetType == "Long Term" ? 1 : 0.5)
+                                    .applyShadow()
+                                Button(action: {
+                                    targetType = "Long Term"
+                                }, label: {
+                                    Text("Long Term")
+                                        .applyButtonModifier()
+                                })
+                            }
+                        }
+                        .padding(.bottom, 10)
+                        .padding(.horizontal, 20)
+                    }
+                }
+                .padding(.bottom, 10)
+                
+                //Target description
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
                         .foregroundColor(Color("ModeColor"))
                         .applyShadow()
                         .padding(.horizontal, 10)
-                    VStack {
+                        
+                    VStack(alignment: .leading) {
                         Text("Description:")
                             .fontWeight(.bold)
                             .foregroundColor(Color("TextColor"))
-                            .applyShadow()
                             .padding()
-                            .padding(.trailing, 255)
+                            .padding(.horizontal, 10)
                         
                         ZStack(alignment: .topLeading) {
                             TextViewWrapper(text: $goalText)
@@ -84,6 +147,7 @@ struct NewTargetView: View {
                         }
                     }
                 }
+                .padding(.bottom, 10)
             }
         }
             Button(action: {
@@ -102,3 +166,17 @@ struct NewTargetView: View {
         }
     }
 
+struct buttonModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        return content
+            .font(.system(size: 20, weight: .bold))
+            .foregroundColor(Color("TextColor"))
+            .cornerRadius(15)
+    }
+}
+
+extension View {
+    func applyButtonModifier() -> some View {
+        return self.modifier(buttonModifier())
+    }
+}
