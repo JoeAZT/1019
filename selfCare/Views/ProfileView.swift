@@ -18,12 +18,26 @@ struct ProfileView: View {
     @State var showingImagePicker = false
     @State var inputImage: UIImage?
     @ObservedObject var entryStore: EntryStore
-    @ObservedObject var goalStore: GoalStore
+    @ObservedObject var longTermGoalStore: LongTermGoalStore
+    @ObservedObject var dailyGoalStore: DailyGoalStore
+    @ObservedObject var weeklyGoalStore: WeeklyGoalStore
     @ObservedObject var profileStore: ProfileStore
     @State var toggleApperance = false
     @State var nameExpand = false
-    
     @State var hasChanges = false
+    
+    init(entryStore: EntryStore, longTermGoalStore: LongTermGoalStore, dailyGoalStore: DailyGoalStore, weeklyGoalStore: WeeklyGoalStore, profileStore: ProfileStore) {
+        self.entryStore = entryStore
+        self.longTermGoalStore = longTermGoalStore
+        self.dailyGoalStore = dailyGoalStore
+        self.weeklyGoalStore = weeklyGoalStore
+        self.profileStore = profileStore
+        _nameText = State(initialValue: profileStore.profile?.name ?? "")
+        
+        if let imageData = profileStore.profile?.profilePicture, let image = UIImage(data: imageData) {
+            _image = State(initialValue: image)
+        }
+    }
     
     var body: some View {
         
@@ -79,12 +93,6 @@ struct ProfileView: View {
                         .scaledToFit()
                         .clipShape(Circle())
                         .frame(minWidth: circleSize, idealWidth: circleSize, maxWidth: circleSize, minHeight: circleSize, idealHeight: circleSize, maxHeight: circleSize, alignment: .center)
-                } else if let imageData = profileStore.profile?.profilePicture, let image = UIImage(data: imageData) {
-                    Image(uiImage: image)
-                        .resizable()
-                        .scaledToFit()
-                        .clipShape(Circle())
-                        .frame(minWidth: circleSize, idealWidth: circleSize, maxWidth: circleSize, minHeight: circleSize, idealHeight: circleSize, maxHeight: circleSize, alignment: .center)
                 } else {
                     ZStack {
                         Circle()
@@ -121,12 +129,15 @@ struct ProfileView: View {
                                 .stroke(Color("ModeColor"), lineWidth: 4)
                         )
                         Button(action: {
+                            print(nameText)
                             nameExpand = false
-//                            let profile = Profile(profilePicture: data,
-//                                                  name: nameText,
-//                                                  targetReminder: Date(),
-//                                                  journalReminder: Date())
-//                            profileStore.updateProfile(profile)
+                            if let data = image?.pngData() {
+                                let profile = Profile(profilePicture: data,
+                                                      name: nameText,
+                                                      targetReminder: Date(),
+                                                      journalReminder: Date())
+                                profileStore.updateProfile(profile)
+                            }
                         }, label: {
                             Text("Done")
                                 .font(.system(size: 12, weight: .bold))
@@ -169,7 +180,8 @@ struct ProfileView: View {
                     VStack {
                         Text("Goal Completed:")
                             .applyTopTitleStyle()
-                        Text("\(goalStore.goals.count)")
+                        let totalTargetCount = longTermGoalStore.goals.count + dailyGoalStore.goals.count + weeklyGoalStore.goals.count
+                        Text("\(totalTargetCount)")
                             .font(.system(size: 50, weight: .semibold, design: .default))
                             .padding(.top, 8)
                     }

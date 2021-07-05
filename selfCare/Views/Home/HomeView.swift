@@ -16,20 +16,19 @@ struct HomeView: View {
     @State private var showProfileView = false
     @State private var showLinksView = false
     @StateObject var entryStore = EntryStore()
-    @StateObject var goalStore = GoalStore()
-    @StateObject var dailyGoalStore = GoalStore()
-    @StateObject var weeklyGoalStore = GoalStore()
-    @StateObject var longTermGoalStore = GoalStore()
+    @StateObject var dailyGoalStore = DailyGoalStore()
+    @StateObject var weeklyGoalStore = WeeklyGoalStore()
+    @StateObject var longTermGoalStore = LongTermGoalStore()
     @StateObject var profileStore = ProfileStore()
     @State var selectedPage = 0
     
-//    let greeting = profileStore.profile?.name = "" : "Welcome to selfCare" ? "Welcome back, \(profileStore.profile?.name)
+//    let greeting = profileStore.profile?.name = "" : "Welcome to selfCare" ? "Welcome back, \(profileStore.profile?.name)"
 //    if profileStore.profile?.name != "" {
 //        let greeting = "Welcome back"
 //    } else {
 //        let greeting = "Welcome to selfCare"
 //    }
-    
+        
     var body: some View {
         
         VStack {
@@ -48,7 +47,7 @@ struct HomeView: View {
                         .shadow(color: .black.opacity(0.4), radius: 3, x: 0, y: 3)
                 })
                 .sheet(isPresented: $showProfileView, content: {
-                    ProfileView(entryStore: entryStore, goalStore: goalStore, profileStore: profileStore)
+                    ProfileView(entryStore: entryStore, longTermGoalStore: longTermGoalStore, dailyGoalStore: dailyGoalStore, weeklyGoalStore: weeklyGoalStore, profileStore: profileStore)
                 })
                 
                 Spacer()
@@ -78,8 +77,7 @@ struct HomeView: View {
             }
             
             VStack(alignment: .leading) {
-//                Text("Welcome back, \(profileStore.profile?.name)")
-                Text("Welcome back")
+                Text(profileStore.profile?.name == "" ? "Welcome to selfCare" : "Welcome back,  \(profileStore.profile!.name)")
                     .font(.system(size: 25, weight: .black, design: .default))
                     .foregroundColor(.white)
                 HStack {

@@ -32,12 +32,28 @@ class CacheStorageManager {
                        transformer: TransformerFactory.forCodable(ofType: [Goal].self))
     }()
     
-    func saveGoals(_ goals: [Goal]) {
-        try? goalStorage.setObject(goals, forKey: "goals")
+    func saveDailyGoals(_ goals: [Goal]) {
+        try? goalStorage.setObject(goals, forKey: "dailyGoals")
     }
     
-    func getGoals() -> [Goal] {
-        return (try? goalStorage.object(forKey: "goals")) ?? []
+    func saveWeeklyGoals(_ goals: [Goal]) {
+        try? goalStorage.setObject(goals, forKey: "weeklyGoals")
+    }
+    
+    func saveLongGoals(_ goals: [Goal]) {
+        try? goalStorage.setObject(goals, forKey: "longGoals")
+    }
+    
+    func getDailyGoals() -> [Goal] {
+        return (try? goalStorage.object(forKey: "dailyGoals")) ?? []
+    }
+    
+    func getWeeklyGoals() -> [Goal] {
+        return (try? goalStorage.object(forKey: "weeklyGoals")) ?? []
+    }
+    
+    func getLongGoals() -> [Goal] {
+        return (try? goalStorage.object(forKey: "longGoals")) ?? []
     }
     
     private lazy var profileStorage: Storage<String, Profile> = {

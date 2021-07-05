@@ -8,9 +8,9 @@
 import SwiftUI
 struct TargetsView: View {
     
-    @ObservedObject var longTermGoalStore: GoalStore
-    @ObservedObject var weeklyGoalStore: GoalStore
-    @ObservedObject var dailyGoalStore: GoalStore
+    @ObservedObject var longTermGoalStore: LongTermGoalStore
+    @ObservedObject var weeklyGoalStore: WeeklyGoalStore
+    @ObservedObject var dailyGoalStore: DailyGoalStore
     @State private var showNewGoalView = false
     @State var expandedID: String?
     
