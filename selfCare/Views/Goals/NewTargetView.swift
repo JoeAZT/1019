@@ -12,7 +12,9 @@ struct NewTargetView: View {
     @State var goalText: String = ""
     @State var titleText: String = ""
     @Binding var showGoalView: Bool
-    @ObservedObject var goalStore: GoalStore
+    @ObservedObject var longTermGoallStore: GoalStore
+    @ObservedObject var dailyGoalStore: GoalStore
+    @ObservedObject var weeklyGoalStore: GoalStore
     @State var isCompleted: Bool = false
     @State var targetType: Goal.TargetType = .daily
     
@@ -152,7 +154,14 @@ struct NewTargetView: View {
             Button(action: {
                 self.showGoalView = false
                 let goal = Goal(id: UUID().uuidString, title: titleText, goalText: goalText, completed: false, targetType: targetType)
-                goalStore.addGoal(goal)
+                if goal.targetType == .daily {
+                    dailyGoalStore.addGoal(goal)
+                } else if goal.targetType == .weekly{
+                    weeklyGoalStore.addGoal(goal)
+                } else {
+                    longTermGoallStore.addGoal(goal)
+                }
+                
             
             }, label: {
                 Text("Complete Entry")

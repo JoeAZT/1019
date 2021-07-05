@@ -17,6 +17,9 @@ struct HomeView: View {
     @State private var showLinksView = false
     @StateObject var entryStore = EntryStore()
     @StateObject var goalStore = GoalStore()
+    @StateObject var dailyGoalStore = GoalStore()
+    @StateObject var weeklyGoalStore = GoalStore()
+    @StateObject var longTermGoalStore = GoalStore()
     @StateObject var profileStore = ProfileStore()
     @State var selectedPage = 0
     
@@ -118,7 +121,7 @@ struct HomeView: View {
                             .foregroundColor(.white)
                         
                         ScrollView {
-                            ForEach(goalStore.goals.filter { $0.targetType == .daily }) { goal in
+                            ForEach(dailyGoalStore.goals) { goal in
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 5)
                                         .foregroundColor(Color("ModeColor"))
@@ -135,7 +138,7 @@ struct HomeView: View {
                                             .padding(5)
                                     }
                                     .onTapGesture {
-                                        goalStore.toggleCompletedFor(goal)
+                                        dailyGoalStore.toggleCompletedFor(goal)
                                     }
                                 }
                             }
@@ -196,7 +199,7 @@ struct HomeView: View {
                         .shadow(color: .black.opacity(0.4), radius: 3, x: 0, y: 3)
                 })
                 .sheet(isPresented: $showGoalsView) {
-                    TargetsView(goalStore: goalStore)
+                    TargetsView(longTermGoalStore: longTermGoalStore, weeklyGoalStore: weeklyGoalStore, dailyGoalStore: dailyGoalStore)
                 }
             }
         }

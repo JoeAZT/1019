@@ -8,7 +8,9 @@
 import SwiftUI
 struct TargetsView: View {
     
-    @ObservedObject var goalStore: GoalStore
+    @ObservedObject var longTermGoalStore: GoalStore
+    @ObservedObject var weeklyGoalStore: GoalStore
+    @ObservedObject var dailyGoalStore: GoalStore
     @State private var showNewGoalView = false
     @State var expandedID: String?
     
@@ -26,9 +28,9 @@ struct TargetsView: View {
                     //List of goals
                     List {
                         Section(header: Text("Daily")) {
-                            ForEach(goalStore.goals.filter { $0.targetType == .daily }) { goal in
+                            ForEach(dailyGoalStore.goals) { goal in
                                 TargetRow(goal: goal, isExpanded: expandedID == goal.id) {
-                                    goalStore.toggleCompletedFor(goal)
+                                    dailyGoalStore.toggleCompletedFor(goal)
                                 }
                                 .onTapGesture {
                                     if self.expandedID == goal.id {
@@ -39,12 +41,12 @@ struct TargetsView: View {
                                 }
                                 .animation(.spring())
                             }
-                            .onDelete(perform: delete)
+                            .onDelete(perform: deleteDaily)
                         }
                         Section(header: Text("Weekly")) {
-                            ForEach(goalStore.goals.filter { $0.targetType == .weekly }) { goal in
+                            ForEach(weeklyGoalStore.goals) { goal in
                                 TargetRow(goal: goal, isExpanded: expandedID == goal.id) {
-                                    goalStore.toggleCompletedFor(goal)
+                                    weeklyGoalStore.toggleCompletedFor(goal)
                                 }
                                 .onTapGesture {
                                     if self.expandedID == goal.id {
@@ -55,12 +57,12 @@ struct TargetsView: View {
                                 }
                                 .animation(.spring())
                             }
-                            .onDelete(perform: delete)
+                            .onDelete(perform: deleteWeekly)
                         }
                         Section(header: Text("Long Term")) {
-                            ForEach(goalStore.goals.filter { $0.targetType == .longTerm }) { goal in
+                            ForEach(longTermGoalStore.goals) { goal in
                                 TargetRow(goal: goal, isExpanded: expandedID == goal.id) {
-                                    goalStore.toggleCompletedFor(goal)
+                                    longTermGoalStore.toggleCompletedFor(goal)
                                 }
                                 .onTapGesture {
                                     print("")
@@ -72,26 +74,26 @@ struct TargetsView: View {
                                 }
                                 .animation(.spring())
                             }
-                            .onDelete(perform: delete)
+                            .onDelete(perform: deleteLongTerm)
                         }
                     }
                 }
                 
                 //Empty goal list placeholder
-                if goalStore.goals.isEmpty {
-                    VStack(alignment: .center) {
-                        Image(systemName: "plus.circle")
-                            .font(.system(size: 200, weight: .regular, design: .default))
-                            .padding(30)
-                        
-                        Text("When you enter goals they will appear on this screen. It's up to you whether they're short term or long term, or if they should be assigned as daily goals.")
-                            .font(.system(size: 20, weight: .regular, design: .default))
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal, 60)
-                    }
-                    .opacity(0.4)
-                    .padding(.bottom, 50)
-                }
+//                if dailyGoalStore.goals.isEmpty == true && longTermGoalStore.isEmpty == true && weeklyGoalStore.isEmpty == true  {
+//                    VStack(alignment: .center) {
+//                        Image(systemName: "plus.circle")
+//                            .font(.system(size: 200, weight: .regular, design: .default))
+//                            .padding(30)
+//
+//                        Text("When you enter goals they will appear on this screen. It's up to you whether they're short term or long term, or if they should be assigned as daily goals.")
+//                            .font(.system(size: 20, weight: .regular, design: .default))
+//                            .multilineTextAlignment(.center)
+//                            .padding(.horizontal, 60)
+//                    }
+//                    .opacity(0.4)
+//                    .padding(.bottom, 50)
+//                }
             }
             
             Button(action: {
@@ -106,13 +108,21 @@ struct TargetsView: View {
                     .cornerRadius(15)
             })
             .sheet(isPresented: $showNewGoalView) {
-                NewTargetView(showGoalView: $showNewGoalView, goalStore: goalStore)
+                NewTargetView(showGoalView: $showNewGoalView, longTermGoallStore: longTermGoalStore, dailyGoalStore: dailyGoalStore, weeklyGoalStore: weeklyGoalStore)
             }
         }
     }
     
-    func delete(at offsets: IndexSet) {
-        goalStore.goals.remove(atOffsets: offsets)
+    func deleteDaily(at offsets: IndexSet) {
+        dailyGoalStore.goals.remove(atOffsets: offsets)
+    }
+    
+    func deleteWeekly(at offsets: IndexSet) {
+        weeklyGoalStore.goals.remove(atOffsets: offsets)
+    }
+    
+    func deleteLongTerm(at offsets: IndexSet) {
+        longTermGoalStore.goals.remove(atOffsets: offsets)
     }
 }
 

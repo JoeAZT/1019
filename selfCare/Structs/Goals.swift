@@ -48,5 +48,5 @@ class GoalStore: ObservableObject {
     private func saveGoalsToCache() {
         cacheStorageManager.saveGoals(goals)
     }
-    
+
 }
