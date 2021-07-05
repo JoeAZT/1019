@@ -96,7 +96,7 @@ struct HomeView: View {
                             .foregroundColor(.white)
             
                         ScrollView(.horizontal) {
-                            HStack(spacing: 20) {
+                            HStack(spacing: 14) {
                                 ForEach(entryStore.entries.map(\.value)) { entry in
                                     Text(entry.mood.rawValue)
                                         .font(.system(size: 30, weight: .regular, design: .default))
@@ -118,7 +118,7 @@ struct HomeView: View {
                             .foregroundColor(.white)
                         
                         ScrollView {
-                            ForEach(goalStore.goals) { goal in
+                            ForEach(goalStore.goals.filter { $0.targetType == .daily }) { goal in
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 5)
                                         .foregroundColor(Color("ModeColor"))

@@ -25,79 +25,88 @@ struct TargetsView: View {
                 ZStack {
                     //List of goals
                     List {
-                        ForEach(goalStore.goals) { goal in
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 10)
-                                    .frame(width: 380, height: expandedID == goal.id ? 200 : 50, alignment: .center)
-                                    .foregroundColor(Color("ModeColor"))
-                                    .applyShadow()
-                                HStack {
-                                    VStack(alignment: .leading) {
-                                        Text(goal.title)
-                                            .foregroundColor(goal.completed ? Color.gray : Color("TextColor"))
-                                            .fontWeight(.bold)
-                                            .padding(.vertical, 10)
-                                        if expandedID == goal.id {
-                                            Text(goal.goalText)
-                                        }
+                        Section(header: Text("Daily")) {
+                            ForEach(goalStore.goals.filter { $0.targetType == .daily }) { goal in
+                                TargetRow(goal: goal, isExpanded: expandedID == goal.id) {
+                                    goalStore.toggleCompletedFor(goal)
+                                }
+                                .onTapGesture {
+                                    if self.expandedID == goal.id {
+                                        self.expandedID = nil
+                                    } else {
+                                        self.expandedID = goal.id
                                     }
-                                    .padding(.horizontal, 10)
-                                    Spacer()
-                                    Image(systemName: goal.completed ? "checkmark.square" : "square")
-                                        .font(.system(size: 30, weight: .bold, design: .default))
-                                        .onTapGesture {
-                                            goalStore.toggleCompletedFor(goal)
-                                        }
                                 }
-                                .padding(8)
-                                .padding(.horizontal, 5)
+                                .animation(.spring())
                             }
-                            .contentShape(Rectangle())
-                            .onTapGesture {
-                                if self.expandedID == goal.id {
-                                    self.expandedID = nil
-                                } else {
-                                    self.expandedID = goal.id
+                            .onDelete(perform: delete)
+                        }
+                        Section(header: Text("Weekly")) {
+                            ForEach(goalStore.goals.filter { $0.targetType == .weekly }) { goal in
+                                TargetRow(goal: goal, isExpanded: expandedID == goal.id) {
+                                    goalStore.toggleCompletedFor(goal)
                                 }
+                                .onTapGesture {
+                                    if self.expandedID == goal.id {
+                                        self.expandedID = nil
+                                    } else {
+                                        self.expandedID = goal.id
+                                    }
+                                }
+                                .animation(.spring())
                             }
-                            .animation(.spring())
+                            .onDelete(perform: delete)
                         }
-                        .onDelete(perform: delete)
-                    }
-                    .padding(.leading, -3)
-                    
-                    
-                    //Empty goal list placeholder
-                    if goalStore.goals.isEmpty {
-                        VStack(alignment: .center) {
-                            Image(systemName: "plus.circle")
-                                .font(.system(size: 200, weight: .regular, design: .default))
-                                .padding(30)
-                            
-                            Text("When you enter goals they will appear on this screen. It's up to you whether they're short term or long term, or if they should be assigned as daily goals.")
-                                .font(.system(size: 20, weight: .regular, design: .default))
-                                .multilineTextAlignment(.center)
-                                .padding(.horizontal, 60)
+                        Section(header: Text("Long Term")) {
+                            ForEach(goalStore.goals.filter { $0.targetType == .longTerm }) { goal in
+                                TargetRow(goal: goal, isExpanded: expandedID == goal.id) {
+                                    goalStore.toggleCompletedFor(goal)
+                                }
+                                .onTapGesture {
+                                    print("")
+                                    if self.expandedID == goal.id {
+                                        self.expandedID = nil
+                                    } else {
+                                        self.expandedID = goal.id
+                                    }
+                                }
+                                .animation(.spring())
+                            }
+                            .onDelete(perform: delete)
                         }
-                        .opacity(0.4)
-                        .padding(.bottom, 50)
                     }
                 }
                 
-                Button(action: {
-                    showNewGoalView.toggle()
-                    
-                }, label: {
-                    Text("Create Goal")
-                        .font(.system(size: 20, weight: .bold))
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(LinearGradient(gradient: Gradient(colors: [Color .blue, .pink]), startPoint: .leading, endPoint: .trailing))
-                        .cornerRadius(15)
-                })
-                .sheet(isPresented: $showNewGoalView) {
-                    NewTargetView(showGoalView: $showNewGoalView, goalStore: goalStore)
+                //Empty goal list placeholder
+                if goalStore.goals.isEmpty {
+                    VStack(alignment: .center) {
+                        Image(systemName: "plus.circle")
+                            .font(.system(size: 200, weight: .regular, design: .default))
+                            .padding(30)
+                        
+                        Text("When you enter goals they will appear on this screen. It's up to you whether they're short term or long term, or if they should be assigned as daily goals.")
+                            .font(.system(size: 20, weight: .regular, design: .default))
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 60)
+                    }
+                    .opacity(0.4)
+                    .padding(.bottom, 50)
                 }
+            }
+            
+            Button(action: {
+                showNewGoalView.toggle()
+                
+            }, label: {
+                Text("Create Goal")
+                    .font(.system(size: 20, weight: .bold))
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(LinearGradient(gradient: Gradient(colors: [Color .blue, .pink]), startPoint: .leading, endPoint: .trailing))
+                    .cornerRadius(15)
+            })
+            .sheet(isPresented: $showNewGoalView) {
+                NewTargetView(showGoalView: $showNewGoalView, goalStore: goalStore)
             }
         }
     }

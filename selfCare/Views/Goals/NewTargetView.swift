@@ -14,7 +14,7 @@ struct NewTargetView: View {
     @Binding var showGoalView: Bool
     @ObservedObject var goalStore: GoalStore
     @State var isCompleted: Bool = false
-    @State var targetType: String = "Daily"
+    @State var targetType: Goal.TargetType = .daily
     
     var body: some View {
         
@@ -74,10 +74,10 @@ struct NewTargetView: View {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 10)
                                     .foregroundColor(Color.blue)
-                                    .opacity(targetType == "Daily" ? 1 : 0.5)
+                                    .opacity(targetType == .daily ? 1 : 0.5)
                                     .applyShadow()
                                 Button(action: {
-                                    targetType = "Daily"
+                                    targetType = .daily
                                 }, label: {
                                     Text("Daily")
                                         .applyButtonModifier()
@@ -87,11 +87,10 @@ struct NewTargetView: View {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 10)
                                     .foregroundColor(Color.purple)
-                                    .opacity(targetType == "Weekly" ? 1 : 0.5)
+                                    .opacity(targetType == .weekly ? 1 : 0.5)
                                     .applyShadow()
                                 Button(action: {
-                                    targetType = "Weekly"
-                                }, label: {
+                                        targetType = .weekly                                }, label: {
                                     Text("Weekly")
                                         .applyButtonModifier()
                                         .padding()
@@ -102,10 +101,10 @@ struct NewTargetView: View {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 10)
                                     .foregroundColor(Color.pink)
-                                    .opacity(targetType == "Long Term" ? 1 : 0.5)
+                                    .opacity(targetType == .longTerm ? 1 : 0.5)
                                     .applyShadow()
                                 Button(action: {
-                                    targetType = "Long Term"
+                                    targetType = .longTerm
                                 }, label: {
                                     Text("Long Term")
                                         .applyButtonModifier()
@@ -152,7 +151,7 @@ struct NewTargetView: View {
         }
             Button(action: {
                 self.showGoalView = false
-                let goal = Goal(id: UUID().uuidString, title: titleText, goalText: goalText, completed: false)
+                let goal = Goal(id: UUID().uuidString, title: titleText, goalText: goalText, completed: false, targetType: targetType)
                 goalStore.addGoal(goal)
             
             }, label: {
@@ -171,6 +170,7 @@ struct buttonModifier: ViewModifier {
         return content
             .font(.system(size: 20, weight: .bold))
             .foregroundColor(Color("TextColor"))
+            
             .cornerRadius(15)
     }
 }

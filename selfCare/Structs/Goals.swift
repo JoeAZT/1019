@@ -12,11 +12,10 @@ struct Goal: Identifiable, Codable {
     let title: String
     let goalText: String
     var completed: Bool
-    
-    enum targetType: String, Codable {
-        case daily = "Daily"
-        case weekly = "Weekly"
-        case longTerm = "Long Term"
+    var targetType: TargetType
+
+    enum TargetType: String, Codable {
+        case daily, weekly, longTerm
     }
 }
 
@@ -49,4 +48,5 @@ class GoalStore: ObservableObject {
     private func saveGoalsToCache() {
         cacheStorageManager.saveGoals(goals)
     }
+    
 }
