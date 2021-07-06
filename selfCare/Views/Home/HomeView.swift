@@ -87,7 +87,7 @@ struct HomeView: View {
                         Text("Your mood this week:")
                             .font(.system(size: 20, weight: .bold, design: .default))
                             .foregroundColor(.white)
-            
+                        
                         ScrollView(.horizontal) {
                             HStack(spacing: 14) {
                                 ForEach(entryStore.entries.map(\.value)) { entry in
@@ -101,44 +101,79 @@ struct HomeView: View {
                 }
                 .frame(height: 100)
                 
-                ZStack {
-                    RoundedRectangle(cornerRadius: 20)
-                        .foregroundColor(Color("ModeColor"))
-                        .opacity(0.2)
-                    VStack(alignment: .leading) {
-                        Text("Your daily targets:")
-                            .font(.system(size: 20, weight: .bold, design: .default))
-                            .foregroundColor(.white)
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundColor(Color("ModeColor"))
+                            .opacity(0.2)
                         
-                        ScrollView {
-                            ForEach(dailyGoalStore.goals) { goal in
-                                ZStack {
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .foregroundColor(Color("ModeColor"))
-                                        .opacity(0.1)
-                                    HStack {
-                                        Text(goal.title)
-                                            .fontWeight(.semibold)
-                                            .foregroundColor(.white)
-                                            .padding(5)
-                                        Spacer()
-                                        Image(systemName: goal.completed ? "checkmark.square" : "square")
-                                            .font(.system(size: 20, weight: .bold, design: .default))
-                                            .foregroundColor(.white)
-                                            .padding(5)
-                                    }
-                                    .onTapGesture {
-                                        dailyGoalStore.toggleCompletedFor(goal)
+                        TabView {
+                        VStack(alignment: .leading) {
+                            Text("Your daily targets:")
+                                .font(.system(size: 20, weight: .bold, design: .default))
+                                .foregroundColor(.white)
+                            
+                            ScrollView {
+                                ForEach(dailyGoalStore.goals) { goal in
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .foregroundColor(Color("ModeColor"))
+                                            .opacity(0.1)
+                                        HStack {
+                                            Text(goal.title)
+                                                .fontWeight(.semibold)
+                                                .foregroundColor(.white)
+                                                .padding(5)
+                                            Spacer()
+                                            Image(systemName: goal.completed ? "checkmark.square" : "square")
+                                                .font(.system(size: 20, weight: .bold, design: .default))
+                                                .foregroundColor(.white)
+                                                .padding(5)
+                                        }
+                                        .onTapGesture {
+                                            dailyGoalStore.toggleCompletedFor(goal)
+                                        }
                                     }
                                 }
+                                
                             }
-                            
                         }
-                    }
-                    .padding()
-                    .padding(.horizontal, 10)
-                }
-                .frame(height: 200)
+                        .padding()
+                        .padding(.horizontal, 10)
+                            
+                            VStack(alignment: .leading) {
+                                Text("Your weekly targets:")
+                                    .font(.system(size: 20, weight: .bold, design: .default))
+                                    .foregroundColor(.white)
+                                
+                                ScrollView {
+                                    ForEach(weeklyGoalStore.goals) { goal in
+                                        ZStack {
+                                            RoundedRectangle(cornerRadius: 5)
+                                                .foregroundColor(Color("ModeColor"))
+                                                .opacity(0.1)
+                                            HStack {
+                                                Text(goal.title)
+                                                    .fontWeight(.semibold)
+                                                    .foregroundColor(.white)
+                                                    .padding(5)
+                                                Spacer()
+                                                Image(systemName: goal.completed ? "checkmark.square" : "square")
+                                                    .font(.system(size: 20, weight: .bold, design: .default))
+                                                    .foregroundColor(.white)
+                                                    .padding(5)
+                                            }
+                                            .onTapGesture {
+                                                weeklyGoalStore.toggleCompletedFor(goal)
+                                            }
+                                        }
+                                    }
+                                    
+                                }
+                            }
+                            .padding()
+                            .padding(.horizontal, 10)
+                    }.tabViewStyle(PageTabViewStyle())
+                }.frame(height: 200)
             }
             .padding()
             
