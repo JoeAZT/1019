@@ -90,7 +90,8 @@ struct HomeView: View {
                         
                         ScrollView(.horizontal) {
                             HStack(spacing: 14) {
-                                ForEach(entryStore.entries.map(\.value)) { entry in
+//                                ForEach(entryStore.entries.map(\.value)) { entry in
+                                ForEach(entryStore.sevenEntries.reversed()) { entry in
                                     Text(entry.mood.rawValue)
                                         .font(.system(size: 30, weight: .regular, design: .default))
                                 }
