@@ -65,7 +65,7 @@ struct ProfileView: View {
                         .padding()
                         .font(.system(size: 30))
                         .foregroundColor(Color("TextColor"))
-                        .shadow(color: .black.opacity(0.2), radius: 3, x: 0, y: 3)
+                        .applyShadow()
                 })
                 Spacer()
                 
@@ -90,6 +90,7 @@ struct ProfileView: View {
                         .foregroundColor(Color("TextColor"))
                         .padding()
                 })
+                .applyShadow()
             }
             
             Group {
