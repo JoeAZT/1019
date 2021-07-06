@@ -45,7 +45,7 @@ class LongTermGoalStore: ObservableObject {
         saveGoalsToCache()
     }
     
-    private func saveGoalsToCache() {
+    func saveGoalsToCache() {
         cacheStorageManager.saveLongGoals(goals)
     }
 
@@ -77,7 +77,7 @@ class DailyGoalStore: ObservableObject {
         saveGoalsToCache()
     }
     
-    private func saveGoalsToCache() {
+    func saveGoalsToCache() {
         cacheStorageManager.saveDailyGoals(goals)
     }
 
@@ -109,7 +109,7 @@ class WeeklyGoalStore: ObservableObject {
         saveGoalsToCache()
     }
     
-    private func saveGoalsToCache() {
+    func saveGoalsToCache() {
         cacheStorageManager.saveWeeklyGoals(goals)
     }
 

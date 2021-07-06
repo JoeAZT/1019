@@ -9,6 +9,8 @@ import SwiftUI
 
 struct LinksView: View {
     
+    @AppStorage("isDarkMode") private var isDarkMode = false
+    
     var body: some View {
         
         Text("Your Links this week:")
@@ -31,6 +33,7 @@ struct LinksView: View {
                 }
             }
         }
+        .preferredColorScheme(isDarkMode ? .dark : .light)
     }
     
     

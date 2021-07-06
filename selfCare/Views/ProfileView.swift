@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import IrregularGradient
 
 struct ProfileView: View {
     
@@ -22,9 +23,10 @@ struct ProfileView: View {
     @ObservedObject var dailyGoalStore: DailyGoalStore
     @ObservedObject var weeklyGoalStore: WeeklyGoalStore
     @ObservedObject var profileStore: ProfileStore
-    @State var toggleApperance = false
     @State var nameExpand = false
     @State var hasChanges = false
+    @State var lightMode = true
+    @AppStorage("isDarkMode") private var isDarkMode = false
     
     init(entryStore: EntryStore, longTermGoalStore: LongTermGoalStore, dailyGoalStore: DailyGoalStore, weeklyGoalStore: WeeklyGoalStore, profileStore: ProfileStore) {
         self.entryStore = entryStore
@@ -75,14 +77,18 @@ struct ProfileView: View {
                 Spacer()
                 
                 Button(action: {
-                    print("toggle dark/light mode")
+                    
+                    if isDarkMode == false {
+                        isDarkMode = true
+                    } else {
+                        isDarkMode = false
+                    }
                     
                 }, label: {
-                    Image(systemName: "moon.circle.fill")
-                        .padding()
-                        .font(.system(size: 30))
+                    Image(systemName: isDarkMode ? "sun.max.fill" : "moon.fill")
+                        .font(.system(size: 32))
                         .foregroundColor(Color("TextColor"))
-                        .shadow(color: .black.opacity(0.2), radius: 3, x: 0, y: 3)
+                        .padding()
                 })
             }
             
@@ -126,7 +132,7 @@ struct ProfileView: View {
                         .frame(height: 40, alignment: .center)
                         .overlay(
                             RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color("ModeColor"), lineWidth: 4)
+                                .stroke(Color("TextColor"), lineWidth: 4).opacity(0.4)
                         )
                         Button(action: {
                             print(nameText)
@@ -242,7 +248,7 @@ struct ProfileView: View {
                 }
                 .padding()
             }
-        }
+        }.preferredColorScheme(isDarkMode ? .dark : .light)
         .padding(.horizontal, 10)
         .navigationBarTitle("Pick a photo")
         .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {

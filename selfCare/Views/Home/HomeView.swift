@@ -21,20 +21,12 @@ struct HomeView: View {
     @StateObject var longTermGoalStore = LongTermGoalStore()
     @StateObject var profileStore = ProfileStore()
     @State var selectedPage = 0
-    
-//    let greeting = profileStore.profile?.name = "" : "Welcome to selfCare" ? "Welcome back, \(profileStore.profile?.name)"
-//    if profileStore.profile?.name != "" {
-//        let greeting = "Welcome back"
-//    } else {
-//        let greeting = "Welcome to selfCare"
-//    }
+    @AppStorage("isDarkMode") private var isDarkMode = false
         
     var body: some View {
         
         VStack {
-            
             HStack {
-                
                 //Profile
                 Button(action: {
                     showProfileView.toggle()
@@ -77,7 +69,7 @@ struct HomeView: View {
             }
             
             VStack(alignment: .leading) {
-                Text(profileStore.profile?.name == "" ? "Welcome to selfCare" : "Welcome back,  \(profileStore.profile!.name)")
+                Text(profileStore.profile?.name == "" ? "Welcome to selfCare" : "Welcome back, \(profileStore.profile!.name)")
                     .font(.system(size: 25, weight: .black, design: .default))
                     .foregroundColor(.white)
                 HStack {
@@ -201,6 +193,7 @@ struct HomeView: View {
                 }
             }
         }
+        .preferredColorScheme(isDarkMode ? .dark : .light)
         .embedInBackground()
     }
 }

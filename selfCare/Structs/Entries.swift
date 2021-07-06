@@ -40,6 +40,10 @@ class EntryStore: ObservableObject {
     
     @Published var graphEntries = [DataPoint]()
     
+    var sortedEntries: [Entry] {
+        return entries.values.sorted(by: { $0.date > $1.date })
+    }
+    
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd-MM-yyyy"
@@ -57,7 +61,7 @@ class EntryStore: ObservableObject {
     init() {
         let manager = CacheStorageManager()
         let entries = manager.getEntries()
-        
+            
         self.cacheStorageManager = manager
         
         var entriesDict = [String: Entry]()
@@ -75,7 +79,8 @@ class EntryStore: ObservableObject {
         saveEntriesToCache()
     }
     
-    private func saveEntriesToCache() {
+    
+    func saveEntriesToCache() {
         cacheStorageManager.saveEntries(entries.map(\.value))
     }
     

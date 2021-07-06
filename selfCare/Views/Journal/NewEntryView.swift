@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import IrregularGradient
 
 struct NewEntryView: View {
     
@@ -25,6 +26,7 @@ struct NewEntryView: View {
     @State var outside = false
     @Binding var showNewEntryView: Bool
     @ObservedObject var entryStore: EntryStore
+    @AppStorage("isDarkMode") private var isDarkMode = false
     
     var body: some View {
     
@@ -458,5 +460,6 @@ struct NewEntryView: View {
                 .padding()
             }
         }
+        .preferredColorScheme(isDarkMode ? .dark : .light)
     }
 }

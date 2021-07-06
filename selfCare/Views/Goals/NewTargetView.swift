@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import IrregularGradient
 
 struct NewTargetView: View {
     
@@ -17,6 +18,7 @@ struct NewTargetView: View {
     @ObservedObject var weeklyGoalStore: WeeklyGoalStore
     @State var isCompleted: Bool = false
     @State var targetType: Goal.TargetType = .daily
+    @AppStorage("isDarkMode") private var isDarkMode = false
     
     var body: some View {
         
@@ -171,6 +173,7 @@ struct NewTargetView: View {
                     .background(LinearGradient(gradient: Gradient(colors: [Color .blue, .pink]), startPoint: .leading, endPoint: .trailing))
                     .cornerRadius(15)
             })
+            .preferredColorScheme(isDarkMode ? .dark : .light)
         }
     }
 

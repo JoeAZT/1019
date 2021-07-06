@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import IrregularGradient
 
 struct JournalView: View {
     
     @ObservedObject var entryStore: EntryStore
     @State private var showNewEntryView = false
     @State var expandedEntry: String?
+    @AppStorage("isDarkMode") private var isDarkMode = false
     
     var body: some View {
         
@@ -23,7 +25,7 @@ struct JournalView: View {
                 .padding()
             
             List {
-                ForEach(entryStore.entries.map(\.value)) { entry in
+                ForEach(entryStore.sortedEntries) { entry in
                     
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
@@ -167,6 +169,7 @@ struct JournalView: View {
         .sheet(isPresented: $showNewEntryView) {
             NewEntryView(showNewEntryView: $showNewEntryView, entryStore: entryStore)
         }
+        .preferredColorScheme(isDarkMode ? .dark : .light)
     }
 }
 
