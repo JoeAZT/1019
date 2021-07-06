@@ -86,7 +86,7 @@ struct ProfileView: View {
                     
                 }, label: {
                     Image(systemName: isDarkMode ? "sun.max.fill" : "moon.fill")
-                        .font(.system(size: 32))
+                        .font(.system(size: 30))
                         .foregroundColor(Color("TextColor"))
                         .padding()
                 })

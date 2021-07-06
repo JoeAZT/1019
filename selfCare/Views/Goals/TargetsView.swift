@@ -20,39 +20,12 @@ struct TargetsView: View {
     var body: some View {
         
         VStack {
-            HStack {
-                Button(action: {
-                    longTermGoalStore.saveGoalsToCache()
-                    weeklyGoalStore.saveGoalsToCache()
-                    dailyGoalStore.saveGoalsToCache()
-                    
-                    self.presentationMode.wrappedValue.dismiss()
-                    
-                    }
-                ,label: {
-                    Image(systemName: "chevron.left.circle.fill")
-                        .padding()
-                        .font(.system(size: 30))
-                        .foregroundColor(Color("TextColor"))
-                        .shadow(color: .black.opacity(0.2), radius: 3, x: 0, y: 3)
-                })
-                Spacer()
                 
                 Text("Targets")
                     .fontWeight(.semibold)
                     .foregroundColor(Color("TextColor"))
                     .font(.title)
                     .padding()
-                
-                Spacer()
-                
-                Text("Sp")
-                    .fontWeight(.semibold)
-                    .foregroundColor(Color("TextColor"))
-                    .font(.title)
-                    .padding()
-                    .opacity(0.0)
-            }
             
             VStack {
                 ZStack {
@@ -147,14 +120,17 @@ struct TargetsView: View {
     
     func deleteDaily(at offsets: IndexSet) {
         dailyGoalStore.goals.remove(atOffsets: offsets)
+        dailyGoalStore.saveGoalsToCache()
     }
     
     func deleteWeekly(at offsets: IndexSet) {
         weeklyGoalStore.goals.remove(atOffsets: offsets)
+        weeklyGoalStore.saveGoalsToCache()
     }
     
     func deleteLongTerm(at offsets: IndexSet) {
         longTermGoalStore.goals.remove(atOffsets: offsets)
+        longTermGoalStore.saveGoalsToCache()
     }
 }
 
