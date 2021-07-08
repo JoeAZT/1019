@@ -39,6 +39,7 @@ class EntryStore: ObservableObject {
     @Published var entries = [String: Entry]() // [22-06-2021: Entry]
     
     @Published var graphEntries = [DataPoint]()
+    @Published var monthlyGraphEntries = [DataPoint]()
     
     var sortedEntries: [Entry] {
         return entries.values.sorted(by: { $0.date > $1.date })
@@ -64,6 +65,12 @@ class EntryStore: ObservableObject {
         return formatter
     }()
     
+    private lazy var dayFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM,  dd"
+        return formatter
+    }()
+    
     private let cacheStorageManager: CacheStorageManager
     
     init() {
@@ -78,15 +85,16 @@ class EntryStore: ObservableObject {
         }
         self.entries = entriesDict
         updateChartEntries()
+        updateMonthlyChartEntries()
     }
     
     func addEntry(_ entry: Entry) {
         let dateString = dateFormatter.string(from: entry.date)
         entries[dateString] = entry
         updateChartEntries()
+        updateMonthlyChartEntries()
         saveEntriesToCache()
     }
-    
     
     func saveEntriesToCache() {
         cacheStorageManager.saveEntries(entries.map(\.value))
@@ -121,6 +129,37 @@ class EntryStore: ObservableObject {
             }
         }
         self.graphEntries = dataPoints
+    }
+    
+    private func updateMonthlyChartEntries() {
+        // Find the last 30 days of entries from the array
+        let currentDate = Date()
+        var dataPoints = [DataPoint]()
+        
+        for i in 0...28 {
+            guard let date = Calendar.current.date(byAdding: .day, value: -(i), to: currentDate) else { continue }
+            let dayString = dateFormatter.string(from: date) // 22-06-2021
+            let formattedDayString = dayFormatter.string(from: date) // 22
+            
+            if let entry = entries[dayString] {
+                
+                let legend: Legend
+                if entry.rating < 4 {
+                    legend = Legend(color: .pink, label: "")
+                } else if  entry.rating < 7 {
+                    legend = Legend(color: .purple, label: "")
+                } else {
+                    legend = Legend(color: .blue, label: "")
+                }
+                
+                let dataPoint = DataPoint(value: entry.rating, label: LocalizedStringKey(formattedDayString), legend: legend)
+                dataPoints.insert(dataPoint, at: 0)
+            } else {
+                let dataPoint = DataPoint(value: 0, label: LocalizedStringKey(formattedDayString), legend: chartLegend)
+                dataPoints.insert(dataPoint, at: 0)
+            }
+        }
+        self.monthlyGraphEntries = dataPoints
     }
     
     func average() -> Double {

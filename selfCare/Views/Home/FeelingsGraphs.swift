@@ -21,28 +21,51 @@ struct FeelingsGraphs: View {
                 .foregroundColor(Color("ModeColor"))
                 .opacity(0.2)
             
-            VStack(alignment: .leading) {
-                Text("Your ratings this week:")
-                    .font(.system(size: 20, weight: .bold, design: .default))
-                    .foregroundColor(.white)
-                    .padding()
-                
-                LineChartView(dataPoints: entryStore.graphEntries)
-                    .chartStyle(
-                        LineChartStyle(
-                            lineMinHeight: 1,
-                            showAxis: true,
-                            axisLeadingPadding: 10,
-                            showLabels: true,
-                            labelCount: 7,
-                            showLegends: false
+            TabView {
+                VStack(alignment: .leading) {
+                    Text("Your ratings this week:")
+                        .font(.system(size: 20, weight: .bold, design: .default))
+                        .foregroundColor(.white)
+                        .padding()
+                    
+                    LineChartView(dataPoints: entryStore.graphEntries)
+                        .chartStyle(
+                            LineChartStyle(
+                                lineMinHeight: 1,
+                                showAxis: true,
+                                axisLeadingPadding: 10,
+                                showLabels: true,
+                                labelCount: 7,
+                                showLegends: false
+                            )
                         )
-                    )
-                    .padding()
-                    .accentColor(.white)
-                    .foregroundColor(.white)
-            }
+                        .padding()
+                        .accentColor(.white)
+                        .foregroundColor(.white)
+                }
+                
+                VStack(alignment: .leading) {
+                    Text("Your ratings this month:")
+                        .font(.system(size: 20, weight: .bold, design: .default))
+                        .foregroundColor(.white)
+                        .padding()
+                    
+                    LineChartView(dataPoints: entryStore.monthlyGraphEntries)
+                        .chartStyle(
+                            LineChartStyle(
+                                lineMinHeight: 1,
+                                showAxis: true,
+                                axisLeadingPadding: 10,
+                                showLabels: true,
+                                labelCount: 4,
+                                showLegends: false
+                            )
+                        )
+                        .padding()
+                        .accentColor(.white)
+                        .foregroundColor(.white)
+                }
+            }.tabViewStyle(PageTabViewStyle())
         }
-        
     }
 }
