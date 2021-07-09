@@ -65,7 +65,7 @@ struct FeelingsGraphs: View {
                         .accentColor(.white)
                         .foregroundColor(.white)
                 }
-            }.tabViewStyle(PageTabViewStyle())
+            }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
         }
     }
 }
