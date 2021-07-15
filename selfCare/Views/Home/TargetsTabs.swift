@@ -84,7 +84,8 @@ struct TargetTabs: View {
                 .padding()
                 .padding(.horizontal, 10)
             }.tabViewStyle(PageTabViewStyle())
-        }.frame(height: 200)
+        }
+//        }.frame(height: 200)
     }
     
 }

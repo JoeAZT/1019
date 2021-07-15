@@ -69,7 +69,8 @@ struct HomeView: View {
             }
             
             VStack(alignment: .leading) {
-                Text(profileStore.profile?.name == "" ? "Welcome to selfCare" : "Welcome back, \(profileStore.profile!.name)")
+//                Text(profileStore.profile?.name == "" ? "Welcome to selfCare" : "Welcome back, \(profileStore.profile!.name)")
+                Text(profileStore.profile?.name == "" ? "Welcome to selfCare" : "Welcome back")
                     .font(.system(size: 25, weight: .black, design: .default))
                     .foregroundColor(.white)
                 HStack {
@@ -77,6 +78,7 @@ struct HomeView: View {
                     
                     FeelingsGraphs(entryStore: entryStore)
                 }
+                .layoutPriority(1)
                 
                 ZStack {
                     RoundedRectangle(cornerRadius: 20)
@@ -90,7 +92,7 @@ struct HomeView: View {
                         
                         ScrollView(.horizontal) {
                             HStack(spacing: 14) {
-                                ForEach(entryStore.sevenEntries.reversed()) { entry in
+                                ForEach(entryStore.sortedEntries.reversed()) { entry in
                                     Text(entry.mood.rawValue)
                                         .font(.system(size: 30, weight: .regular, design: .default))
                                 }
@@ -100,9 +102,9 @@ struct HomeView: View {
                     .padding(.horizontal, 30)
                 }
                 .frame(height: 100)
-                
+                VStack {
                 TargetTabs(dailyGoalStore: dailyGoalStore, weeklyGoalStore: weeklyGoalStore)
-
+                }.layoutPriority(1)
             }
             .padding()
             

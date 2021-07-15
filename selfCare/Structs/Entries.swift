@@ -45,12 +45,19 @@ class EntryStore: ObservableObject {
         return entries.values.sorted(by: { $0.date > $1.date })
     }
     
+    
+    
     var sevenEntries: [Entry] {
-        var results: [Entry] = []
-        for i in 0..<7 {
-            results.append(sortedEntries[i])
+        if sortedEntries.isEmpty {
+            let results: [Entry] = []
+            return results
+        } else {
+            var results: [Entry] = []
+            for i in 0..<7 {
+                results.append(sortedEntries[i])
+            }
+            return results
         }
-        return results
     }
     
     private lazy var dateFormatter: DateFormatter = {
@@ -67,7 +74,7 @@ class EntryStore: ObservableObject {
     
     private lazy var dayFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "MMM,  dd"
+        formatter.dateFormat = "d/M"
         return formatter
     }()
     

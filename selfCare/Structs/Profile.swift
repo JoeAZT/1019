@@ -5,7 +5,6 @@
 //  Created by Joseph Taylor on 24/06/2021.
 //
 
-import Foundation
 import SwiftUI
 
 struct Profile: Codable {
