@@ -69,7 +69,6 @@ struct TargetsView: View {
                                     longTermGoalStore.toggleCompletedFor(goal)
                                 }
                                 .onTapGesture {
-                                    print("")
                                     if self.expandedID == goal.id {
                                         self.expandedID = nil
                                     } else {

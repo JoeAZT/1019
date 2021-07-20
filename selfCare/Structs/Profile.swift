@@ -10,8 +10,10 @@ import SwiftUI
 struct Profile: Codable {
     let profilePicture: Data
     var name: String
-    let targetReminder: Date
-    let journalReminder: Date
+    let targetTime: Date?
+    let journalTime: Date?
+    let targetTimeText: String
+    let journalTimeText: String
 }
 
 class ProfileStore: ObservableObject {
@@ -38,5 +40,20 @@ class ProfileStore: ObservableObject {
         } else {
             cacheStorageManager.removeProfile()
         }
+    }
+    
+    var timeFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        return formatter
+    }()
+    
+    func updateJournalReminder(input: Date) -> String {
+        return timeFormatter.string(from: input)
+    }
+
+    
+    func updateTargetReminder(input: Date) -> String {
+        return timeFormatter.string(from: input)
     }
 }

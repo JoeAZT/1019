@@ -14,8 +14,6 @@ struct ProfileView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @State var nameText: String = ""
-    @State var goalTime = Date()
-    @State var journalTime = Date()
     @State var image: UIImage?
     @State var showingImagePicker = false
     @State var inputImage: UIImage?
@@ -56,11 +54,12 @@ struct ProfileView: View {
                     if let data = image?.pngData() {
                         let profile = Profile(profilePicture: data,
                                               name: nameText,
-                                              targetReminder: Date(),
-                                              journalReminder: Date())
+                                              targetTime: profileStore.profile?.targetTime,
+                                              journalTime: profileStore.profile?.journalTime, targetTimeText: profileStore.profile?.targetTimeText ?? "Set up reminders", journalTimeText: profileStore.profile?.journalTimeText ?? "Set up reminders")
                         profileStore.updateProfile(profile)
                         self.presentationMode.wrappedValue.dismiss()
                     }
+                    
                 }, label: {
                     Image(systemName: "chevron.left.circle.fill")
                         .padding()
@@ -137,15 +136,14 @@ struct ProfileView: View {
                                         .stroke(Color("TextColor"), lineWidth: 4).opacity(0.4)
                                 )
                             Button(action: {
-                                print(nameText)
                                 nameExpand = false
                                 if let data = image?.pngData() {
                                     let profile = Profile(profilePicture: data,
                                                           name: nameText,
-                                                          targetReminder: Date(),
-                                                          journalReminder: Date())
-                                    profileStore.updateProfile(profile)
+                                                          targetTime: profileStore.profile?.targetTime,
+                                                          journalTime: profileStore.profile?.journalTime, targetTimeText: profileStore.profile?.targetTimeText ?? "Set up reminders", journalTimeText: profileStore.profile?.journalTimeText ?? "Set up reminders")
                                 }
+                                
                             }, label: {
                                 Text("Done")
                                     .font(.system(size: 12, weight: .bold))
@@ -198,7 +196,7 @@ struct ProfileView: View {
                 }
                 
                 //Middle rectangle
-                Reminder()
+                Reminder(targetTime: profileStore.profile?.targetTime ?? Date().adding(minutes: 60), journalTime: profileStore.profile?.journalTime ?? Date().adding(minutes: 60), profileStore: profileStore)
                 
                 ZStack {
                     RoundedRectangle(cornerRadius: 25)
@@ -302,5 +300,11 @@ extension View {
 extension View {
     func applyBottomTitleStyle() -> some View {
         return self.modifier(BottomTitlesModifier())
+    }
+}
+
+extension Date {
+    func adding(minutes: Int) -> Date {
+        return Calendar.current.date(byAdding: .minute, value: minutes, to: self)!
     }
 }

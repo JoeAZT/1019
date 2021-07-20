@@ -45,8 +45,6 @@ class EntryStore: ObservableObject {
         return entries.values.sorted(by: { $0.date > $1.date })
     }
     
-    
-    
     var sevenEntries: [Entry] {
         if sortedEntries.isEmpty {
             let results: [Entry] = []

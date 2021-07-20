@@ -135,6 +135,7 @@
 		71881EA926473CBE00604DAC /* Structs */ = {
 			isa = PBXGroup;
 			children = (
+				710FE17526406AF3005419E0 /* TextViewWrapper.swift */,
 				71881EA726473CB900604DAC /* Entries.swift */,
 				7110D03E264AA2100051CF62 /* Goals.swift */,
 				716174AC2684C37800B25942 /* Profile.swift */,
@@ -173,7 +174,6 @@
 				71C47D12263DAAB300C979D9 /* selfCareApp.swift */,
 				7110D048264AC9B00051CF62 /* CacheStorageManager.swift */,
 				71881EA62647039900604DAC /* Views */,
-				710FE17526406AF3005419E0 /* TextViewWrapper.swift */,
 				71881EA926473CBE00604DAC /* Structs */,
 				71C47D16263DAAB800C979D9 /* Assets.xcassets */,
 				71C47D1B263DAAB800C979D9 /* Info.plist */,
