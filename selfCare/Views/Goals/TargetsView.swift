@@ -19,103 +19,130 @@ struct TargetsView: View {
     
     var body: some View {
         
-        VStack {
+        //Consider using a nav view instead of using the Text() option at the top of the screens? Look into is at least.
+        
+        //Empty goal list placeholder
+        if dailyGoalStore.goals.isEmpty == true && weeklyGoalStore.goals.isEmpty == true && longTermGoalStore.goals.isEmpty == true {
+            VStack {
+                    Text("Targets")
+                        .fontWeight(.semibold)
+                        .foregroundColor(Color("TextColor"))
+                        .font(.title)
+                        .padding()
                 
+                Spacer()
+                
+                VStack {
+                Image(systemName: "plus.circle")
+                    .font(.system(size: 200, weight: .regular, design: .default))
+                
+                Text("When you enter targets they will appear on this screen. It's up to you whether they're daily, weekly, or if they should be assigned as long term targets.")
+                    .font(.system(size: 20, weight: .regular, design: .default))
+                    .multilineTextAlignment(.center)
+            }
+            .padding(.horizontal, 30)
+            .opacity(0.4)
+                
+                Spacer()
+            
+                Button(action: {
+                    showNewGoalView.toggle()
+                    
+                }, label: {
+                    Text("Create Goal")
+                        .font(.system(size: 20, weight: .bold))
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(LinearGradient(gradient: Gradient(colors: [Color .blue, .pink]), startPoint: .leading, endPoint: .trailing))
+                        .cornerRadius(15)
+                })
+                .sheet(isPresented: $showNewGoalView) {
+                    NewTargetView(showGoalView: $showNewGoalView, longTermGoallStore: longTermGoalStore, dailyGoalStore: dailyGoalStore, weeklyGoalStore: weeklyGoalStore)
+                }
+            }
+            .preferredColorScheme(isDarkMode ? .dark : .light)
+        } else {
+            VStack {
                 Text("Targets")
                     .fontWeight(.semibold)
                     .foregroundColor(Color("TextColor"))
                     .font(.title)
                     .padding()
-            
-            VStack {
-                ZStack {
-                    //List of goals
-                    List {
-                        Section(header: Text("Daily")) {
-                            ForEach(dailyGoalStore.goals) { goal in
-                                TargetRow(goal: goal, isExpanded: expandedID == goal.id) {
-                                    dailyGoalStore.toggleCompletedFor(goal)
-                                }
-                                .onTapGesture {
-                                    if self.expandedID == goal.id {
-                                        self.expandedID = nil
-                                    } else {
-                                        self.expandedID = goal.id
+                
+                VStack {
+                    ZStack {
+                        //List of goals
+                        List {
+                            Section(header: Text("Daily")) {
+                                ForEach(dailyGoalStore.goals) { goal in
+                                    TargetRow(goal: goal, isExpanded: expandedID == goal.id) {
+                                        dailyGoalStore.toggleCompletedFor(goal)
                                     }
-                                }
-                                .animation(.spring())
-                            }
-                            .onDelete(perform: deleteDaily)
-                        }
-                        Section(header: Text("Weekly")) {
-                            ForEach(weeklyGoalStore.goals) { goal in
-                                TargetRow(goal: goal, isExpanded: expandedID == goal.id) {
-                                    weeklyGoalStore.toggleCompletedFor(goal)
-                                }
-                                .onTapGesture {
-                                    if self.expandedID == goal.id {
-                                        self.expandedID = nil
-                                    } else {
-                                        self.expandedID = goal.id
+                                    .onTapGesture {
+                                        if self.expandedID == goal.id {
+                                            self.expandedID = nil
+                                        } else {
+                                            self.expandedID = goal.id
+                                        }
                                     }
+                                    .animation(.spring())
                                 }
-                                .animation(.spring())
+                                .onDelete(perform: deleteDaily)
                             }
-                            .onDelete(perform: deleteWeekly)
-                        }
-                        Section(header: Text("Long Term")) {
-                            ForEach(longTermGoalStore.goals) { goal in
-                                TargetRow(goal: goal, isExpanded: expandedID == goal.id) {
-                                    longTermGoalStore.toggleCompletedFor(goal)
-                                }
-                                .onTapGesture {
-                                    if self.expandedID == goal.id {
-                                        self.expandedID = nil
-                                    } else {
-                                        self.expandedID = goal.id
+                            Section(header: Text("Weekly")) {
+                                ForEach(weeklyGoalStore.goals) { goal in
+                                    TargetRow(goal: goal, isExpanded: expandedID == goal.id) {
+                                        weeklyGoalStore.toggleCompletedFor(goal)
                                     }
+                                    .onTapGesture {
+                                        if self.expandedID == goal.id {
+                                            self.expandedID = nil
+                                        } else {
+                                            self.expandedID = goal.id
+                                        }
+                                    }
+                                    .animation(.spring())
                                 }
-                                .animation(.spring())
+                                .onDelete(perform: deleteWeekly)
                             }
-                            .onDelete(perform: deleteLongTerm)
+                            Section(header: Text("Long Term")) {
+                                ForEach(longTermGoalStore.goals) { goal in
+                                    TargetRow(goal: goal, isExpanded: expandedID == goal.id) {
+                                        longTermGoalStore.toggleCompletedFor(goal)
+                                    }
+                                    .onTapGesture {
+                                        if self.expandedID == goal.id {
+                                            self.expandedID = nil
+                                        } else {
+                                            self.expandedID = goal.id
+                                        }
+                                    }
+                                    .animation(.spring())
+                                }
+                                .onDelete(perform: deleteLongTerm)
+                            }
                         }
                     }
+                    Button(action: {
+                        showNewGoalView.toggle()
+                        
+                    }, label: {
+                        Text("Create Goal")
+                            .font(.system(size: 20, weight: .bold))
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(LinearGradient(gradient: Gradient(colors: [Color .blue, .pink]), startPoint: .leading, endPoint: .trailing))
+                            .cornerRadius(15)
+                    })
+                    .sheet(isPresented: $showNewGoalView) {
+                        NewTargetView(showGoalView: $showNewGoalView, longTermGoallStore: longTermGoalStore, dailyGoalStore: dailyGoalStore, weeklyGoalStore: weeklyGoalStore)
+                    }
                 }
-                
-                //Empty goal list placeholder
-//                if dailyGoalStore.goals.isEmpty == true && longTermGoalStore.isEmpty == true && weeklyGoalStore.isEmpty == true  {
-//                    VStack(alignment: .center) {
-//                        Image(systemName: "plus.circle")
-//                            .font(.system(size: 200, weight: .regular, design: .default))
-//                            .padding(30)
-//
-//                        Text("When you enter goals they will appear on this screen. It's up to you whether they're short term or long term, or if they should be assigned as daily goals.")
-//                            .font(.system(size: 20, weight: .regular, design: .default))
-//                            .multilineTextAlignment(.center)
-//                            .padding(.horizontal, 60)
-//                    }
-//                    .opacity(0.4)
-//                    .padding(.bottom, 50)
-//                }
-            }
-            
-            Button(action: {
-                showNewGoalView.toggle()
-                
-            }, label: {
-                Text("Create Goal")
-                    .font(.system(size: 20, weight: .bold))
-                    .foregroundColor(.white)
-                    .padding()
-                    .background(LinearGradient(gradient: Gradient(colors: [Color .blue, .pink]), startPoint: .leading, endPoint: .trailing))
-                    .cornerRadius(15)
-            })
-            .sheet(isPresented: $showNewGoalView) {
-                NewTargetView(showGoalView: $showNewGoalView, longTermGoallStore: longTermGoalStore, dailyGoalStore: dailyGoalStore, weeklyGoalStore: weeklyGoalStore)
             }
             .preferredColorScheme(isDarkMode ? .dark : .light)
         }
     }
+    
     
     func deleteDaily(at offsets: IndexSet) {
         dailyGoalStore.goals.remove(atOffsets: offsets)

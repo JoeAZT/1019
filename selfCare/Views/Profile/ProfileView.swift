@@ -139,6 +139,7 @@ struct ProfileView: View {
                                                           name: nameText,
                                                           targetTime: profileStore.profile?.targetTime,
                                                           journalTime: profileStore.profile?.journalTime, targetTimeText: profileStore.profile?.targetTimeText ?? "Set up reminders", journalTimeText: profileStore.profile?.journalTimeText ?? "Set up reminders")
+                                    profileStore.updateProfile(profile)
                                 }
                                 
                             }, label: {
@@ -181,7 +182,7 @@ struct ProfileView: View {
                         .padding()
                         
                         VStack {
-                            Text("Goal Completed:")
+                            Text("Goals Completed:")
                                 .applyTopTitleStyle()
                             let totalTargetCount = longTermGoalStore.goals.count + dailyGoalStore.goals.count + weeklyGoalStore.goals.count
                             Text("\(totalTargetCount)")

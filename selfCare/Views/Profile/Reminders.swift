@@ -25,7 +25,7 @@ struct Reminder: View {
                     Text("Targets Reminder:")
                         .applyMiddleTitleStyle()
                     if isExpanded == false {
-                    Text(profileStore.updateTargetReminder(input: targetTime))
+                        Text(profileStore.updateTargetReminder(input: targetTime))
                         .font(.system(size: 30, weight: .bold))
                         .padding(.top, 10)
                         .onTapGesture {

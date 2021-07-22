@@ -446,7 +446,7 @@ struct NewEntryView: View {
                 Button(action: {
                     
                     self.showNewEntryView = false
-                    let entry = Entry(id: UUID().uuidString, rating: ratingSlider, reflectionText: reflectionText, happyText: happyText, achievementText: achievementText, mood: mood, date: Date(), exercise: exercise, water: water, sleep: sleep, meditation: meditation, fruit: fruit, reading: reading, productivity: productivity, outside: outside)
+                    let entry = Entry(id: UUID().uuidString, rating: ratingSlider, ratingString: String(format: "%.1f", ratingSlider), reflectionText: reflectionText, happyText: happyText, achievementText: achievementText, mood: mood, date: Date(), exercise: exercise, water: water, sleep: sleep, meditation: meditation, fruit: fruit, reading: reading, productivity: productivity, outside: outside)
                     entryStore.addEntry(entry)
                     
                 }, label: {

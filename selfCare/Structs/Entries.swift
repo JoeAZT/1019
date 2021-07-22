@@ -12,6 +12,7 @@ import SwiftUICharts
 struct Entry: Identifiable, Codable {
     let id: String
     let rating: Double
+    let ratingString: String
     let reflectionText: String
     let happyText: String
     let achievementText: String
@@ -46,7 +47,7 @@ class EntryStore: ObservableObject {
     }
     
     var sevenEntries: [Entry] {
-        if sortedEntries.isEmpty {
+        if sortedEntries.count < 7 {
             let results: [Entry] = []
             return results
         } else {

@@ -42,9 +42,7 @@ struct JournalView: View {
                                     Text(entry.date, style: .date)
                                         .font(.system(size: 15, weight: .medium, design: .default))
                                     HStack {
-                                        Text("Rating:")
-                                            .font(.system(size: 17, weight: .bold, design: .default))
-                                        Text(String(format: "%.1f", entry.rating))
+                                        Text("Rating: \(entry.ratingString)")
                                             .font(.system(size: 17, weight: .bold, design: .default))
                                     }
                                 }
@@ -172,6 +170,3 @@ struct JournalView: View {
         .preferredColorScheme(isDarkMode ? .dark : .light)
     }
 }
-
-
-

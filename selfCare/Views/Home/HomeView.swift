@@ -69,8 +69,7 @@ struct HomeView: View {
             }
             
             VStack(alignment: .leading) {
-//                Text(profileStore.profile?.name == "" ? "Welcome to selfCare" : "Welcome back, \(profileStore.profile!.name)")
-                Text(profileStore.profile?.name == "" ? "Welcome to selfCare" : "Welcome back")
+                Text(profileStore.profile?.name == nil ? "Welcome to selfCare" : "Welcome back, \(profileStore.profile!.name)")
                     .font(.system(size: 25, weight: .black, design: .default))
                     .foregroundColor(.white)
                 HStack {
@@ -92,7 +91,7 @@ struct HomeView: View {
                         
                         ScrollView(.horizontal) {
                             HStack(spacing: 14) {
-                                ForEach(entryStore.sortedEntries.reversed()) { entry in
+                                ForEach(entryStore.sevenEntries.reversed()) { entry in
                                     Text(entry.mood.rawValue)
                                         .font(.system(size: 30, weight: .regular, design: .default))
                                 }
