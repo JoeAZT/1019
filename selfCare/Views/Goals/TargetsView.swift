@@ -40,7 +40,7 @@ struct TargetsView: View {
                     .font(.system(size: 20, weight: .regular, design: .default))
                     .multilineTextAlignment(.center)
             }
-            .padding(.horizontal, 30)
+            .padding(.horizontal, 60)
             .opacity(0.4)
                 
                 Spacer()
