@@ -68,6 +68,7 @@ struct JournalView: View {
                                                 .font(.system(size: 20, weight: .bold, design: .default))
                                                 .opacity(entry.fruit == true ? 1 : 0.2)
                                         }
+                                        
                                         HStack {
                                             Text("📚")
                                                 .font(.system(size: 20, weight: .bold, design: .default))
@@ -136,6 +137,7 @@ struct JournalView: View {
                 }
                         
                 if entryStore.entries.isEmpty {
+                    Spacer()
                     VStack {
                         Image(systemName: "plus.circle")
                             .font(.system(size: 200, weight: .regular, design: .default))

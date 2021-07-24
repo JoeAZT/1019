@@ -52,7 +52,7 @@ struct ProfileView: View {
                         return
                     }
                     if let data = image?.pngData() {
-                        let profile = Profile(profilePicture: data, name: nameText, targetTime: profileStore.profile?.targetTime, journalTime: profileStore.profile?.journalTime, targetTimeText: profileStore.profile?.journalTimeText ?? "Set up Reminder", journalTimeText: profileStore.profile?.journalTimeText ?? "Set up Reminder")
+                        let profile = Profile(profilePicture: data, name: nameText, targetTime: profileStore.profile?.targetTime, journalTime: profileStore.profile?.journalTime, targetTimeText: profileStore.profile?.targetTimeText ?? "Set up Reminder", journalTimeText: profileStore.profile?.journalTimeText ?? "Set up Reminder")
                         profileStore.updateProfile(profile)
                         self.presentationMode.wrappedValue.dismiss()
                     }
@@ -168,18 +168,16 @@ struct ProfileView: View {
                                 .applyTopTitleStyle()
                             Text("\(entryStore.entries.count)")
                                 .font(.system(size: 50, weight: .semibold, design: .default))
-                                .padding(.top, 8)
                         }
-                        .padding()
+                        .padding(10)
                         
                         VStack {
                             Text("Consecutive active days:")
                                 .applyTopTitleStyle()
                             Text("0")
                                 .font(.system(size: 50, weight: .semibold, design: .default))
-                                .padding(.top, 8)
                         }
-                        .padding()
+                        .padding(10)
                         
                         VStack {
                             Text("Goals Completed:")
@@ -187,10 +185,11 @@ struct ProfileView: View {
                             let totalTargetCount = longTermGoalStore.goals.count + dailyGoalStore.goals.count + weeklyGoalStore.goals.count
                             Text("\(totalTargetCount)")
                                 .font(.system(size: 50, weight: .semibold, design: .default))
-                                .padding(.top, 8)
                         }
+                        .padding(10)
                     }
                     .padding(.horizontal)
+                    .padding(.top, 8)
                 }
                 
                 //Middle rectangle
@@ -256,6 +255,7 @@ struct TopTitlesModifier: ViewModifier {
             .font(.system(size: 16, weight: .regular, design: .default))
             .foregroundColor(Color("TextColor")).opacity(0.4)
             .multilineTextAlignment(.center)
+            .frame(width: 100)
     }
 }
 
@@ -271,7 +271,7 @@ struct BottomTitlesModifier: ViewModifier {
     func body(content: Content) -> some View {
         return content
             .multilineTextAlignment(.center)
-            .font(.system(size: 18, weight: .regular, design: .default))
+            .font(.system(size: 16, weight: .regular, design: .default))
             .foregroundColor(Color("TextColor")).opacity(0.4)
             .padding(5)
     }

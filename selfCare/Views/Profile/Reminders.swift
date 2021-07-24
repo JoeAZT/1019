@@ -107,6 +107,8 @@ struct Reminder: View {
                             Button(action: {
                                 isExpanded = false
                                 // This button should have the functionality to save the time specified by the user
+                                profileStore.profile?.journalTimeText = String(journalTime)
+                                
                             }, label: {
                                 Text("Done")
                                     .font(.system(size: 12, weight: .bold))

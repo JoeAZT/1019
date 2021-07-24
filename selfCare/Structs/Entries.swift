@@ -48,7 +48,8 @@ class EntryStore: ObservableObject {
     
     var sevenEntries: [Entry] {
         if sortedEntries.count < 7 {
-            let results: [Entry] = []
+            var results: [Entry] = []
+            results = sortedEntries
             return results
         } else {
             var results: [Entry] = []
