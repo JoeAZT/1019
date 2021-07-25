@@ -9,12 +9,11 @@ import SwiftUI
 
 struct Reminder: View {
     
-    @State var targetTime: Date
-    @State var journalTime: Date
-    @State var targetTimeText: String
-    @State var journalTimeText: String
+    @Binding var targetTime: Date
+    @Binding var journalTime: Date
+    
     @ObservedObject var profileStore: ProfileStore
-    @State var isExpanded = false
+    @State var isExpanded: Bool
     
     var body: some View {
         
@@ -27,7 +26,7 @@ struct Reminder: View {
                     Text("Targets Reminder:")
                         .applyMiddleTitleStyle()
                     if isExpanded == false {
-                        Text(profileStore.profile?.targetTimeText ?? "Set up reminder")
+                        Text(profileStore.dateConverter(input: targetTime))
                         .font(.system(size: 30, weight: .bold))
                         .padding(.top, 10)
                         .onTapGesture {
@@ -57,7 +56,6 @@ struct Reminder: View {
                             })
                             Button(action: {
                                 isExpanded = false
-                                targetTimeText = profileStore.dateConverter(input: targetTime)
                             }, label: {
                                 Text("Done")
                                     .font(.system(size: 12, weight: .bold))
@@ -81,7 +79,7 @@ struct Reminder: View {
                     Text("Jounral Reminder:")
                         .applyMiddleTitleStyle()
                     if isExpanded == false {
-                        Text(profileStore.profile?.targetTimeText ?? "Set up reminder")
+                        Text(profileStore.dateConverter(input: journalTime))
                         .font(.system(size: 30, weight: .bold))
                         .padding(.top, 10)
                         .onTapGesture {
@@ -98,7 +96,6 @@ struct Reminder: View {
                         HStack {
                             Button(action: {
                                 isExpanded = false
-                                journalTimeText = profileStore.dateConverter(input: journalTime)
                                 
                             }, label: {
                                 Text("Cancel")

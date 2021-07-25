@@ -27,6 +27,9 @@ struct ProfileView: View {
     @State var lightMode = true
     @AppStorage("isDarkMode") private var isDarkMode = false
     
+    @State var targetTime: Date
+    @State var journalTime: Date
+    
     init(entryStore: EntryStore, longTermGoalStore: LongTermGoalStore, dailyGoalStore: DailyGoalStore, weeklyGoalStore: WeeklyGoalStore, profileStore: ProfileStore) {
         self.entryStore = entryStore
         self.longTermGoalStore = longTermGoalStore
@@ -38,6 +41,9 @@ struct ProfileView: View {
         if let imageData = profileStore.profile?.profilePicture, let image = UIImage(data: imageData) {
             _image = State(initialValue: image)
         }
+        
+        self._targetTime = State(initialValue: profileStore.profile?.targetTime ?? Date())
+        self._journalTime = State(initialValue: profileStore.profile?.journalTime ?? Date())
     }
     
     var body: some View {
@@ -47,15 +53,15 @@ struct ProfileView: View {
         VStack {
             HStack {
                 Button(action: {
-                    guard hasChanges else {
-                        self.presentationMode.wrappedValue.dismiss()
-                        return
-                    }
                     if let data = image?.pngData() {
-                        let profile = Profile(profilePicture: data, name: nameText, targetTime: reminder.targetTime, journalTime: reminder.journalTime, targetTimeText: reminder.targetTimeText ?? "Set up Reminder", journalTimeText: reminder.journalTimeText ?? "Set up Reminder")
+                        let profile = Profile(profilePicture: data, name: nameText, targetTime: targetTime, journalTime: journalTime)
                         profileStore.updateProfile(profile)
                         self.presentationMode.wrappedValue.dismiss()
                     }
+//                    guard hasChanges else {
+//                        self.presentationMode.wrappedValue.dismiss()
+//                        return
+//                    }
                     
                 }, label: {
                     Image(systemName: "chevron.left.circle.fill")
@@ -135,10 +141,7 @@ struct ProfileView: View {
                             Button(action: {
                                 nameExpand = false
                                 if let data = image?.pngData() {
-                                    let profile = Profile(profilePicture: data,
-                                                          name: nameText,
-                                                          targetTime: profileStore.profile?.targetTime,
-                                                          journalTime: profileStore.profile?.journalTime, targetTimeText: profileStore.profile?.targetTimeText ?? "Set up reminders", journalTimeText: profileStore.profile?.journalTimeText ?? "Set up reminders")
+                                    let profile = Profile(profilePicture: data, name: nameText, targetTime: targetTime, journalTime: journalTime)
                                     profileStore.updateProfile(profile)
                                 }
                                 
@@ -194,7 +197,7 @@ struct ProfileView: View {
                 
                 //Middle rectangle
 //                Reminder(targetTime: profileStore.profile?.targetTime ?? Date().adding(minutes: 59), journalTime: profileStore.profile?.journalTime ?? Date().adding(minutes: 59), profileStore: profileStore, isExpanded: false)
-                Reminder(targetTime: profileStore.profile?.targetTime ?? Date(), journalTime: profileStore.profile?.journalTime ?? Date(), targetTimeText: "help", journalTimeText: "please", profileStore: profileStore, isExpanded: false)
+                Reminder(targetTime: $targetTime, journalTime: $journalTime, profileStore: profileStore, isExpanded: false)
                 
                 ZStack {
                     RoundedRectangle(cornerRadius: 25)

@@ -12,8 +12,6 @@ struct Profile: Codable {
     var name: String
     let targetTime: Date?
     let journalTime: Date?
-    let targetTimeText: String
-    let journalTimeText: String
 }
 
 class ProfileStore: ObservableObject {
