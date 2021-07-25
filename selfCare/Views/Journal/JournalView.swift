@@ -44,9 +44,11 @@ struct JournalView: View {
                                     HStack {
                                         Text("Rating: \(entry.ratingString)")
                                             .font(.system(size: 17, weight: .bold, design: .default))
+                                            .scaledToFill()
                                     }
+//                                    .padding(.vertical, 1)
                                 }
-                                .padding()
+                                .padding(.horizontal, 8)
                                 
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 10)

@@ -52,7 +52,7 @@ struct ProfileView: View {
                         return
                     }
                     if let data = image?.pngData() {
-                        let profile = Profile(profilePicture: data, name: nameText, targetTime: profileStore.profile?.targetTime, journalTime: profileStore.profile?.journalTime, targetTimeText: profileStore.profile?.targetTimeText ?? "Set up Reminder", journalTimeText: profileStore.profile?.journalTimeText ?? "Set up Reminder")
+                        let profile = Profile(profilePicture: data, name: nameText, targetTime: reminder.targetTime, journalTime: reminder.journalTime, targetTimeText: reminder.targetTimeText ?? "Set up Reminder", journalTimeText: reminder.journalTimeText ?? "Set up Reminder")
                         profileStore.updateProfile(profile)
                         self.presentationMode.wrappedValue.dismiss()
                     }
@@ -193,7 +193,8 @@ struct ProfileView: View {
                 }
                 
                 //Middle rectangle
-                Reminder(targetTime: profileStore.profile?.targetTime ?? Date().adding(minutes: 59), journalTime: profileStore.profile?.journalTime ?? Date().adding(minutes: 59), profileStore: profileStore, isExpanded: false)
+//                Reminder(targetTime: profileStore.profile?.targetTime ?? Date().adding(minutes: 59), journalTime: profileStore.profile?.journalTime ?? Date().adding(minutes: 59), profileStore: profileStore, isExpanded: false)
+                Reminder(targetTime: profileStore.profile?.targetTime ?? Date(), journalTime: profileStore.profile?.journalTime ?? Date(), targetTimeText: "help", journalTimeText: "please", profileStore: profileStore, isExpanded: false)
                 
                 ZStack {
                     RoundedRectangle(cornerRadius: 25)

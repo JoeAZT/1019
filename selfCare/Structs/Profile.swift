@@ -48,12 +48,7 @@ class ProfileStore: ObservableObject {
         return formatter
     }()
     
-    func updateJournalReminder(input: Date) -> String {
-        return timeFormatter.string(from: input)
-    }
-
-    
-    func updateTargetReminder(input: Date) -> String {
+    func dateConverter(input: Date) -> String {
         return timeFormatter.string(from: input)
     }
 }

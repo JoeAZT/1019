@@ -11,6 +11,8 @@ struct Reminder: View {
     
     @State var targetTime: Date
     @State var journalTime: Date
+    @State var targetTimeText: String
+    @State var journalTimeText: String
     @ObservedObject var profileStore: ProfileStore
     @State var isExpanded = false
     
@@ -25,7 +27,7 @@ struct Reminder: View {
                     Text("Targets Reminder:")
                         .applyMiddleTitleStyle()
                     if isExpanded == false {
-                        Text(profileStore.updateTargetReminder(input: targetTime))
+                        Text(profileStore.profile?.targetTimeText ?? "Set up reminder")
                         .font(.system(size: 30, weight: .bold))
                         .padding(.top, 10)
                         .onTapGesture {
@@ -55,6 +57,7 @@ struct Reminder: View {
                             })
                             Button(action: {
                                 isExpanded = false
+                                targetTimeText = profileStore.dateConverter(input: targetTime)
                             }, label: {
                                 Text("Done")
                                     .font(.system(size: 12, weight: .bold))
@@ -78,7 +81,7 @@ struct Reminder: View {
                     Text("Jounral Reminder:")
                         .applyMiddleTitleStyle()
                     if isExpanded == false {
-                    Text(profileStore.updateJournalReminder(input: journalTime))
+                        Text(profileStore.profile?.targetTimeText ?? "Set up reminder")
                         .font(.system(size: 30, weight: .bold))
                         .padding(.top, 10)
                         .onTapGesture {
@@ -95,6 +98,7 @@ struct Reminder: View {
                         HStack {
                             Button(action: {
                                 isExpanded = false
+                                journalTimeText = profileStore.dateConverter(input: journalTime)
                                 
                             }, label: {
                                 Text("Cancel")
@@ -107,7 +111,7 @@ struct Reminder: View {
                             Button(action: {
                                 isExpanded = false
                                 // This button should have the functionality to save the time specified by the user
-                                profileStore.profile?.journalTimeText = String(journalTime)
+                                
                                 
                             }, label: {
                                 Text("Done")
