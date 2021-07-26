@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UserNotifications
 
 struct Reminder: View {
     
@@ -107,8 +108,18 @@ struct Reminder: View {
                             })
                             Button(action: {
                                 isExpanded = false
-                                // This button should have the functionality to save the time specified by the user
-                                
+                                UNUserNotificationCenter.current()
+                                    .requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                                        if success {
+                                            print("All set")
+                                        } else if let error = error {
+                                            print(error.localizedDescription)
+                                        }
+                                    }
+                                let content = UNMutableNotificationContent()
+                                content.title = "Journal"
+                                content.subtitle = "It's time for you to complete todays journal entry."
+                                content.sound = UNNotificationSound.default
                                 
                             }, label: {
                                 Text("Done")

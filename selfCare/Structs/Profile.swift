@@ -35,9 +35,59 @@ class ProfileStore: ObservableObject {
     private func saveProfileToCache() {
         if let profile = profile {
             cacheStorageManager.saveProfile(profile)
+            
+            if let time = profile.targetTime {
+                scheduleNotificationForTarget(time)
+            }
         } else {
             cacheStorageManager.removeProfile()
         }
+        
+        if let time = profile?.journalTime {
+            scheduleNotificationForJournal(time)
+        } else {
+            cacheStorageManager.removeProfile()
+        }
+    }
+    
+    private func scheduleNotificationForTarget(_ date: Date) {
+        UNUserNotificationCenter.current()
+            .requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                if success {
+                    print("All set")
+                } else if let error = error {
+                    print(error.localizedDescription)
+                }
+            }
+        
+        let content = UNMutableNotificationContent()
+        content.title = "Targets"
+        content.subtitle = "It's time to fill in your targets for today."
+        content.sound = UNNotificationSound.default
+        
+        let components = Calendar.current.dateComponents([.hour, .minute], from: date)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
+        UNUserNotificationCenter.current().add(.init(identifier: UUID().uuidString, content: content, trigger: trigger))
+    }
+    
+    private func scheduleNotificationForJournal(_ date: Date) {
+        UNUserNotificationCenter.current()
+            .requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                if success {
+                    print("All set")
+                } else if let error = error {
+                    print(error.localizedDescription)
+                }
+            }
+        
+        let content = UNMutableNotificationContent()
+        content.title = "Journal"
+        content.subtitle = "It's time to fill in your journal for today."
+        content.sound = UNNotificationSound.default
+        
+        let components = Calendar.current.dateComponents([.hour, .minute], from: date)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
+        UNUserNotificationCenter.current().add(.init(identifier: UUID().uuidString, content: content, trigger: trigger))
     }
     
     var timeFormatter: DateFormatter = {

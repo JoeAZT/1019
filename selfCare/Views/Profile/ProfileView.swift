@@ -50,6 +50,7 @@ struct ProfileView: View {
         
         let circleSize = CGFloat(150)
         
+        ScrollView {
         VStack {
             HStack {
                 Button(action: {
@@ -58,10 +59,10 @@ struct ProfileView: View {
                         profileStore.updateProfile(profile)
                         self.presentationMode.wrappedValue.dismiss()
                     }
-//                    guard hasChanges else {
-//                        self.presentationMode.wrappedValue.dismiss()
-//                        return
-//                    }
+                    guard hasChanges else {
+                        self.presentationMode.wrappedValue.dismiss()
+                        return
+                    }
                     
                 }, label: {
                     Image(systemName: "chevron.left.circle.fill")
@@ -95,7 +96,6 @@ struct ProfileView: View {
                 })
                 .applyShadow()
             }
-            ScrollView {
                 Group {
                     if let image = image {
                         Image(uiImage: image)
@@ -191,12 +191,10 @@ struct ProfileView: View {
                         }
                         .padding(10)
                     }
-                    .padding(.horizontal)
-                    .padding(.top, 8)
                 }
+                .padding(.horizontal)
                 
                 //Middle rectangle
-//                Reminder(targetTime: profileStore.profile?.targetTime ?? Date().adding(minutes: 59), journalTime: profileStore.profile?.journalTime ?? Date().adding(minutes: 59), profileStore: profileStore, isExpanded: false)
                 Reminder(targetTime: $targetTime, journalTime: $journalTime, profileStore: profileStore, isExpanded: false)
                 
                 ZStack {
@@ -222,8 +220,9 @@ struct ProfileView: View {
                     }
                     .padding()
                 }
-            }.preferredColorScheme(isDarkMode ? .dark : .light)
-            .padding(.horizontal, 10)
+                .padding(.horizontal)
+            }
+            .preferredColorScheme(isDarkMode ? .dark : .light)
             .navigationBarTitle("Pick a photo")
             .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
                 ImagePicker(image: self.$inputImage)
@@ -231,11 +230,13 @@ struct ProfileView: View {
         }
     }
     
+    
     func loadImage() {
         guard let inputImage = inputImage else { return }
         image = inputImage
         hasChanges = true
     }
+    
 }
         
 struct ProfileView_Previews: PreviewProvider {
@@ -257,6 +258,7 @@ struct TopTitlesModifier: ViewModifier {
     func body(content: Content) -> some View {
         return content
             .font(.system(size: 16, weight: .regular, design: .default))
+//            .scaledToFill()
             .foregroundColor(Color("TextColor")).opacity(0.4)
             .multilineTextAlignment(.center)
             .frame(width: 100)
