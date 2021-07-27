@@ -25,6 +25,7 @@ class ProfileStore: ObservableObject {
 
         self.cacheStorageManager = manager
         self.profile = profile
+
     }
 
     func updateProfile(_ profile: Profile) {
@@ -99,4 +100,7 @@ class ProfileStore: ObservableObject {
     func dateConverter(input: Date) -> String {
         return timeFormatter.string(from: input)
     }
+    
+    
+    
 }

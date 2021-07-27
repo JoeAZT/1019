@@ -177,7 +177,7 @@ struct ProfileView: View {
                         VStack {
                             Text("Consecutive active days:")
                                 .applyTopTitleStyle()
-                            Text("0")
+                            Text(String(entryStore.conseqEntries()))
                                 .font(.system(size: 50, weight: .semibold, design: .default))
                         }
                         .padding(10)
