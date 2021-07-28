@@ -8,7 +8,6 @@
 import Foundation
 import SwiftUI
 import SwiftUICharts
-import UserNotifications
 
 struct Entry: Identifiable, Codable {
     let id: String
@@ -184,28 +183,7 @@ class EntryStore: ObservableObject {
         return counter
     }
     
-//    func noEntryDays() {
-//        let sorted = entries.values.sorted(by: { $0.date > $1.date })
-//        if Calendar.current.isDate(sorted.first?.date ?? Date(), inSameDayAs: Calendar.current.date(byAdding: .day, value: -3, to: Date())!) {
-//            print("Check up triggered")
-//        }
-//    }
-    
-    func testNoEntryDays() {
-        let sorted = entries.values.sorted(by: { $0.date > $1.date })
-        if Calendar.current.isDate(sorted.first?.date ?? Date(), inSameDayAs: Date()) {
-            UNUserNotificationCenter.current()
-                .requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
-                    if success {
-                        print("Check up triggered")
-//                        UNNotificationTrigger(coder: <#T##NSCoder#>)
-                    } else if let error = error {
-                        print(error.localizedDescription)
-                    }
-                }
-        }
-    }
-    
+    var lastDate = Date()
     
     func average() -> Double {
         if entries.isEmpty {

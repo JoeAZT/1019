@@ -49,6 +49,8 @@ struct HomeView: View {
                         .scaledToFit()
                         .frame(width: 60.0, height: 60.0)
                     .shadow(color: .black.opacity(0.4), radius: 3, x: 0, y: 3)
+                    .onAppear(perform: {
+                    })
 
                 Spacer()
                 
@@ -143,9 +145,7 @@ struct HomeView: View {
                 
                 //Goals Button
                 Button(action: {
-                    
                     showGoalsView.toggle()
-                    
                 }, label: {
                     Image(systemName: "target")
                         .padding(.horizontal)
@@ -162,7 +162,6 @@ struct HomeView: View {
         .embedInBackground()
     }
 }
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

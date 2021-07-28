@@ -57,6 +57,7 @@ struct Reminder: View {
                             })
                             Button(action: {
                                 isExpanded = false
+                                
                             }, label: {
                                 Text("Done")
                                     .font(.system(size: 12, weight: .bold))
@@ -108,18 +109,7 @@ struct Reminder: View {
                             })
                             Button(action: {
                                 isExpanded = false
-                                UNUserNotificationCenter.current()
-                                    .requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
-                                        if success {
-                                            print("All set")
-                                        } else if let error = error {
-                                            print(error.localizedDescription)
-                                        }
-                                    }
-                                let content = UNMutableNotificationContent()
-                                content.title = "Journal"
-                                content.subtitle = "It's time for you to complete todays journal entry."
-                                content.sound = UNNotificationSound.default
+                                
                                 
                             }, label: {
                                 Text("Done")

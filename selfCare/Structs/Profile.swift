@@ -43,7 +43,6 @@ class ProfileStore: ObservableObject {
         } else {
             cacheStorageManager.removeProfile()
         }
-        
         if let time = profile?.journalTime {
             scheduleNotificationForJournal(time)
         } else {
@@ -55,7 +54,7 @@ class ProfileStore: ObservableObject {
         UNUserNotificationCenter.current()
             .requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
                 if success {
-                    print("All set")
+                    print("All set 1")
                 } else if let error = error {
                     print(error.localizedDescription)
                 }
@@ -68,14 +67,23 @@ class ProfileStore: ObservableObject {
         
         let components = Calendar.current.dateComponents([.hour, .minute], from: date)
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
-        UNUserNotificationCenter.current().add(.init(identifier: UUID().uuidString, content: content, trigger: trigger))
+        UNUserNotificationCenter.current().add(.init(identifier: "TargetTime", content: content, trigger: trigger))
+        
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+            if success {
+                
+            } else if let error = error {
+                print(error.localizedDescription)
+            }
+        }
     }
     
     private func scheduleNotificationForJournal(_ date: Date) {
         UNUserNotificationCenter.current()
             .requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
                 if success {
-                    print("All set")
+                    print("All set 1")
                 } else if let error = error {
                     print(error.localizedDescription)
                 }
@@ -88,7 +96,16 @@ class ProfileStore: ObservableObject {
         
         let components = Calendar.current.dateComponents([.hour, .minute], from: date)
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
-        UNUserNotificationCenter.current().add(.init(identifier: UUID().uuidString, content: content, trigger: trigger))
+        UNUserNotificationCenter.current().add(.init(identifier: "JournalTime", content: content, trigger: trigger))
+        
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+            if success {
+                
+            } else if let error = error {
+                print(error.localizedDescription)
+            }
+        }
     }
     
     var timeFormatter: DateFormatter = {
