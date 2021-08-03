@@ -21,6 +21,7 @@
 		718069B32695D5AC003974A5 /* TargetsTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718069B22695D5AC003974A5 /* TargetsTabs.swift */; };
 		71881EA826473CB900604DAC /* Entries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71881EA726473CB900604DAC /* Entries.swift */; };
 		71A09A92265E886200554FC8 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 71A09A91265E886200554FC8 /* SwiftUICharts */; };
+		71A4480926B2CA21005D917B /* selfCareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A4480826B2CA21005D917B /* selfCareTests.swift */; };
 		71C47D13263DAAB300C979D9 /* selfCareApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C47D12263DAAB300C979D9 /* selfCareApp.swift */; };
 		71C47D15263DAAB300C979D9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C47D14263DAAB300C979D9 /* HomeView.swift */; };
 		71C47D17263DAAB800C979D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71C47D16263DAAB800C979D9 /* Assets.xcassets */; };
@@ -32,6 +33,16 @@
 		71F5484E263F0CCD00325490 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F5484D263F0CCD00325490 /* ProfileView.swift */; };
 		71F54850263F0CF400325490 /* TargetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F5484F263F0CF400325490 /* TargetsView.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		71A4480B26B2CA21005D917B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 71C47D07263DAAB300C979D9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 71C47D0E263DAAB300C979D9;
+			remoteInfo = selfCare;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		710FE17526406AF3005419E0 /* TextViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewWrapper.swift; sourceTree = "<group>"; };
@@ -46,6 +57,9 @@
 		7175ADEF269CA36B00DB068C /* Reminders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminders.swift; sourceTree = "<group>"; };
 		718069B22695D5AC003974A5 /* TargetsTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetsTabs.swift; sourceTree = "<group>"; };
 		71881EA726473CB900604DAC /* Entries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entries.swift; sourceTree = "<group>"; };
+		71A4480626B2CA21005D917B /* selfCareTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = selfCareTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		71A4480826B2CA21005D917B /* selfCareTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selfCareTests.swift; sourceTree = "<group>"; };
+		71A4480A26B2CA21005D917B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		71C47D0F263DAAB300C979D9 /* selfCare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = selfCare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71C47D12263DAAB300C979D9 /* selfCareApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selfCareApp.swift; sourceTree = "<group>"; };
 		71C47D14263DAAB300C979D9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -60,6 +74,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		71A4480326B2CA21005D917B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		71C47D0C263DAAB300C979D9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -151,10 +172,20 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		71A4480726B2CA21005D917B /* selfCareTests */ = {
+			isa = PBXGroup;
+			children = (
+				71A4480826B2CA21005D917B /* selfCareTests.swift */,
+				71A4480A26B2CA21005D917B /* Info.plist */,
+			);
+			path = selfCareTests;
+			sourceTree = "<group>";
+		};
 		71C47D06263DAAB300C979D9 = {
 			isa = PBXGroup;
 			children = (
 				71C47D11263DAAB300C979D9 /* selfCare */,
+				71A4480726B2CA21005D917B /* selfCareTests */,
 				71C47D10263DAAB300C979D9 /* Products */,
 				71A09A90265E886200554FC8 /* Frameworks */,
 			);
@@ -164,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				71C47D0F263DAAB300C979D9 /* selfCare.app */,
+				71A4480626B2CA21005D917B /* selfCareTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -193,6 +225,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		71A4480526B2CA21005D917B /* selfCareTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 71A4480D26B2CA21005D917B /* Build configuration list for PBXNativeTarget "selfCareTests" */;
+			buildPhases = (
+				71A4480226B2CA21005D917B /* Sources */,
+				71A4480326B2CA21005D917B /* Frameworks */,
+				71A4480426B2CA21005D917B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				71A4480C26B2CA21005D917B /* PBXTargetDependency */,
+			);
+			name = selfCareTests;
+			productName = selfCareTests;
+			productReference = 71A4480626B2CA21005D917B /* selfCareTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		71C47D0E263DAAB300C979D9 /* selfCare */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 71C47D1E263DAAB800C979D9 /* Build configuration list for PBXNativeTarget "selfCare" */;
@@ -224,6 +274,10 @@
 				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
+					71A4480526B2CA21005D917B = {
+						CreatedOnToolsVersion = 12.5.1;
+						TestTargetID = 71C47D0E263DAAB300C979D9;
+					};
 					71C47D0E263DAAB300C979D9 = {
 						CreatedOnToolsVersion = 12.5;
 					};
@@ -248,11 +302,19 @@
 			projectRoot = "";
 			targets = (
 				71C47D0E263DAAB300C979D9 /* selfCare */,
+				71A4480526B2CA21005D917B /* selfCareTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		71A4480426B2CA21005D917B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		71C47D0D263DAAB300C979D9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -265,6 +327,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		71A4480226B2CA21005D917B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				71A4480926B2CA21005D917B /* selfCareTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		71C47D0B263DAAB300C979D9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -293,7 +363,55 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		71A4480C26B2CA21005D917B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 71C47D0E263DAAB300C979D9 /* selfCare */;
+			targetProxy = 71A4480B26B2CA21005D917B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		71A4480E26B2CA21005D917B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 24YMX7WMLR;
+				INFOPLIST_FILE = selfCareTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.taylor.joe.selfCareTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/selfCare.app/selfCare";
+			};
+			name = Debug;
+		};
+		71A4480F26B2CA21005D917B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 24YMX7WMLR;
+				INFOPLIST_FILE = selfCareTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.taylor.joe.selfCareTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/selfCare.app/selfCare";
+			};
+			name = Release;
+		};
 		71C47D1C263DAAB800C979D9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -457,6 +575,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		71A4480D26B2CA21005D917B /* Build configuration list for PBXNativeTarget "selfCareTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				71A4480E26B2CA21005D917B /* Debug */,
+				71A4480F26B2CA21005D917B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		71C47D0A263DAAB300C979D9 /* Build configuration list for PBXProject "selfCare" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

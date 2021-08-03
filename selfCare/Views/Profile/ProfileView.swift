@@ -195,7 +195,7 @@ struct ProfileView: View {
                 .padding(.horizontal)
                 
                 //Middle rectangle
-                Reminder(targetTime: $targetTime, journalTime: $journalTime, profileStore: profileStore, isExpanded: false)
+                Reminder(targetTime: $targetTime, journalTime: $journalTime, profileStore: profileStore, isTargetsExpanded: false, isJournalExpanded: false)
                 
                 ZStack {
                     RoundedRectangle(cornerRadius: 25)
@@ -269,7 +269,7 @@ struct MiddleTitlesModifier: ViewModifier {
     func body(content: Content) -> some View {
         return content
             .multilineTextAlignment(.center)
-            .font(.system(size: 20, weight: .semibold, design: .default))
+            .font(.system(size: 24, weight: .semibold, design: .default))
     }
 }
 
