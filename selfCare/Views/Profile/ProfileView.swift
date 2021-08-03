@@ -196,6 +196,7 @@ struct ProfileView: View {
                 
                 //Middle rectangle
                 Reminder(targetTime: $targetTime, journalTime: $journalTime, profileStore: profileStore, isTargetsExpanded: false, isJournalExpanded: false)
+                    .padding(.horizontal)
                 
                 ZStack {
                     RoundedRectangle(cornerRadius: 25)
@@ -258,6 +259,7 @@ struct TopTitlesModifier: ViewModifier {
     func body(content: Content) -> some View {
         return content
             .font(.system(size: 16, weight: .regular, design: .default))
+            .padding(.vertical, 10)
 //            .scaledToFill()
             .foregroundColor(Color("TextColor")).opacity(0.4)
             .multilineTextAlignment(.center)
