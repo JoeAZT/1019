@@ -96,14 +96,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7110D042264AAE660051CF62 /* Goals */ = {
+		7110D042264AAE660051CF62 /* Targets */ = {
 			isa = PBXGroup;
 			children = (
 				71F5484F263F0CF400325490 /* TargetsView.swift */,
 				712C4DB0269321A800D41738 /* TargetRow.swift */,
 				7110D040264AADAD0051CF62 /* NewTargetView.swift */,
 			);
-			path = Goals;
+			path = Targets;
 			sourceTree = "<group>";
 		};
 		7110D043264AAE7A0051CF62 /* Journal */ = {
@@ -149,7 +149,7 @@
 			children = (
 				7112DCE926A04ACA007CE0D3 /* Links */,
 				7175ADEE269CA32A00DB068C /* Profile */,
-				7110D042264AAE660051CF62 /* Goals */,
+				7110D042264AAE660051CF62 /* Targets */,
 				7110D043264AAE7A0051CF62 /* Journal */,
 				7110D044264AAE8D0051CF62 /* Home */,
 			);

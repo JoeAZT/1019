@@ -15,7 +15,7 @@ struct TargetRow: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10)
-                .frame(width: 380, height: isExpanded ? 200 : 80, alignment: .center)
+                .frame(height: isExpanded ? 200 : 80, alignment: .center)
                 .foregroundColor(Color("ModeColor"))
                 .applyShadow()
             HStack {

@@ -32,7 +32,7 @@ struct CircleGraphic: View {
                     
                     VStack {
                         Text(String(format: "%.1f", rating))
-                            .font(.system(size: 50))
+                            .font(.system(size: 40))
                             .foregroundColor(.white)
                             .shadow(color: .black.opacity(0.3), radius: 3, x: 0, y: 3)
                     }
@@ -45,8 +45,8 @@ struct CircleGraphic: View {
                         .animation(Animation.easeInOut(duration: 2.0))
                         .rotationEffect(.degrees(-90))
                 }
-                .padding()
-                .padding(.bottom, 5)
+//                .padding(15)
+                .padding(.bottom, 20)
             }
         }
     }
