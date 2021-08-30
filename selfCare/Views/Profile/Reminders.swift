@@ -17,143 +17,111 @@ struct Reminder: View {
     @State var isTargetsExpanded: Bool
     @State var isJournalExpanded: Bool
     
+    let onTapSaveTargetTime: () -> Void
+    let onTapSaveJournalTime: () -> Void
+    
     var body: some View {
         
         VStack {
-            ZStack {
-                RoundedRectangle(cornerRadius: 25)
-                    .foregroundColor(Color("ModeColor"))
-                    .applyShadow()
-                
-                VStack {
-                    if isTargetsExpanded == false {
-                        HStack {
-                            Text("Targets Reminder:")
-                                .applyMiddleTitleStyle()
-                            Text(profileStore.dateConverter(input: targetTime))
-                                .applyMiddleTitleStyle()
-                        }
-                        .padding(.vertical, 20)
-                        
-                        .onTapGesture {
-                            if isTargetsExpanded == true {
-                                isTargetsExpanded = false
-                            } else {
-                                isTargetsExpanded = true
-                            }
+            VStack {
+                if isTargetsExpanded == false {
+                    HStack {
+                        Text("Targets Reminder:")
+                            .applyAntiTopTitleStyle()
+                        Spacer()
+                        Text(profileStore.dateConverter(input: targetTime))
+                            .applyMiddleTitleStyle()
+                    }
+                    .onTapGesture {
+                        if isTargetsExpanded == true {
+                            isTargetsExpanded = false
+                        } else {
+                            isTargetsExpanded = true
                         }
                     }
-                    
-                    
-                    if isTargetsExpanded == true {
-                        VStack {
-                            HStack {
-                                Text("Targets Reminder:")
-                                    .applyMiddleTitleStyle()
-                                DatePicker("", selection: $targetTime, displayedComponents: .hourAndMinute)
-                                    .labelsHidden()
-                            }
-                            
-                            HStack {
-                                Button(action: {
-                                    isTargetsExpanded = false
-                                    
-                                }, label: {
-                                    Text("Cancel")
-                                        .font(.system(size: 15, weight: .bold))
-                                        .foregroundColor(.white)
-                                        .padding(.horizontal, 30)
-                                        .padding(10)
-                                        .background(Color.pink)
-                                        .cornerRadius(10)
-                                })
-                                Button(action: {
-                                    isTargetsExpanded = false
-                                    
-                                    
-                                }, label: {
-                                    Text("Done")
-                                        .font(.system(size: 15, weight: .bold))
-                                        .foregroundColor(.white)
-                                        .padding(.horizontal, 30)
-                                        .padding(10)
-                                        .background(LinearGradient(gradient: Gradient(colors: [Color .blue, .purple]), startPoint: .leading, endPoint: .trailing))
-                                        .cornerRadius(10)
-                                })
-                            }
+                }
+                
+                
+                if isTargetsExpanded == true {
+                    VStack {
+                        HStack {
+                            Text("Targets Reminder:")
+                                .applyAntiTopTitleStyle()
+                            Spacer()
+                            Button(action: {
+                                isTargetsExpanded = false
+                                
+                            }, label: {
+                                Image(systemName: "multiply.square.fill")
+                                    .font(.system(size: 25, weight: .bold))
+                                    .foregroundColor(Color.pink)
+                            })
+                            Button(action: {
+                                isTargetsExpanded = false
+                                
+                                onTapSaveTargetTime()
+                            }, label: {
+                                Image(systemName: "checkmark.square.fill")
+                                    .font(.system(size: 25, weight: .bold))
+                                    .foregroundColor(Color.green)
+                            })
+                            DatePicker("", selection: $targetTime, displayedComponents: .hourAndMinute)
+                                .labelsHidden()
                         }
-                        .padding()
                     }
                 }
             }
             
-            ZStack {
-                RoundedRectangle(cornerRadius: 25)
-                    .foregroundColor(Color("ModeColor"))
-                    .applyShadow()
-                
-                VStack {
-                    if isJournalExpanded == false {
-                        HStack {
-                            Text("Targets Reminder:")
-                                .applyMiddleTitleStyle()
-                            Text(profileStore.dateConverter(input: journalTime))
-                                .applyMiddleTitleStyle()
-                        }
-                        .padding(.vertical, 20)
-                        
-                        .onTapGesture {
-                            if isJournalExpanded == true {
-                                isJournalExpanded = false
-                            } else {
-                                isJournalExpanded = true
-                            }
+            VStack {
+                if isJournalExpanded == false {
+                    HStack {
+                        Text("Targets Reminder:")
+                            .applyAntiTopTitleStyle()
+                        Spacer()
+                        Text(profileStore.dateConverter(input: journalTime))
+                            .applyMiddleTitleStyle()
+                    }
+                    .onTapGesture {
+                        if isJournalExpanded == true {
+                            isJournalExpanded = false
+                        } else {
+                            isJournalExpanded = true
                         }
                     }
-                    
-                    
-                    if isJournalExpanded == true {
-                        VStack {
-                            HStack {
-                                Text("Targets Reminder:")
-                                    .applyMiddleTitleStyle()
-                                DatePicker("", selection: $journalTime, displayedComponents: .hourAndMinute)
-                                    .labelsHidden()
-                            }
-                            
-                            HStack {
-                                Button(action: {
-                                    isJournalExpanded = false
-                                    
-                                }, label: {
-                                    Text("Cancel")
-                                        .font(.system(size: 15, weight: .bold))
-                                        .foregroundColor(.white)
-                                        .padding(.horizontal, 30)
-                                        .padding(10)
-                                        .background(Color.pink)
-                                        .cornerRadius(10)
-                                })
-                                Button(action: {
-                                    isTargetsExpanded = false
-                                    
-                                    
-                                }, label: {
-                                    Text("Done")
-                                        .font(.system(size: 15, weight: .bold))
-                                        .foregroundColor(.white)
-                                        .padding(.horizontal, 30)
-                                        .padding(10)
-                                        .background(LinearGradient(gradient: Gradient(colors: [Color .blue, .purple]), startPoint: .leading, endPoint: .trailing))
-                                        .cornerRadius(10)
-                                })
-                            }
+                }
+                 
+                
+                if isJournalExpanded == true {
+                    VStack {
+                        HStack {
+                            Text("Targets Reminder:")
+                                .applyAntiTopTitleStyle()
+                            Spacer()
+                            Button(action: {
+                                isJournalExpanded = false
+                                
+                            }, label: {
+                                Image(systemName: "multiply.square.fill")
+                                    .font(.system(size: 25, weight: .bold))
+                                    .foregroundColor(Color.pink)
+                            })
+                            Button(action: {
+                                isJournalExpanded = false
+                                
+                                onTapSaveJournalTime()
+                            }, label: {
+                                Image(systemName: "checkmark.square.fill")
+                                    .font(.system(size: 25, weight: .bold))
+                                    .foregroundColor(Color.green)
+                            })
+                            DatePicker("", selection: $journalTime, displayedComponents: .hourAndMinute)
+                                .labelsHidden()
                         }
-                        .padding()
                     }
                 }
             }
         }
+        .padding(.horizontal, 30)
     }
 }
 

@@ -63,7 +63,12 @@ class CacheStorageManager {
     }()
     
     func saveProfile(_ profile: Profile) {
-            try? profileStorage.setObject(profile, forKey: "profile")
+        do {
+            try profileStorage.setObject(profile, forKey: "profile")
+        } catch {
+            print(error)
+        }
+            
     }
     
     func getProfile() -> Profile? {

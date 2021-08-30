@@ -23,14 +23,18 @@ struct ProfileView: View {
     @ObservedObject var weeklyGoalStore: WeeklyGoalStore
     @ObservedObject var profileStore: ProfileStore
     @State var nameExpand = false
-    @State var hasChanges = false
+    
+    var hasChanges: Bool {
+        return inputImage != nil || targetTime != profileStore.profile?.targetTime || journalTime != profileStore.profile?.journalTime || nameText != profileStore.profile?.name
+    }
     @State var lightMode = true
     @AppStorage("isDarkMode") private var isDarkMode = false
     
     @State var targetTime: Date
     @State var journalTime: Date
     
-    init(entryStore: EntryStore, longTermGoalStore: LongTermGoalStore, dailyGoalStore: DailyGoalStore, weeklyGoalStore: WeeklyGoalStore, profileStore: ProfileStore) {
+    init(entryStore: EntryStore, longTermGoalStore: LongTermGoalStore, dailyGoalStore: DailyGoalStore, weeklyGoalStore: WeeklyGoalStore, profileStore: ProfileStore
+    ) {
         self.entryStore = entryStore
         self.longTermGoalStore = longTermGoalStore
         self.dailyGoalStore = dailyGoalStore
@@ -46,38 +50,44 @@ struct ProfileView: View {
         self._journalTime = State(initialValue: profileStore.profile?.journalTime ?? Date())
     }
     
+    func saveProfile(_ shouldDismiss: Bool = false) {
+        guard hasChanges else {
+            if shouldDismiss {
+                self.presentationMode.wrappedValue.dismiss()
+            }
+            return
+        }
+        
+        let profile = Profile(profilePicture:image?.pngData(), name: nameText, targetTime: targetTime, journalTime: journalTime)
+        profileStore.updateProfile(profile)
+        if shouldDismiss {
+            self.presentationMode.wrappedValue.dismiss()
+        }
+        
+    }
+    
     var body: some View {
         
         let circleSize = CGFloat(150)
         
-        ScrollView {
         VStack {
             HStack {
                 Button(action: {
-                    if let data = image?.pngData() {
-                        let profile = Profile(profilePicture: data, name: nameText, targetTime: targetTime, journalTime: journalTime)
-                        profileStore.updateProfile(profile)
-                        self.presentationMode.wrappedValue.dismiss()
-                    }
-                    guard hasChanges else {
-                        self.presentationMode.wrappedValue.dismiss()
-                        return
-                    }
+                    saveProfile(true)
                     
                 }, label: {
                     Image(systemName: "chevron.left.circle.fill")
                         .padding()
                         .font(.system(size: 30))
-                        .foregroundColor(Color("TextColor"))
+                        .foregroundColor(Color("ModeColor"))
                         .applyShadow()
                 })
                 Spacer()
                 
                 Text("Profile")
                     .fontWeight(.semibold)
-                    .foregroundColor(Color("TextColor"))
+                    .foregroundColor(Color("ModeColor"))
                     .font(.title)
-                
                 Spacer()
                 
                 Button(action: {
@@ -91,155 +101,107 @@ struct ProfileView: View {
                 }, label: {
                     Image(systemName: isDarkMode ? "sun.max.fill" : "moon.fill")
                         .font(.system(size: 30))
-                        .foregroundColor(Color("TextColor"))
+                        .foregroundColor(Color("ModeColor"))
                         .padding()
                 })
                 .applyShadow()
             }
-                Group {
-                    if let image = image {
-                        Image(uiImage: image)
-                            .resizable()
-                            .scaledToFit()
-                            .clipShape(Circle())
+            
+            //Profile image / Image picker
+            Group {
+                if let image = image {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                        .clipShape(Circle())
+                        .frame(minWidth: circleSize, idealWidth: circleSize, maxWidth: circleSize, minHeight: circleSize, idealHeight: circleSize, maxHeight: circleSize, alignment: .center)
+                } else {
+                    ZStack {
+                        Circle()
                             .frame(minWidth: circleSize, idealWidth: circleSize, maxWidth: circleSize, minHeight: circleSize, idealHeight: circleSize, maxHeight: circleSize, alignment: .center)
-                    } else {
-                        ZStack {
-                            Circle()
-                                .frame(minWidth: circleSize, idealWidth: circleSize, maxWidth: circleSize, minHeight: circleSize, idealHeight: circleSize, maxHeight: circleSize, alignment: .center)
-                                .foregroundColor(Color("TextColor").opacity(0.4))
-                                .applyShadow()
-                                .padding()
-                            
-                            Text("Tap here to add profile picture")
-                                .multilineTextAlignment(.center)
-                                .foregroundColor(Color("ModeColor"))
-                                .font(.system(size: 13, weight: .regular, design: .default))
-                                .frame(width: 100, height: 50, alignment: .center)
-                        }
-                    }
-                }
-                .onTapGesture {
-                    self.showingImagePicker = true
-                }
-                
-                VStack {
-                    if nameExpand == false {
-                        Text(nameText == "" ? "Add Your Name" : nameText)
-                            .font(.system(size: 40, weight: .semibold, design: .default))
-                            .onTapGesture {
-                                nameExpand = true
-                            }
-                    } else {
-                        HStack {
-                            TextViewWrapper(text: $nameText)
-                                .frame(height: 40, alignment: .center)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .stroke(Color("TextColor"), lineWidth: 4).opacity(0.4)
-                                )
-                            Button(action: {
-                                nameExpand = false
-                                if let data = image?.pngData() {
-                                    let profile = Profile(profilePicture: data, name: nameText, targetTime: targetTime, journalTime: journalTime)
-                                    profileStore.updateProfile(profile)
-                                }
-                                
-                            }, label: {
-                                Text("Done")
-                                    .font(.system(size: 12, weight: .bold))
-                                    .foregroundColor(.white)
-                                    .padding()
-                                    .background(LinearGradient(gradient: Gradient(colors: [Color .blue, .pink]), startPoint: .leading, endPoint: .trailing))
-                                    .cornerRadius(15)
-                            })
-                        }
-                        .padding()
-                        .padding(.horizontal, 10)
-                    }
-                }
-                
-                //Top rectangle
-                ZStack {
-                    RoundedRectangle(cornerRadius: 25)
-                        .foregroundColor(Color("ModeColor"))
-                        .applyShadow()
-                    
-                    HStack {
-                        VStack {
-                            Text("Journal Entries:")
-                                .applyTopTitleStyle()
-                            Text("\(entryStore.entries.count)")
-                                .font(.system(size: 50, weight: .semibold, design: .default))
-                        }
-                        .padding(10)
+                            .foregroundColor(Color("TextColor").opacity(0.4))
+                            .applyShadow()
+                            .padding()
                         
-                        VStack {
-                            Text("Consecutive active days:")
-                                .applyTopTitleStyle()
-                            Text(String(entryStore.conseqEntries()))
-                                .font(.system(size: 50, weight: .semibold, design: .default))
-                        }
-                        .padding(10)
-                        
-                        VStack {
-                            Text("Goals Completed:")
-                                .applyTopTitleStyle()
-                            let totalTargetCount = longTermGoalStore.goals.count + dailyGoalStore.goals.count + weeklyGoalStore.goals.count
-                            Text("\(totalTargetCount)")
-                                .font(.system(size: 50, weight: .semibold, design: .default))
-                        }
-                        .padding(10)
+                        Text("Tap here to add profile picture")
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(Color("ModeColor"))
+                            .font(.system(size: 13, weight: .regular, design: .default))
+                            .frame(width: 100, height: 50, alignment: .center)
                     }
                 }
-                .padding(.horizontal)
-                
-                //Middle rectangle
-                Reminder(targetTime: $targetTime, journalTime: $journalTime, profileStore: profileStore, isTargetsExpanded: false, isJournalExpanded: false)
-                    .padding(.horizontal)
-                
-                ZStack {
-                    RoundedRectangle(cornerRadius: 25)
-                        .foregroundColor(Color("ModeColor"))
-                        .applyShadow()
-                    
-                    //Bottom rectangle
-                    HStack {
-                        VStack {
-                            Text("Your latest rating:")
-                                .applyBottomTitleStyle()
-                            Text(String(format: "%.1f", entryStore.todaysEntry()?.rating ?? 0))
-                                .font(.system(size: 60, weight: .semibold, design: .default))
-                        }
-                        
-                        VStack {
-                            Text("Your latest mood:")
-                                .applyBottomTitleStyle()
-                            Text("\(entryStore.todaysEntry()?.mood.rawValue ?? "?")")
-                                .font(.system(size: 60, weight: .semibold, design: .default))
-                        }
-                    }
-                    .padding()
-                }
-                .padding(.horizontal)
             }
-            .preferredColorScheme(isDarkMode ? .dark : .light)
-            .navigationBarTitle("Pick a photo")
-            .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
-                ImagePicker(image: self.$inputImage)
+            .onTapGesture {
+                self.showingImagePicker = true
+            }
+            
+            VStack {
+                if nameExpand == false {
+                    Text(nameText == "" ? "Add Your Name" : nameText)
+                        .font(.system(size: 40, weight: .semibold, design: .default))
+                        .foregroundColor(Color("ModeColor"))
+                        .onTapGesture {
+                            nameExpand = true
+                        }
+                } else {
+                    HStack {
+                        TextViewWrapper(text: $nameText)
+                            .frame(height: 45, alignment: .center)
+                            .cornerRadius(10)
+                        
+                        Button(action: {
+                            nameExpand = false
+//                            if let data = image?.pngData() {
+//                                let profile = Profile(profilePicture: data, name: nameText, targetTime: targetTime, journalTime: journalTime)
+//                                profileStore.updateProfile(profile)
+//                            }
+                            saveProfile()
+                            
+                        }, label: {
+                            Text("Done")
+                                .font(.system(size: 12, weight: .bold))
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(Color.green)
+                                .cornerRadius(10)
+                        })
+                    }
+                    .padding(.horizontal, 10)
+                }
+                
+                //Main Card with stats
+                StatsView(
+                    targetTime: $targetTime,
+                    journalTime: $journalTime,
+                    profileStore: profileStore,
+                    entryStore: entryStore,
+                    longTermGoalStore: longTermGoalStore,
+                    dailyGoalStore: dailyGoalStore,
+                    weeklyGoalStore: weeklyGoalStore,
+                    onTapSaveTargetTime: {
+                        saveProfile()
+                    },
+                    onTapSaveJournalTime: {
+                        saveProfile()
+                    }
+                )
+                .ignoresSafeArea()
             }
         }
+        .preferredColorScheme(isDarkMode ? .dark : .light)
+        .navigationBarTitle("Pick a photo")
+        .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
+            ImagePicker(image: self.$inputImage)
+        }
+        .background(LinearGradient(gradient: Gradient(colors: [Color .blue, .pink]), startPoint: .topLeading, endPoint: .trailing))
     }
-    
     
     func loadImage() {
         guard let inputImage = inputImage else { return }
         image = inputImage
-        hasChanges = true
     }
-    
 }
-        
+
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
@@ -258,12 +220,20 @@ struct shadowModifier: ViewModifier {
 struct TopTitlesModifier: ViewModifier {
     func body(content: Content) -> some View {
         return content
-            .font(.system(size: 16, weight: .regular, design: .default))
+            .font(.system(size: 14, weight: .regular, design: .default))
             .padding(.vertical, 10)
-//            .scaledToFill()
             .foregroundColor(Color("TextColor")).opacity(0.4)
             .multilineTextAlignment(.center)
-            .frame(width: 100)
+    }
+}
+
+struct AntiTopTitlesModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        return content
+            .font(.system(size: 14, weight: .regular, design: .default))
+            .padding(.vertical, 10)
+            .foregroundColor(Color("ModeColor")).opacity(0.4)
+            .multilineTextAlignment(.center)
     }
 }
 
@@ -292,8 +262,14 @@ extension View {
 }
 
 extension View {
-    func applyTopTitleStyle() -> some View {
+    func applyAntiTopTitleStyle() -> some View {
         return self.modifier(TopTitlesModifier())
+    }
+}
+
+extension View {
+    func applyTopTitleStyle() -> some View {
+        return self.modifier(AntiTopTitlesModifier())
     }
 }
 

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Profile: Codable {
-    let profilePicture: Data
+    let profilePicture: Data?
     var name: String
     let targetTime: Date?
     let journalTime: Date?

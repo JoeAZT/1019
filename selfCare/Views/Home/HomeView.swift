@@ -39,6 +39,7 @@ struct HomeView: View {
                         .shadow(color: .black.opacity(0.4), radius: 3, x: 0, y: 3)
                 })
                 .sheet(isPresented: $showProfileView, content: {
+
                     ProfileView(entryStore: entryStore, longTermGoalStore: longTermGoalStore, dailyGoalStore: dailyGoalStore, weeklyGoalStore: weeklyGoalStore, profileStore: profileStore)
                 })
                 
