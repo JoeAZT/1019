@@ -24,11 +24,34 @@ struct TargetsView: View {
         //Empty goal list placeholder
         if dailyGoalStore.goals.isEmpty == true && weeklyGoalStore.goals.isEmpty == true && longTermGoalStore.goals.isEmpty == true {
             VStack {
+                HStack {
+                    Button(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Image(systemName: "chevron.left.circle.fill")
+                            .padding()
+                            .font(.system(size: 30))
+                            .foregroundColor(Color("TextColor"))
+                            .applyShadow()
+                    }
+                    Spacer()
+                    
                     Text("Targets")
                         .fontWeight(.semibold)
                         .foregroundColor(Color("TextColor"))
                         .font(.title)
                         .padding()
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                    }) {
+                        Image(systemName: "chevron.left.circle.fill")
+                            .padding()
+                            .font(.system(size: 30))
+                            .foregroundColor(Color("TextColor")).opacity(0)
+                    }
+                }
                 
                 Spacer()
                 
@@ -63,11 +86,34 @@ struct TargetsView: View {
             .preferredColorScheme(isDarkMode ? .dark : .light)
         } else {
             VStack {
-                Text("Targets")
-                    .fontWeight(.semibold)
-                    .foregroundColor(Color("TextColor"))
-                    .font(.title)
-                    .padding()
+                HStack {
+                    Button(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Image(systemName: "chevron.left.circle.fill")
+                            .padding()
+                            .font(.system(size: 30))
+                            .foregroundColor(Color("TextColor"))
+                            .applyShadow()
+                    }
+                    Spacer()
+                    
+                    Text("Targets")
+                        .fontWeight(.semibold)
+                        .foregroundColor(Color("TextColor"))
+                        .font(.title)
+                        .padding()
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                    }) {
+                        Image(systemName: "chevron.left.circle.fill")
+                            .padding()
+                            .font(.system(size: 30))
+                            .foregroundColor(Color("TextColor")).opacity(0)
+                    }
+                }
                 
                 VStack {
                     ZStack {

@@ -10,6 +10,8 @@ import IrregularGradient
 
 struct NewEntryView: View {
     
+    @Environment(\.presentationMode) var presentationMode
+    
     @State var ratingSlider: Double = 0.0
     @State var reflectionText: String = ""
     @State var happyText: String = ""
@@ -29,16 +31,39 @@ struct NewEntryView: View {
     @AppStorage("isDarkMode") private var isDarkMode = false
     
     var body: some View {
-    
+        
         VStack {
-            
-            //Screen Title
-            Text("New Entry")
-                .fontWeight(.semibold)
-                .foregroundColor(Color("TextColor"))
-                .font(.title)
-                .padding()
+            HStack {
                 
+                Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                }) {
+                    Image(systemName: "chevron.left.circle.fill")
+                        .padding()
+                        .font(.system(size: 30))
+                        .foregroundColor(Color("TextColor"))
+                        .applyShadow()
+                }
+                
+                Spacer()
+                
+                //Screen Title
+                Text("New Entry")
+                    .fontWeight(.semibold)
+                    .foregroundColor(Color("TextColor"))
+                    .font(.title)
+                    .padding()
+                
+                Spacer()
+                
+                Button(action: {
+                }) {
+                    Image(systemName: "chevron.left.circle.fill")
+                        .padding()
+                        .font(.system(size: 30))
+                        .foregroundColor(Color("TextColor")).opacity(0)
+                }
+            }
             
             ScrollView {
                 

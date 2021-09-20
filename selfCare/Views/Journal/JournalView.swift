@@ -10,6 +10,8 @@ import IrregularGradient
 
 struct JournalView: View {
     
+    @Environment(\.presentationMode) var presentationMode
+    
     @ObservedObject var entryStore: EntryStore
     @State private var showNewEntryView = false
     @State var expandedEntry: String?
@@ -18,11 +20,36 @@ struct JournalView: View {
     var body: some View {
         
         VStack {
-            Text("Journal")
-                .fontWeight(.semibold)
-                .foregroundColor(Color("TextColor"))
-                .font(.title)
-                .padding()
+            HStack {
+                
+                Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                }) {
+                    Image(systemName: "chevron.left.circle.fill")
+                        .padding()
+                        .font(.system(size: 30))
+                        .foregroundColor(Color("TextColor"))
+                        .applyShadow()
+                }
+                
+                Spacer()
+                
+                Text("Journal")
+                    .fontWeight(.semibold)
+                    .foregroundColor(Color("TextColor"))
+                    .font(.title)
+                    .padding()
+                
+                Spacer()
+                
+                Button(action: {
+                }) {
+                    Image(systemName: "chevron.left.circle.fill")
+                        .padding()
+                        .font(.system(size: 30))
+                        .foregroundColor(Color("TextColor")).opacity(0)
+                }
+            }
             
             List {
                 ForEach(entryStore.sortedEntries) { entry in
@@ -40,13 +67,12 @@ struct JournalView: View {
                                 
                                 VStack(alignment: .leading) {
                                     Text(entry.date, style: .date)
-                                        .font(.system(size: 15, weight: .medium, design: .default))
+                                        .font(.system(size: 12, weight: .medium, design: .default))
                                     HStack {
                                         Text("Rating: \(entry.ratingString)")
                                             .font(.system(size: 17, weight: .bold, design: .default))
                                             .scaledToFill()
                                     }
-//                                    .padding(.vertical, 1)
                                 }
                                 .padding(.horizontal, 8)
                                 

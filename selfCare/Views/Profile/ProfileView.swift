@@ -63,12 +63,11 @@ struct ProfileView: View {
         if shouldDismiss {
             self.presentationMode.wrappedValue.dismiss()
         }
-        
     }
     
     var body: some View {
         
-        let circleSize = CGFloat(150)
+        let circleSize = CGFloat(230)
         
         VStack {
             HStack {
@@ -119,9 +118,8 @@ struct ProfileView: View {
                     ZStack {
                         Circle()
                             .frame(minWidth: circleSize, idealWidth: circleSize, maxWidth: circleSize, minHeight: circleSize, idealHeight: circleSize, maxHeight: circleSize, alignment: .center)
-                            .foregroundColor(Color("TextColor").opacity(0.4))
+                            .foregroundColor(Color("ModeColor").opacity(0.4))
                             .applyShadow()
-                            .padding()
                         
                         Text("Tap here to add profile picture")
                             .multilineTextAlignment(.center)
@@ -151,10 +149,10 @@ struct ProfileView: View {
                         
                         Button(action: {
                             nameExpand = false
-//                            if let data = image?.pngData() {
-//                                let profile = Profile(profilePicture: data, name: nameText, targetTime: targetTime, journalTime: journalTime)
-//                                profileStore.updateProfile(profile)
-//                            }
+                            //                            if let data = image?.pngData() {
+                            //                                let profile = Profile(profilePicture: data, name: nameText, targetTime: targetTime, journalTime: journalTime)
+                            //                                profileStore.updateProfile(profile)
+                            //                            }
                             saveProfile()
                             
                         }, label: {
@@ -187,13 +185,14 @@ struct ProfileView: View {
                 )
                 .ignoresSafeArea()
             }
+            .preferredColorScheme(isDarkMode ? .dark : .light)
+            .navigationBarTitle("Pick a photo")
+            .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
+                ImagePicker(image: self.$inputImage)
+            }
+            
         }
-        .preferredColorScheme(isDarkMode ? .dark : .light)
-        .navigationBarTitle("Pick a photo")
-        .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
-            ImagePicker(image: self.$inputImage)
-        }
-        .background(LinearGradient(gradient: Gradient(colors: [Color .blue, .pink]), startPoint: .topLeading, endPoint: .trailing))
+        .background(LinearGradient(gradient: Gradient(colors: [Color .blue, .pink]), startPoint: .topLeading, endPoint: .trailing).ignoresSafeArea())
     }
     
     func loadImage() {
@@ -220,19 +219,9 @@ struct shadowModifier: ViewModifier {
 struct TopTitlesModifier: ViewModifier {
     func body(content: Content) -> some View {
         return content
-            .font(.system(size: 14, weight: .regular, design: .default))
+            .font(.system(size: 16, weight: .regular, design: .default))
             .padding(.vertical, 10)
-            .foregroundColor(Color("TextColor")).opacity(0.4)
-            .multilineTextAlignment(.center)
-    }
-}
-
-struct AntiTopTitlesModifier: ViewModifier {
-    func body(content: Content) -> some View {
-        return content
-            .font(.system(size: 14, weight: .regular, design: .default))
-            .padding(.vertical, 10)
-            .foregroundColor(Color("ModeColor")).opacity(0.4)
+            .foregroundColor(Color("ModeColor"))
             .multilineTextAlignment(.center)
     }
 }
@@ -250,7 +239,7 @@ struct BottomTitlesModifier: ViewModifier {
         return content
             .multilineTextAlignment(.center)
             .font(.system(size: 16, weight: .regular, design: .default))
-            .foregroundColor(Color("TextColor")).opacity(0.4)
+            .foregroundColor(Color("ModeColor")).opacity(0.4)
             .padding(5)
     }
 }
@@ -262,14 +251,8 @@ extension View {
 }
 
 extension View {
-    func applyAntiTopTitleStyle() -> some View {
-        return self.modifier(TopTitlesModifier())
-    }
-}
-
-extension View {
     func applyTopTitleStyle() -> some View {
-        return self.modifier(AntiTopTitlesModifier())
+        return self.modifier(TopTitlesModifier())
     }
 }
 

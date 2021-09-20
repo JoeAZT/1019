@@ -27,7 +27,7 @@ struct Reminder: View {
                 if isTargetsExpanded == false {
                     HStack {
                         Text("Targets Reminder:")
-                            .applyAntiTopTitleStyle()
+                            .applyTopTitleStyle()
                         Spacer()
                         Text(profileStore.dateConverter(input: targetTime))
                             .applyMiddleTitleStyle()
@@ -46,7 +46,7 @@ struct Reminder: View {
                     VStack {
                         HStack {
                             Text("Targets Reminder:")
-                                .applyAntiTopTitleStyle()
+                                .applyTopTitleStyle()
                             Spacer()
                             Button(action: {
                                 isTargetsExpanded = false
@@ -54,7 +54,7 @@ struct Reminder: View {
                             }, label: {
                                 Image(systemName: "multiply.square.fill")
                                     .font(.system(size: 25, weight: .bold))
-                                    .foregroundColor(Color.pink)
+                                    .foregroundColor(Color.purple)
                             })
                             Button(action: {
                                 isTargetsExpanded = false
@@ -70,13 +70,13 @@ struct Reminder: View {
                         }
                     }
                 }
-            }
+            }.foregroundColor(Color("ModeColor"))
             
             VStack {
                 if isJournalExpanded == false {
                     HStack {
                         Text("Targets Reminder:")
-                            .applyAntiTopTitleStyle()
+                            .applyTopTitleStyle()
                         Spacer()
                         Text(profileStore.dateConverter(input: journalTime))
                             .applyMiddleTitleStyle()
@@ -95,7 +95,7 @@ struct Reminder: View {
                     VStack {
                         HStack {
                             Text("Targets Reminder:")
-                                .applyAntiTopTitleStyle()
+                                .applyTopTitleStyle()
                             Spacer()
                             Button(action: {
                                 isJournalExpanded = false
@@ -103,7 +103,7 @@ struct Reminder: View {
                             }, label: {
                                 Image(systemName: "multiply.square.fill")
                                     .font(.system(size: 25, weight: .bold))
-                                    .foregroundColor(Color.pink)
+                                    .foregroundColor(Color.purple)
                             })
                             Button(action: {
                                 isJournalExpanded = false
@@ -119,7 +119,7 @@ struct Reminder: View {
                         }
                     }
                 }
-            }
+            }.foregroundColor(Color("ModeColor"))
         }
         .padding(.horizontal, 30)
     }

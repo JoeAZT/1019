@@ -10,6 +10,7 @@ import IrregularGradient
 
 struct NewTargetView: View {
     
+    @Environment(\.presentationMode) var presentationMode
     @State var goalText: String = ""
     @State var titleText: String = ""
     @Binding var showGoalView: Bool
@@ -23,13 +24,38 @@ struct NewTargetView: View {
     var body: some View {
         
         VStack {
-            //Screen Title
-            Text("New Target")
-                .fontWeight(.semibold)
-                .foregroundColor(Color("TextColor"))
-                .font(.title)
-                .padding()
-                .padding(.bottom, 10)
+            
+            HStack {
+                
+                Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                }) {
+                    Image(systemName: "chevron.left.circle.fill")
+                        .padding()
+                        .font(.system(size: 30))
+                        .foregroundColor(Color("TextColor"))
+                        .applyShadow()
+                }
+                Spacer()
+                
+                //Screen Title
+                Text("New Target")
+                    .fontWeight(.semibold)
+                    .foregroundColor(Color("TextColor"))
+                    .font(.title)
+                    .padding()
+                
+                Spacer()
+                
+                Button(action: {
+                }) {
+                    Image(systemName: "chevron.left.circle.fill")
+                        .padding()
+                        .font(.system(size: 30))
+                        .foregroundColor(Color("TextColor")).opacity(0)
+                }
+            }
+            
             
             ScrollView {
                 
