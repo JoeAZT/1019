@@ -31,6 +31,9 @@ struct Reminder: View {
                         Spacer()
                         Text(profileStore.dateConverter(input: targetTime))
                             .applyMiddleTitleStyle()
+                        Image(systemName: "pencil.circle.fill")
+                            .font(.system(size: 24, weight: .semibold, design: .default))
+                            .foregroundColor(Color("ModeColor"))
                     }
                     .onTapGesture {
                         if isTargetsExpanded == true {
@@ -75,11 +78,14 @@ struct Reminder: View {
             VStack {
                 if isJournalExpanded == false {
                     HStack {
-                        Text("Targets Reminder:")
+                        Text("Jounral Reminder:")
                             .applyTopTitleStyle()
                         Spacer()
                         Text(profileStore.dateConverter(input: journalTime))
                             .applyMiddleTitleStyle()
+                        Image(systemName: "pencil.circle.fill")
+                            .font(.system(size: 24, weight: .semibold, design: .default))
+                            .foregroundColor(Color("ModeColor"))
                     }
                     .onTapGesture {
                         if isJournalExpanded == true {
@@ -94,7 +100,7 @@ struct Reminder: View {
                 if isJournalExpanded == true {
                     VStack {
                         HStack {
-                            Text("Targets Reminder:")
+                            Text("Journal Reminder:")
                                 .applyTopTitleStyle()
                             Spacer()
                             Button(action: {

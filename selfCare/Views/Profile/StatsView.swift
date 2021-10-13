@@ -78,7 +78,7 @@ struct StatsView: View {
                     
                     Spacer()
                     
-                    //Bottom rectangle
+                    //Middle section
                     HStack {
                         Spacer()
                         VStack {
@@ -114,7 +114,7 @@ struct StatsView: View {
                     
                     Spacer()
                     
-                    //Middle rectangle
+                    //Bottom section
                     Reminder(
                         targetTime: $targetTime,
                         journalTime: $journalTime,
