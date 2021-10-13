@@ -67,7 +67,7 @@ struct JournalView: View {
                                 
                                 VStack(alignment: .leading) {
                                     Text(entry.date, style: .date)
-                                        .font(.system(size: 12, weight: .medium, design: .default))
+                                        .font(.system(size: 10, weight: .medium, design: .default))
                                     HStack {
                                         Text("Rating: \(entry.ratingString)")
                                             .font(.system(size: 17, weight: .bold, design: .default))
@@ -75,6 +75,7 @@ struct JournalView: View {
                                     }
                                 }
                                 .padding(.horizontal, 8)
+                                
                                 
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 10)

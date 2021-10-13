@@ -109,13 +109,26 @@ struct ProfileView: View {
             //Profile image / Image picker
             Group {
                 if let image = image {
-                    Image(uiImage: image)
-                        .resizable()
-                        .scaledToFit()
-                        .clipShape(Circle())
-                        .frame(minWidth: circleSize, idealWidth: circleSize, maxWidth: circleSize, minHeight: circleSize, idealHeight: circleSize, maxHeight: circleSize, alignment: .center)
+                    ZStack {
+                        
+                        Image(uiImage: image)
+                            .resizable()
+                            .scaledToFit()
+                            .clipShape(Circle())
+                            .frame(minWidth: circleSize, idealWidth: circleSize, maxWidth: circleSize, minHeight: circleSize, idealHeight: circleSize, maxHeight: circleSize, alignment: .center)
+
+                        
+                        Image(systemName: "plus.circle.fill")
+                            .font(.system(size: 24 , weight: .semibold, design: .default))
+                            .foregroundColor(Color("ModeColor"))
+                            .background(LinearGradient(gradient: Gradient(colors: [Color .blue, .pink]), startPoint: .topLeading, endPoint: .trailing))
+                            .clipShape(Circle())
+                            .padding(.leading, 110)
+                            .padding(.bottom, 110)
+                    }
                 } else {
                     ZStack {
+                        
                         Circle()
                             .frame(minWidth: circleSize, idealWidth: circleSize, maxWidth: circleSize, minHeight: circleSize, idealHeight: circleSize, maxHeight: circleSize, alignment: .center)
                             .foregroundColor(Color("ModeColor").opacity(0.4))
@@ -126,6 +139,7 @@ struct ProfileView: View {
                             .foregroundColor(Color("ModeColor"))
                             .font(.system(size: 13, weight: .regular, design: .default))
                             .frame(width: 100, height: 50, alignment: .center)
+                        
                     }
                 }
             }
@@ -135,12 +149,19 @@ struct ProfileView: View {
             
             VStack {
                 if nameExpand == false {
-                    Text(nameText == "" ? "Add Your Name" : nameText)
-                        .font(.system(size: 40, weight: .semibold, design: .default))
-                        .foregroundColor(Color("ModeColor"))
-                        .onTapGesture {
+                    HStack {
+                        Text(nameText == "" ? "Add Your Name" : nameText)
+                            .font(.system(size: 40, weight: .semibold, design: .default))
+                            .foregroundColor(Color("ModeColor"))
+                        Image(systemName: "pencil.circle.fill")
+                            .font(.system(size: 24, weight: .semibold, design: .default))
+                            .foregroundColor(Color("ModeColor"))
+                            .padding(.top, 5)
+                            .onTapGesture {
                             nameExpand = true
                         }
+                    }
+                    .padding(.leading, 30)
                 } else {
                     HStack {
                         TextViewWrapper(text: $nameText)
@@ -149,10 +170,6 @@ struct ProfileView: View {
                         
                         Button(action: {
                             nameExpand = false
-                            //                            if let data = image?.pngData() {
-                            //                                let profile = Profile(profilePicture: data, name: nameText, targetTime: targetTime, journalTime: journalTime)
-                            //                                profileStore.updateProfile(profile)
-                            //                            }
                             saveProfile()
                             
                         }, label: {
@@ -164,7 +181,7 @@ struct ProfileView: View {
                                 .cornerRadius(10)
                         })
                     }
-                    .padding(.horizontal, 10)
+                    .padding(.horizontal, 30)
                 }
                 
                 //Main Card with stats

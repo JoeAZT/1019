@@ -120,7 +120,8 @@ struct NewTargetView: View {
                                     .opacity(targetType == .weekly ? 1 : 0.5)
                                     .applyShadow()
                                 Button(action: {
-                                        targetType = .weekly                                }, label: {
+                                        targetType = .weekly
+                                }, label: {
                                     Text("Weekly")
                                         .applyButtonModifier()
                                         .padding()
@@ -190,7 +191,6 @@ struct NewTargetView: View {
                     longTermGoallStore.addGoal(goal)
                 }
                 
-            
             }, label: {
                 Text("Complete Entry")
                     .font(.system(size: 20, weight: .bold))

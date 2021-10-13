@@ -45,7 +45,6 @@ struct CircleGraphic: View {
                         .animation(Animation.easeInOut(duration: 2.0))
                         .rotationEffect(.degrees(-90))
                 }
-//                .padding(15)
                 .padding(.bottom, 20)
             }
         }
