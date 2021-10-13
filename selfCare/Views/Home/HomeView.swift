@@ -77,7 +77,6 @@ struct HomeView: View {
                     .foregroundColor(.white)
                 HStack {
                     CircleGraphic(rating: entryStore.average())
-                    
                     FeelingsGraphs(entryStore: entryStore)
                 }
                 .layoutPriority(1)

@@ -17,8 +17,8 @@ struct StatsView: View {
     @ObservedObject var dailyGoalStore: DailyGoalStore
     @ObservedObject var weeklyGoalStore: WeeklyGoalStore
     
-    let onTapSaveTargetTime: () -> Void
-    let onTapSaveJournalTime: () -> Void
+//    let onTapSaveTargetTime: () -> Void
+//    let onTapSaveJournalTime: () -> Void
     
     var body: some View {
         
@@ -114,19 +114,6 @@ struct StatsView: View {
                     
                     Spacer()
                     
-                    //Bottom section
-                    Reminder(
-                        targetTime: $targetTime,
-                        journalTime: $journalTime,
-                        profileStore: profileStore,
-                        isTargetsExpanded: false,
-                        isJournalExpanded: false,
-                        onTapSaveTargetTime: onTapSaveTargetTime,
-                        onTapSaveJournalTime: onTapSaveJournalTime
-                    )
-                    .padding(.horizontal)
-                    
-                    Spacer()
                 }
             }
         }

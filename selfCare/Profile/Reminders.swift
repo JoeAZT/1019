@@ -31,9 +31,6 @@ struct Reminder: View {
                         Spacer()
                         Text(profileStore.dateConverter(input: targetTime))
                             .applyMiddleTitleStyle()
-                        Image(systemName: "pencil.circle.fill")
-                            .font(.system(size: 24, weight: .semibold, design: .default))
-                            .foregroundColor(Color("ModeColor"))
                     }
                     .onTapGesture {
                         if isTargetsExpanded == true {
@@ -43,7 +40,6 @@ struct Reminder: View {
                         }
                     }
                 }
-                
                 
                 if isTargetsExpanded == true {
                     VStack {
@@ -73,7 +69,8 @@ struct Reminder: View {
                         }
                     }
                 }
-            }.foregroundColor(Color("ModeColor"))
+            }
+            .foregroundColor(Color("ModeColor"))
             
             VStack {
                 if isJournalExpanded == false {
@@ -83,9 +80,6 @@ struct Reminder: View {
                         Spacer()
                         Text(profileStore.dateConverter(input: journalTime))
                             .applyMiddleTitleStyle()
-                        Image(systemName: "pencil.circle.fill")
-                            .font(.system(size: 24, weight: .semibold, design: .default))
-                            .foregroundColor(Color("ModeColor"))
                     }
                     .onTapGesture {
                         if isJournalExpanded == true {
@@ -95,7 +89,7 @@ struct Reminder: View {
                         }
                     }
                 }
-                 
+                
                 
                 if isJournalExpanded == true {
                     VStack {
@@ -130,5 +124,3 @@ struct Reminder: View {
         .padding(.horizontal, 30)
     }
 }
-
-
