@@ -20,36 +20,8 @@ struct JournalView: View {
     var body: some View {
         
         VStack {
-            HStack {
-                
-                Button(action: {
-                    presentationMode.wrappedValue.dismiss()
-                }) {
-                    Image(systemName: "chevron.left.circle.fill")
-                        .padding()
-                        .font(.system(size: 30))
-                        .foregroundColor(Color("TextColor"))
-                        .applyShadow()
-                }
-                
-                Spacer()
-                
-                Text("Journal")
-                    .fontWeight(.semibold)
-                    .foregroundColor(Color("TextColor"))
-                    .font(.title)
-                    .padding()
-                
-                Spacer()
-                
-                Button(action: {
-                }) {
-                    Image(systemName: "chevron.left.circle.fill")
-                        .padding()
-                        .font(.system(size: 30))
-                        .foregroundColor(Color("TextColor")).opacity(0)
-                }
-            }
+            
+            TopItemsJournal
             
             List {
                 ForEach(entryStore.sortedEntries) { entry in
@@ -196,5 +168,37 @@ struct JournalView: View {
             NewEntryView(showNewEntryView: $showNewEntryView, entryStore: entryStore)
         }
         .preferredColorScheme(isDarkMode ? .dark : .light)
+    }
+    
+    var TopItemsJournal: some View {
+    HStack {
+        Button(action: {
+            presentationMode.wrappedValue.dismiss()
+        }) {
+            Image(systemName: "chevron.left.circle.fill")
+                .padding()
+                .font(.system(size: 30))
+                .foregroundColor(Color("TextColor"))
+                .applyShadow()
+        }
+        
+        Spacer()
+        
+        Text("Journal")
+            .fontWeight(.semibold)
+            .foregroundColor(Color("TextColor"))
+            .font(.title)
+            .padding()
+        
+        Spacer()
+        
+        Button(action: {
+        }) {
+            Image(systemName: "chevron.left.circle.fill")
+                .padding()
+                .font(.system(size: 30))
+                .foregroundColor(Color("TextColor")).opacity(0)
+        }
+    }
     }
 }

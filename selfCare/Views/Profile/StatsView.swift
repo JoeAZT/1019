@@ -42,6 +42,7 @@ struct StatsView: View {
                         .foregroundColor(Color("ModeColor"))
                         
                         Spacer()
+                        
                         VStack {
                             Text("""
                                 Journal

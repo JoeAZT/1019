@@ -25,65 +25,11 @@ struct NewTargetView: View {
         
         VStack {
             
-            HStack {
-                
-                Button(action: {
-                    presentationMode.wrappedValue.dismiss()
-                }) {
-                    Image(systemName: "chevron.left.circle.fill")
-                        .padding()
-                        .font(.system(size: 30))
-                        .foregroundColor(Color("TextColor"))
-                        .applyShadow()
-                }
-                Spacer()
-                
-                //Screen Title
-                Text("New Target")
-                    .fontWeight(.semibold)
-                    .foregroundColor(Color("TextColor"))
-                    .font(.title)
-                    .padding()
-                
-                Spacer()
-                
-                Button(action: {
-                }) {
-                    Image(systemName: "chevron.left.circle.fill")
-                        .padding()
-                        .font(.system(size: 30))
-                        .foregroundColor(Color("TextColor")).opacity(0)
-                }
-            }
-            
+            TopItemsNewTarget
             
             ScrollView {
                 
-                //Target Title
-                ZStack {
-                    RoundedRectangle(cornerRadius: 10)
-                        .foregroundColor(Color("ModeColor"))
-                        .applyShadow()
-                        .padding(.horizontal, 10)
-                    VStack(alignment: .leading) {
-                        Text("What's your target?")
-                            .fontWeight(.bold)
-                            .foregroundColor(Color("TextColor"))
-                            .padding()
-                        
-                        ZStack(alignment: .leading) {
-                            TextViewWrapper(text: $titleText)
-                                .frame(width: 360, height: 40, alignment: .center)
-                                .cornerRadius(10)
-                                .padding(.horizontal, 10)
-                            if titleText.isEmpty {
-                                Text("My target today is...")
-                                    .opacity(0.4)
-                                    .padding(.all, 20)
-                            }
-                        }
-                    }
-                }
+                TitleAndDescriptionNewTarget
                 .padding(.bottom, 10)
                 
                 //Target Type
@@ -201,6 +147,69 @@ struct NewTargetView: View {
             })
             .preferredColorScheme(isDarkMode ? .dark : .light)
         }
+    
+//MARK: - Top Items: All items at the top of the view are contained here
+    var TopItemsNewTarget: some View {
+    HStack {
+        
+        Button(action: {
+            presentationMode.wrappedValue.dismiss()
+        }) {
+            Image(systemName: "chevron.left.circle.fill")
+                .padding()
+                .font(.system(size: 30))
+                .foregroundColor(Color("TextColor"))
+                .applyShadow()
+        }
+        Spacer()
+        
+        //Screen Title
+        Text("New Target")
+            .fontWeight(.semibold)
+            .foregroundColor(Color("TextColor"))
+            .font(.title)
+            .padding()
+        
+        Spacer()
+        
+        Button(action: {
+        }) {
+            Image(systemName: "chevron.left.circle.fill")
+                .padding()
+                .font(.system(size: 30))
+                .foregroundColor(Color("TextColor")).opacity(0)
+        }
+    }
+    }
+    
+    //MARK: - Target Title and description:
+    var TitleAndDescriptionNewTarget: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 10)
+                .foregroundColor(Color("ModeColor"))
+                .applyShadow()
+                .padding(.horizontal, 10)
+            VStack(alignment: .leading) {
+                Text("What's your target?")
+                    .fontWeight(.bold)
+                    .foregroundColor(Color("TextColor"))
+                    .padding()
+                
+                ZStack(alignment: .leading) {
+                    TextViewWrapper(text: $titleText)
+                        .frame(width: 360, height: 40, alignment: .center)
+                        .cornerRadius(10)
+                        .padding(.horizontal, 10)
+                    if titleText.isEmpty {
+                        Text("My target today is...")
+                            .opacity(0.4)
+                            .padding(.all, 20)
+                    }
+                }
+            }
+        }
+    }
+    
     }
 
 struct buttonModifier: ViewModifier {

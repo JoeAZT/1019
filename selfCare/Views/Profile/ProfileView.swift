@@ -27,6 +27,7 @@ struct ProfileView: View {
     var hasChanges: Bool {
         return inputImage != nil || targetTime != profileStore.profile?.targetTime || journalTime != profileStore.profile?.journalTime || nameText != profileStore.profile?.name
     }
+    
     @State var lightMode = true
     @AppStorage("isDarkMode") private var isDarkMode = false
     
@@ -50,6 +51,7 @@ struct ProfileView: View {
         self._journalTime = State(initialValue: profileStore.profile?.journalTime ?? Date())
     }
     
+    //MARK: - Save Profile function
     func saveProfile(_ shouldDismiss: Bool = false) {
         guard hasChanges else {
             if shouldDismiss {
@@ -67,71 +69,13 @@ struct ProfileView: View {
     
     var body: some View {
         
-        let circleSize = CGFloat(230)
-        
         VStack {
-            HStack {
-                Button(action: {
-                    saveProfile(true)
-                    
-                }, label: {
-                    Image(systemName: "chevron.left.circle.fill")
-                        .padding()
-                        .font(.system(size: 30))
-                        .foregroundColor(Color("ModeColor"))
-                        .applyShadow()
-                })
-                Spacer()
-                
-                Text("Profile")
-                    .fontWeight(.semibold)
-                    .foregroundColor(Color("ModeColor"))
-                    .font(.title)
-                Spacer()
-                
-                Button(action: {
-                    
-                    if isDarkMode == false {
-                        isDarkMode = true
-                    } else {
-                        isDarkMode = false
-                    }
-                    
-                }, label: {
-                    Image(systemName: isDarkMode ? "sun.max.fill" : "moon.fill")
-                        .font(.system(size: 30))
-                        .foregroundColor(Color("ModeColor"))
-                        .padding()
-                })
-                .applyShadow()
-            }
+
+            TopItemsProfile
             
             //Profile image / Image picker
-            Group {
-                if let image = image {
-                    Image(uiImage: image)
-                        .resizable()
-                        .scaledToFit()
-                        .clipShape(Circle())
-                        .frame(minWidth: circleSize, idealWidth: circleSize, maxWidth: circleSize, minHeight: circleSize, idealHeight: circleSize, maxHeight: circleSize, alignment: .center)
-                } else {
-                    ZStack {
-                        Circle()
-                            .frame(minWidth: circleSize, idealWidth: circleSize, maxWidth: circleSize, minHeight: circleSize, idealHeight: circleSize, maxHeight: circleSize, alignment: .center)
-                            .foregroundColor(Color("ModeColor").opacity(0.4))
-                            .applyShadow()
-                        
-                        Text("Tap here to add profile picture")
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(Color("ModeColor"))
-                            .font(.system(size: 13, weight: .regular, design: .default))
-                            .frame(width: 100, height: 50, alignment: .center)
-                    }
-                }
-            }
-            .onTapGesture {
-                self.showingImagePicker = true
-            }
+            
+            PictureItemProfile
             
             VStack {
                 if nameExpand == false {
@@ -149,10 +93,6 @@ struct ProfileView: View {
                         
                         Button(action: {
                             nameExpand = false
-                            //                            if let data = image?.pngData() {
-                            //                                let profile = Profile(profilePicture: data, name: nameText, targetTime: targetTime, journalTime: journalTime)
-                            //                                profileStore.updateProfile(profile)
-                            //                            }
                             saveProfile()
                             
                         }, label: {
@@ -198,6 +138,77 @@ struct ProfileView: View {
     func loadImage() {
         guard let inputImage = inputImage else { return }
         image = inputImage
+    }
+    
+    //MARK: - Top Items: Code associated with the top of the view are held here.
+    var TopItemsProfile: some View {
+        HStack {
+            Button(action: {
+                saveProfile(true)
+                
+            }, label: {
+                Image(systemName: "chevron.left.circle.fill")
+                    .padding()
+                    .font(.system(size: 30))
+                    .foregroundColor(Color("ModeColor"))
+                    .applyShadow()
+            })
+            Spacer()
+            
+            Text("Profile")
+                .fontWeight(.semibold)
+                .foregroundColor(Color("ModeColor"))
+                .font(.title)
+            Spacer()
+            
+            Button(action: {
+                
+                if isDarkMode == false {
+                    isDarkMode = true
+                } else {
+                    isDarkMode = false
+                }
+                
+            }, label: {
+                Image(systemName: isDarkMode ? "sun.max.fill" : "moon.fill")
+                    .font(.system(size: 30))
+                    .foregroundColor(Color("ModeColor"))
+                    .padding()
+            })
+            .applyShadow()
+        }
+    }
+    
+    //MARK: - Profile picture: Code associated with the profile picture is held here.
+    let circleSize = CGFloat(230)
+    
+    var PictureItemProfile: some View {
+        
+    Group {
+        if let image = image {
+            Image(uiImage: image)
+                .resizable()
+                .scaledToFit()
+                .clipShape(Circle())
+                .frame(minWidth: circleSize, idealWidth: circleSize, maxWidth: circleSize, minHeight: circleSize, idealHeight: circleSize, maxHeight: circleSize, alignment: .center)
+        } else {
+            ZStack {
+                Circle()
+                    .frame(minWidth: circleSize, idealWidth: circleSize, maxWidth: circleSize, minHeight: circleSize, idealHeight: circleSize, maxHeight: circleSize, alignment: .center)
+                    .foregroundColor(Color("ModeColor").opacity(0.4))
+                    .applyShadow()
+                
+                Text("Tap here to add profile picture")
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(Color("ModeColor"))
+                    .font(.system(size: 13, weight: .regular, design: .default))
+                    .frame(width: 100, height: 50, alignment: .center)
+            }
+        }
+    }
+    .onTapGesture {
+        self.showingImagePicker = true
+    }
     }
 }
 
