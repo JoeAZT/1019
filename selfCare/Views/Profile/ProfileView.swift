@@ -13,9 +13,8 @@ struct ProfileView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-    @State var nameText: String = ""
+    @State var nameText: String
     @State var image: UIImage?
-    @State var showingImagePicker = false
     @State var inputImage: UIImage?
     @ObservedObject var entryStore: EntryStore
     @ObservedObject var longTermGoalStore: LongTermGoalStore
@@ -140,9 +139,6 @@ struct ProfileView: View {
                     }
                 }
             }
-            .onTapGesture {
-                self.showingImagePicker = true
-            }
             
             VStack {
                     HStack {
@@ -181,9 +177,6 @@ struct ProfileView: View {
             }
             .preferredColorScheme(isDarkMode ? .dark : .light)
             .navigationBarTitle("Pick a photo")
-            .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
-                ImagePicker(image: self.$inputImage)
-            }
             
         }
         .background(LinearGradient(gradient: Gradient(colors: [Color .blue, .pink]), startPoint: .topLeading, endPoint: .trailing).ignoresSafeArea())

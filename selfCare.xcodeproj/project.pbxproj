@@ -139,8 +139,8 @@
 		7130653827179956000F045B /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				7130653627177DB9000F045B /* EditProfileView.swift */,
 				71F5484D263F0CCD00325490 /* ProfileView.swift */,
+				7130653627177DB9000F045B /* EditProfileView.swift */,
 				7175ADEE269CA32A00DB068C /* ProfileSections */,
 			);
 			path = Profile;
@@ -158,6 +158,7 @@
 		71881EA62647039900604DAC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7130653827179956000F045B /* Profile */,
 				7112DCE926A04ACA007CE0D3 /* Links */,
 				7110D042264AAE660051CF62 /* Targets */,
 				7110D043264AAE7A0051CF62 /* Journal */,
@@ -218,7 +219,6 @@
 			children = (
 				71C47D12263DAAB300C979D9 /* selfCareApp.swift */,
 				7110D048264AC9B00051CF62 /* CacheStorageManager.swift */,
-				7130653827179956000F045B /* Profile */,
 				71881EA62647039900604DAC /* Views */,
 				71881EA926473CBE00604DAC /* Structs */,
 				71C47D16263DAAB800C979D9 /* Assets.xcassets */,
