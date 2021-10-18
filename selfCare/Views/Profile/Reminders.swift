@@ -90,7 +90,6 @@ struct Reminder: View {
                     }
                 }
                  
-                
                 if isJournalExpanded == true {
                     VStack {
                         HStack {
