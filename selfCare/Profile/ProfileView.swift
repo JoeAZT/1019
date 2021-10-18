@@ -38,7 +38,14 @@ struct ProfileView: View {
     let onTapSaveTargetTime: () -> Void
     let onTapSaveJournalTime: () -> Void
     
-    init(entryStore: EntryStore, longTermGoalStore: LongTermGoalStore, dailyGoalStore: DailyGoalStore, weeklyGoalStore: WeeklyGoalStore, profileStore: ProfileStore
+    init(
+        entryStore: EntryStore,
+        longTermGoalStore: LongTermGoalStore,
+        dailyGoalStore: DailyGoalStore,
+        weeklyGoalStore: WeeklyGoalStore,
+        profileStore: ProfileStore,
+        onTapSaveTargetTime: @escaping () -> Void,
+        onTapSaveJournalTime: @escaping () -> Void
     ) {
         self.entryStore = entryStore
         self.longTermGoalStore = longTermGoalStore
@@ -53,6 +60,9 @@ struct ProfileView: View {
         if let imageData = profileStore.profile?.profilePicture, let image = UIImage(data: imageData) {
             _image = State(initialValue: image)
         }
+        
+        self.onTapSaveTargetTime = onTapSaveTargetTime
+        self.onTapSaveJournalTime = onTapSaveJournalTime
     }
     
     func saveProfile(_ shouldDismiss: Bool = false) {
@@ -71,9 +81,7 @@ struct ProfileView: View {
     }
     
     var body: some View {
-        
         let circleSize = CGFloat(230)
-        
         VStack {
             HStack {
                 Button(action: {
@@ -161,6 +169,7 @@ struct ProfileView: View {
                     profileStore: profileStore,
                     isTargetsExpanded: false,
                     isJournalExpanded: false,
+
                     onTapSaveTargetTime: onTapSaveTargetTime,
                     onTapSaveJournalTime: onTapSaveJournalTime
                 )

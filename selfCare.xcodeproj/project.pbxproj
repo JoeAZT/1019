@@ -136,22 +136,23 @@
 			path = Links;
 			sourceTree = "<group>";
 		};
-		7130653827179956000F045B /* New Group */ = {
+		7130653827179956000F045B /* Profile */ = {
 			isa = PBXGroup;
 			children = (
 				7130653627177DB9000F045B /* EditProfileView.swift */,
+				71F5484D263F0CCD00325490 /* ProfileView.swift */,
+				7175ADEE269CA32A00DB068C /* ProfileSections */,
 			);
-			path = "New Group";
+			path = Profile;
 			sourceTree = "<group>";
 		};
-		7175ADEE269CA32A00DB068C /* Profile */ = {
+		7175ADEE269CA32A00DB068C /* ProfileSections */ = {
 			isa = PBXGroup;
 			children = (
-				71F5484D263F0CCD00325490 /* ProfileView.swift */,
 				7154C2B326DBD76F0023C67B /* StatsView.swift */,
 				7175ADEF269CA36B00DB068C /* Reminders.swift */,
 			);
-			path = Profile;
+			path = ProfileSections;
 			sourceTree = "<group>";
 		};
 		71881EA62647039900604DAC /* Views */ = {
@@ -217,8 +218,7 @@
 			children = (
 				71C47D12263DAAB300C979D9 /* selfCareApp.swift */,
 				7110D048264AC9B00051CF62 /* CacheStorageManager.swift */,
-				7130653827179956000F045B /* New Group */,
-				7175ADEE269CA32A00DB068C /* Profile */,
+				7130653827179956000F045B /* Profile */,
 				71881EA62647039900604DAC /* Views */,
 				71881EA926473CBE00604DAC /* Structs */,
 				71C47D16263DAAB800C979D9 /* Assets.xcassets */,
