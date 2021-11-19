@@ -121,7 +121,10 @@ struct JournalView: View {
 
                     VStack(alignment: .leading) {
                         Text(entry.date, style: .date)
-                            .font(.system(size: 10, weight: .medium, design: .default))
+//                            .font(.system(size: 10, weight: .medium, design: .default))
+                        
+//                            .font(.system(size: 500))
+//                            .minimumScaleFactor(0.01)
                         HStack {
                             Text("Rating: \(entry.ratingString)")
                                 .font(.system(size: 17, weight: .bold, design: .default))

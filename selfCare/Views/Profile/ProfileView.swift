@@ -73,7 +73,7 @@ struct ProfileView: View {
 
             TopItemsProfile
             
-            //Profile image / Image picker
+            //MARK: - Profile image/Image Picker
             
             PictureItemProfile
             
@@ -106,8 +106,8 @@ struct ProfileView: View {
                     }
                     .padding(.horizontal, 10)
                 }
-                
-                //Main Card with stats
+                //MARK: - Main Card with stats
+    
                 StatsView(
                     targetTime: $targetTime,
                     journalTime: $journalTime,
@@ -218,7 +218,7 @@ struct ProfileView_Previews: PreviewProvider {
     }
 }
 
-//Modifiers
+//MARK: - Modifiers
 
 struct shadowModifier: ViewModifier {
     func body(content: Content) -> some View {

@@ -75,7 +75,7 @@ struct Reminder: View {
             VStack {
                 if isJournalExpanded == false {
                     HStack {
-                        Text("Targets Reminder:")
+                        Text("Journal Reminder:")
                             .applyTopTitleStyle()
                         Spacer()
                         Text(profileStore.dateConverter(input: journalTime))
@@ -93,7 +93,7 @@ struct Reminder: View {
                 if isJournalExpanded == true {
                     VStack {
                         HStack {
-                            Text("Targets Reminder:")
+                            Text("Journal Reminder:")
                                 .applyTopTitleStyle()
                             Spacer()
                             Button(action: {
