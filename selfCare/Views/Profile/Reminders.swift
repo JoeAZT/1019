@@ -22,15 +22,19 @@ struct Reminder: View {
     
     var body: some View {
         
-        VStack {
+        VStack(spacing: 8) {
             VStack {
                 if isTargetsExpanded == false {
                     HStack {
                         Text("Targets Reminder:")
-                            .applyTopTitleStyle()
+                            .bold()
                         Spacer()
                         Text(profileStore.dateConverter(input: targetTime))
                             .applyMiddleTitleStyle()
+                            .foregroundColor(Color("ModeColor"))
+                            .padding(7)
+                            .background(Color("TextColor"))
+                            .cornerRadius(10)
                     }
                     .onTapGesture {
                         if isTargetsExpanded == true {
@@ -46,7 +50,7 @@ struct Reminder: View {
                     VStack {
                         HStack {
                             Text("Targets Reminder:")
-                                .applyTopTitleStyle()
+                                .bold()
                             Spacer()
                             Button(action: {
                                 isTargetsExpanded = false
@@ -54,7 +58,7 @@ struct Reminder: View {
                             }, label: {
                                 Image(systemName: "multiply.square.fill")
                                     .font(.system(size: 25, weight: .bold))
-                                    .foregroundColor(Color.purple)
+                                    .foregroundColor(.pink)
                             })
                             Button(action: {
                                 isTargetsExpanded = false
@@ -70,16 +74,20 @@ struct Reminder: View {
                         }
                     }
                 }
-            }.foregroundColor(Color("ModeColor"))
+            }.foregroundColor(Color("TextColor"))
             
             VStack {
                 if isJournalExpanded == false {
                     HStack {
                         Text("Journal Reminder:")
-                            .applyTopTitleStyle()
+                            .bold()
                         Spacer()
                         Text(profileStore.dateConverter(input: journalTime))
                             .applyMiddleTitleStyle()
+                            .foregroundColor(Color("ModeColor"))
+                            .padding(7)
+                            .background(Color("TextColor"))
+                            .cornerRadius(10)
                     }
                     .onTapGesture {
                         if isJournalExpanded == true {
@@ -94,7 +102,7 @@ struct Reminder: View {
                     VStack {
                         HStack {
                             Text("Journal Reminder:")
-                                .applyTopTitleStyle()
+                                .bold()
                             Spacer()
                             Button(action: {
                                 isJournalExpanded = false
@@ -102,7 +110,7 @@ struct Reminder: View {
                             }, label: {
                                 Image(systemName: "multiply.square.fill")
                                     .font(.system(size: 25, weight: .bold))
-                                    .foregroundColor(Color.purple)
+                                    .foregroundColor(.pink)
                             })
                             Button(action: {
                                 isJournalExpanded = false
@@ -118,9 +126,8 @@ struct Reminder: View {
                         }
                     }
                 }
-            }.foregroundColor(Color("ModeColor"))
+            }
         }
-        .padding(.horizontal, 30)
     }
 }
 

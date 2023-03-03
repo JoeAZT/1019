@@ -28,6 +28,7 @@
 		71C47D17263DAAB800C979D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71C47D16263DAAB800C979D9 /* Assets.xcassets */; };
 		71C47D1A263DAAB800C979D9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71C47D19263DAAB800C979D9 /* Preview Assets.xcassets */; };
 		71C47D23263DDA6200C979D9 /* IrregularGradient in Frameworks */ = {isa = PBXBuildFile; productRef = 71C47D22263DDA6200C979D9 /* IrregularGradient */; };
+		71F358D127F0E5CF009E51ED /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F358D027F0E5CF009E51ED /* Functions.swift */; };
 		71F54848263E3A6D00325490 /* JournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F54847263E3A6D00325490 /* JournalView.swift */; };
 		71F5484A263E3A8C00325490 /* NewEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F54849263E3A8C00325490 /* NewEntryView.swift */; };
 		71F5484C263E3B2A00325490 /* LinksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F5484B263E3B2A00325490 /* LinksView.swift */; };
@@ -68,6 +69,7 @@
 		71C47D16263DAAB800C979D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		71C47D19263DAAB800C979D9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		71C47D1B263DAAB800C979D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		71F358D027F0E5CF009E51ED /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		71F54847263E3A6D00325490 /* JournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalView.swift; sourceTree = "<group>"; };
 		71F54849263E3A8C00325490 /* NewEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEntryView.swift; sourceTree = "<group>"; };
 		71F5484B263E3B2A00325490 /* LinksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinksView.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				7110D03E264AA2100051CF62 /* Goals.swift */,
 				716174AC2684C37800B25942 /* Profile.swift */,
 				716174AA26848DCC00B25942 /* ImagePicker.swift */,
+				71F358D027F0E5CF009E51ED /* Functions.swift */,
 			);
 			path = Structs;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				71F54850263F0CF400325490 /* TargetsView.swift in Sources */,
 				71F5484E263F0CCD00325490 /* ProfileView.swift in Sources */,
 				712C4DB1269321A800D41738 /* TargetRow.swift in Sources */,
+				71F358D127F0E5CF009E51ED /* Functions.swift in Sources */,
 				716174AB26848DCC00B25942 /* ImagePicker.swift in Sources */,
 				71C47D13263DAAB300C979D9 /* selfCareApp.swift in Sources */,
 				714ED70C265E7F9A00007B99 /* FeelingsGraphs.swift in Sources */,
@@ -542,7 +546,7 @@
 				DEVELOPMENT_TEAM = 24YMX7WMLR;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = selfCare/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -564,7 +568,7 @@
 				DEVELOPMENT_TEAM = 24YMX7WMLR;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = selfCare/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

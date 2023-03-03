@@ -19,13 +19,14 @@ struct FeelingsGraphs: View {
         ZStack {
             RoundedRectangle(cornerRadius: 20)
                 .foregroundColor(Color("ModeColor"))
-                .opacity(0.2)
+//                .opacity(0.2)
             
             TabView {
                 VStack(alignment: .leading) {
                     Text("Your ratings this week:")
                         .font(.system(size: 20, weight: .bold, design: .default))
-                        .foregroundColor(.white)
+//                        .foregroundColor(.white)
+                        .foregroundColor(Color("TextColor"))
                         .padding()
                     
                     LineChartView(dataPoints: entryStore.graphEntries)
@@ -40,14 +41,16 @@ struct FeelingsGraphs: View {
                             )
                         )
                         .padding()
-                        .accentColor(.white)
+//                        .accentColor(.white)
+                        .accentColor((Color("TextColor")))
                         .foregroundColor(.white)
                 }
                 
                 VStack(alignment: .leading) {
                     Text("Your ratings this month:")
                         .font(.system(size: 20, weight: .bold, design: .default))
-                        .foregroundColor(.white)
+//                        .foregroundColor(.white)
+                    foregroundColor(Color("TextColor"))
                         .padding()
                     
                     LineChartView(dataPoints: entryStore.monthlyGraphEntries)
@@ -62,7 +65,8 @@ struct FeelingsGraphs: View {
                             )
                         )
                         .padding()
-                        .accentColor(.white)
+//                        .accentColor(.white)
+                        .accentColor(Color("TextColor"))
                         .foregroundColor(.white)
                 }
             }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))

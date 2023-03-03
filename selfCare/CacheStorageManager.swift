@@ -68,7 +68,6 @@ class CacheStorageManager {
         } catch {
             print(error)
         }
-            
     }
     
     func getProfile() -> Profile? {

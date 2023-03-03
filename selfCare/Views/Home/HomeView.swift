@@ -30,18 +30,19 @@ struct HomeView: View {
                 //Profile
                 Button(action: {
                     showProfileView.toggle()
-                    
                 }, label: {
                     Image(systemName: "person.circle.fill")
                         .padding()
                         .font(.system(size: 50))
-                        .foregroundColor(.white)
-                        .shadow(color: .black.opacity(0.4), radius: 3, x: 0, y: 3)
+                        .foregroundColor(Color("ModeColor"))
+                        .shadow(color: Color("TextColor").opacity(0.25), radius: 3, x: 1, y: 1)
                 })
                 .sheet(isPresented: $showProfileView, content: {
 
                     ProfileView(entryStore: entryStore, longTermGoalStore: longTermGoalStore, dailyGoalStore: dailyGoalStore, weeklyGoalStore: weeklyGoalStore, profileStore: profileStore)
+                        .presentationDetents([.fraction(0.6)])
                 })
+                
                 
                 Spacer()
                 //Logo
@@ -63,8 +64,10 @@ struct HomeView: View {
                     Image(systemName: "link.circle.fill")
                         .padding()
                         .font(.system(size: 50))
-                        .foregroundColor(.white)
-                        .shadow(color: .black.opacity(0.4), radius: 3, x: 0, y: 3)
+//                        .foregroundColor(.white)
+                        .foregroundColor(Color("ModeColor"))
+//                        .shadow(color: Color("TextColor").opacity(0.5), radius: 3)
+                        .shadow(color: Color("TextColor").opacity(0.25), radius: 3, x: 1, y: 1)
                 })
                 .sheet(isPresented: $showLinksView, content: {
                     LinksView()
@@ -74,7 +77,8 @@ struct HomeView: View {
             VStack(alignment: .leading) {
                 Text(profileStore.profile?.name == nil ? "Welcome to selfCare" : "Welcome back, \(profileStore.profile!.name)")
                     .font(.system(size: 25, weight: .black, design: .default))
-                    .foregroundColor(.white)
+//                    .foregroundColor(.white)
+                    .foregroundColor(Color("ModeColor"))
                 HStack {
                     CircleGraphic(rating: entryStore.average())
                     
@@ -85,12 +89,13 @@ struct HomeView: View {
                 ZStack {
                     RoundedRectangle(cornerRadius: 20)
                         .foregroundColor(Color("ModeColor"))
-                        .opacity(0.2)
+//                        .opacity(0.2)
                     
                     VStack(alignment: .leading) {
                         Text("Your mood this week:")
                             .font(.system(size: 20, weight: .bold, design: .default))
-                            .foregroundColor(.white)
+//                            .foregroundColor(.white)
+                            .foregroundColor(Color("TextColor"))
                         
                         ScrollView(.horizontal) {
                             HStack(spacing: 14) {
@@ -120,8 +125,10 @@ struct HomeView: View {
                     Image(systemName: "book.circle.fill")
                         .padding(.horizontal)
                         .font(.system(size: 70))
-                        .foregroundColor(.white)
-                        .shadow(color: .black.opacity(0.4), radius: 3, x: 0, y: 3)
+//                        .foregroundColor(.white)
+                        .foregroundColor(Color("ModeColor"))
+                        .shadow(color: Color("TextColor").opacity(0.25), radius: 3, x: 1, y: 1)
+//                        .shadow(color: .black.opacity(0.4), radius: 3, x: 0, y: 3)
                 })
                 .sheet(isPresented: $showJournalView, content: {
                     JournalView(entryStore: entryStore)
@@ -136,8 +143,10 @@ struct HomeView: View {
                     Image(systemName: "plus.circle.fill")
                         .padding(.horizontal)
                         .font(.system(size: 70))
-                        .foregroundColor(.white)
-                        .shadow(color: .black.opacity(0.4), radius: 3, x: 0, y: 3)
+//                        .foregroundColor(.white)
+//                        .shadow(color: .black.opacity(0.4), radius: 3, x: 0, y: 3)
+                        .foregroundColor(Color("ModeColor"))
+                        .shadow(color: Color("TextColor").opacity(0.25), radius: 3, x: 1, y: 1)
                 })
                 .sheet(isPresented: $showNewEntryView) {
                     NewEntryView(showNewEntryView: $showNewEntryView, entryStore: entryStore)
@@ -151,8 +160,10 @@ struct HomeView: View {
                     Image(systemName: "target")
                         .padding(.horizontal)
                         .font(.system(size: 70))
-                        .foregroundColor(.white)
-                        .shadow(color: .black.opacity(0.4), radius: 3, x: 0, y: 3)
+//                        .foregroundColor(.white)
+                        .foregroundColor(Color("ModeColor"))
+//                        .shadow(color: .black.opacity(0.4), radius: 3, x: 0, y: 3)
+                        .shadow(color: Color("TextColor").opacity(0.25), radius: 3, x: 1, y: 1)
                 })
                 .sheet(isPresented: $showGoalsView) {
                     TargetsView(longTermGoalStore: longTermGoalStore, weeklyGoalStore: weeklyGoalStore, dailyGoalStore: dailyGoalStore)
@@ -175,10 +186,17 @@ struct GradientBackgroundModifier: ViewModifier {
         ZStack {
             Rectangle()
                 .foregroundColor(.blue)
-                .irregularGradient(colors: [.purple, .pink, .blue ], backgroundColor: .black)
+//                .irregularGradient(colors: [.purple, .pink, .blue, .purple ], backgroundColor: .black.opacity(0.4))
+                .irregularGradient(colors: [.purple, .pink, .blue, .purple ], backgroundColor: .black.opacity(0.4))
                 .ignoresSafeArea(.all, edges: .all)
             content
         }
+    }
+}
+
+extension View {
+    func rotationEffect(x: Int, y: Int, z: Int) {
+        
     }
 }
 

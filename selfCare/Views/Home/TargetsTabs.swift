@@ -17,34 +17,36 @@ struct TargetTabs: View {
         ZStack {
             RoundedRectangle(cornerRadius: 20)
                 .foregroundColor(Color("ModeColor"))
-                .opacity(0.2)
+            //                .opacity(0.2)
             TabView {
                 VStack(alignment: .leading) {
                     Text("Your daily targets:")
                         .font(.system(size: 20, weight: .bold, design: .default))
-                        .foregroundColor(.white)
+                    //                        .foregroundColor(.white)
+                        .foregroundColor(Color("TextColor"))
                     
                     ScrollView {
                         ForEach(dailyGoalStore.goals) { goal in
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 5)
-                                    .foregroundColor(Color("ModeColor"))
-                                    .opacity(0.1)
                                 HStack {
                                     Text(goal.title)
                                         .fontWeight(.semibold)
-                                        .foregroundColor(.white)
+                                    //                                        .foregroundColor(.white)
+                                        .foregroundColor(Color("TextColor"))
                                         .padding(5)
                                     Spacer()
                                     Image(systemName: goal.completed ? "checkmark.square" : "square")
                                         .font(.system(size: 20, weight: .bold, design: .default))
-                                        .foregroundColor(.white)
+                                    //                                        .foregroundColor(.white)
+                                        .foregroundColor(Color("TextColor"))
                                         .padding(5)
                                 }
+                                .background(Color("ModeColor"))
+                                .cornerRadius(10)
+                                .shadow(color: Color("TextColor").opacity(0.2), radius: 3, x: 2, y: 2)
+                                .padding(.horizontal, 4)
                                 .onTapGesture {
                                     dailyGoalStore.toggleCompletedFor(goal)
                                 }
-                            }
                         }
                     }
                 }
@@ -54,38 +56,34 @@ struct TargetTabs: View {
                 VStack(alignment: .leading) {
                     Text("Your weekly targets:")
                         .font(.system(size: 20, weight: .bold, design: .default))
-                        .foregroundColor(.white)
+                    //                        .foregroundColor(.white)
+                        .foregroundColor(Color("TextColor"))
                     
                     ScrollView {
                         ForEach(weeklyGoalStore.goals) { goal in
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 5)
-                                    .foregroundColor(Color("ModeColor"))
-                                    .opacity(0.1)
-                                HStack {
-                                    Text(goal.title)
-                                        .fontWeight(.semibold)
-                                        .foregroundColor(.white)
-                                        .padding(5)
-                                    Spacer()
-                                    Image(systemName: goal.completed ? "checkmark.square" : "square")
-                                        .font(.system(size: 20, weight: .bold, design: .default))
-                                        .foregroundColor(.white)
-                                        .padding(5)
-                                }
-                                .onTapGesture {
-                                    weeklyGoalStore.toggleCompletedFor(goal)
-                                }
+                            HStack {
+                                Text(goal.title)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(Color("TextColor"))
+                                    .padding(5)
+                                Spacer()
+                                Image(systemName: goal.completed ? "checkmark.square" : "square")
+                                    .font(.system(size: 20, weight: .bold, design: .default))
+                                    .foregroundColor(Color("TextColor"))
+                                    .padding(5)
+                            }
+                            .background(Color("ModeColor"))
+                            .cornerRadius(10)
+                            .shadow(color: Color("TextColor").opacity(0.2), radius: 3, x: 2, y: 2)
+                            .padding(.horizontal, 4)
+                            .onTapGesture {
+                                weeklyGoalStore.toggleCompletedFor(goal)
                             }
                         }
-                        
                     }
                 }
                 .padding()
-                .padding(.horizontal, 10)
             }.tabViewStyle(PageTabViewStyle())
         }
-//        }.frame(height: 200)
     }
-    
 }

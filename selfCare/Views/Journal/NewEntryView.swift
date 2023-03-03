@@ -38,10 +38,10 @@ struct NewEntryView: View {
                 Button(action: {
                     presentationMode.wrappedValue.dismiss()
                 }) {
-                    Image(systemName: "chevron.left.circle.fill")
+                    Image(systemName: "multiply")
                         .padding()
                         .font(.system(size: 30))
-                        .foregroundColor(Color("TextColor"))
+                        .foregroundColor(.pink)
                         .applyShadow()
                 }
                 
@@ -58,10 +58,10 @@ struct NewEntryView: View {
                 
                 Button(action: {
                 }) {
-                    Image(systemName: "chevron.left.circle.fill")
+                    Image(systemName: "multiply")
                         .padding()
                         .font(.system(size: 30))
-                        .foregroundColor(Color("TextColor")).opacity(0)
+                        .foregroundColor(.pink).opacity(0)
                 }
             }
             
@@ -85,7 +85,7 @@ struct NewEntryView: View {
                                 .foregroundColor(Color("TextColor"))
                         }
                         .padding(.top, 5)
-                        .padding()
+                        .padding(.horizontal)
                         
                         //Slider
                         HStack {
@@ -108,7 +108,7 @@ struct NewEntryView: View {
                         }
                         .padding()
                     }
-                    .padding(.horizontal, 20)
+                    .padding(.top)
                 }
                 .padding(10)
                 
@@ -123,18 +123,12 @@ struct NewEntryView: View {
                         Text(String(format: "Why was your day %.1f/10?", ratingSlider))
                             .fontWeight(.bold)
                             .foregroundColor(Color("TextColor"))
-                            
-                        ZStack(alignment: .topLeading) {
-                            TextViewWrapper(text: $reflectionText)
-                                .frame(width: 340, height: 290, alignment: .leading)
-                                .cornerRadius(10)
-                            
-                            if reflectionText.isEmpty {
-                                Text("Today I felt...")
-                                    .opacity(0.3)
-                                    .padding()
-                            }
-                        }
+                        
+                        TextField("Today I felt...", text: $reflectionText)
+                            .padding()
+                            .background(Color("TextColor").opacity(0.1))
+                            .cornerRadius(8)
+                        
                     }
                     .padding()
                 }
@@ -152,17 +146,10 @@ struct NewEntryView: View {
                             .lineLimit(nil)
                             .foregroundColor(Color("TextColor"))
                         
-                        ZStack(alignment: .topLeading) {
-                            TextViewWrapper(text: $happyText)
-                                .frame(width: 340, height: 290, alignment: .center)
-                                .cornerRadius(10)
-                            
-                            if happyText.isEmpty {
-                                Text("I was happy today because...")
-                                    .opacity(0.3)
-                                    .padding()
-                            }
-                        }
+                        TextField("I was happy today because...", text: $happyText)
+                            .padding()
+                            .background(Color("TextColor").opacity(0.1))
+                            .cornerRadius(8)
                     }
                     .padding()
                 }
@@ -181,24 +168,15 @@ struct NewEntryView: View {
                             .lineLimit(nil)
                             .foregroundColor(Color("TextColor"))
                         
-                        
-                        ZStack(alignment: .topLeading) {
-                            TextViewWrapper(text: $achievementText)
-                                .frame(width: 340, height: 290, alignment: .center)
-                                .cornerRadius(10)
-                            
-                            if achievementText.isEmpty {
-                                Text("Today, I...")
-                                    .opacity(0.3)
-                                    .padding()
-                                
-                            }
-                        }
+                        TextField("Today I felt...", text: $achievementText)
+                            .padding()
+                            .background(Color("TextColor").opacity(0.1))
+                            .cornerRadius(8)
                     }
                     .padding()
                 }
                 .padding(10)
-            
+                
                 
                 //Emoji
                 ZStack {
@@ -309,13 +287,13 @@ struct NewEntryView: View {
                                         
                                         RoundedRectangle(cornerRadius: 5)
                                             .foregroundColor(exercise == true ? Color("ModeColor") : Color.gray.opacity(0.1))
-                                                    .padding(.horizontal, 10)
+                                            .padding(.horizontal, 10)
                                             .applyShadow()
-                                    Text("🏋️ Exercise")
-                                        .font(.system(size: 19, weight: .bold))
-                                        .foregroundColor(Color("TextColor"))
-                                        .padding(5)
-                                        .opacity(exercise == true ? 1 : 0.5)
+                                        Text("🏋️ Exercise")
+                                            .font(.system(size: 19, weight: .bold))
+                                            .foregroundColor(Color("TextColor"))
+                                            .padding(5)
+                                            .opacity(exercise == true ? 1 : 0.5)
                                     }
                                 })
                                 
@@ -331,11 +309,11 @@ struct NewEntryView: View {
                                             .foregroundColor(sleep == true ? Color("ModeColor") : Color.gray.opacity(0.1))
                                             .padding(.horizontal, 10)
                                             .applyShadow()
-                                    Text("🛌 Quality Sleep")
-                                        .font(.system(size: 19, weight: .bold))
-                                        .foregroundColor(Color("TextColor"))
-                                        .padding(5)
-                                        .opacity(sleep == true ? 1 : 0.5)
+                                        Text("🛌 Quality Sleep")
+                                            .font(.system(size: 19, weight: .bold))
+                                            .foregroundColor(Color("TextColor"))
+                                            .padding(5)
+                                            .opacity(sleep == true ? 1 : 0.5)
                                     }
                                 })
                                 
@@ -351,11 +329,11 @@ struct NewEntryView: View {
                                             .foregroundColor(water == true ? Color("ModeColor") : Color.gray.opacity(0.1))
                                             .padding(.horizontal, 10)
                                             .applyShadow()
-                                    Text("🚰 Water intake")
-                                        .font(.system(size: 19, weight: .bold))
-                                        .foregroundColor(Color("TextColor"))
-                                        .padding(5)
-                                        .opacity(water == true ? 1 : 0.5)
+                                        Text("🚰 Water intake")
+                                            .font(.system(size: 19, weight: .bold))
+                                            .foregroundColor(Color("TextColor"))
+                                            .padding(5)
+                                            .opacity(water == true ? 1 : 0.5)
                                     }
                                 })
                                 
@@ -371,11 +349,11 @@ struct NewEntryView: View {
                                             .foregroundColor(fruit == true ? Color("ModeColor") : Color.gray.opacity(0.1))
                                             .padding(.horizontal, 10)
                                             .applyShadow()
-                                    Text("🍎 5 Fruit & Veg")
-                                        .font(.system(size: 19, weight: .bold))
-                                        .foregroundColor(Color("TextColor"))
-                                        .padding(5)
-                                        .opacity(fruit == true ? 1 : 0.5)
+                                        Text("🍎 5 Fruit & Veg")
+                                            .font(.system(size: 19, weight: .bold))
+                                            .foregroundColor(Color("TextColor"))
+                                            .padding(5)
+                                            .opacity(fruit == true ? 1 : 0.5)
                                     }
                                 })
                             }
@@ -393,11 +371,11 @@ struct NewEntryView: View {
                                             .foregroundColor(reading == true ? Color("ModeColor") : Color.gray.opacity(0.1))
                                             .padding(.horizontal, 10)
                                             .applyShadow()
-                                    Text("📚 Reading")
-                                        .font(.system(size: 19, weight: .bold))
-                                        .foregroundColor(Color("TextColor"))
-                                        .padding(5)
-                                        .opacity(reading == true ? 1 : 0.5)
+                                        Text("📚 Reading")
+                                            .font(.system(size: 19, weight: .bold))
+                                            .foregroundColor(Color("TextColor"))
+                                            .padding(5)
+                                            .opacity(reading == true ? 1 : 0.5)
                                     }
                                 })
                                 
@@ -413,11 +391,11 @@ struct NewEntryView: View {
                                             .foregroundColor(productivity == true ? Color("ModeColor") : Color.gray.opacity(0.1))
                                             .padding(.horizontal, 10)
                                             .applyShadow()
-                                    Text("📈 Productivity")
-                                        .font(.system(size: 19, weight: .bold))
-                                        .foregroundColor(Color("TextColor"))
-                                        .padding(5)
-                                        .opacity(productivity == true ? 1 : 0.5)
+                                        Text("📈 Productivity")
+                                            .font(.system(size: 19, weight: .bold))
+                                            .foregroundColor(Color("TextColor"))
+                                            .padding(5)
+                                            .opacity(productivity == true ? 1 : 0.5)
                                     }
                                 })
                                 
@@ -433,11 +411,11 @@ struct NewEntryView: View {
                                             .foregroundColor(meditation == true ? Color("ModeColor") : Color.gray.opacity(0.1))
                                             .padding(.horizontal, 10)
                                             .applyShadow()
-                                    Text("🧘 Medititaion")
-                                        .font(.system(size: 19, weight: .bold))
-                                        .foregroundColor(Color("TextColor"))
-                                        .padding(5)
-                                        .opacity(meditation == true ? 1 : 0.5)
+                                        Text("🧘 Medititaion")
+                                            .font(.system(size: 19, weight: .bold))
+                                            .foregroundColor(Color("TextColor"))
+                                            .padding(5)
+                                            .opacity(meditation == true ? 1 : 0.5)
                                     }
                                 })
                                 
@@ -453,11 +431,11 @@ struct NewEntryView: View {
                                             .foregroundColor(outside == true ? Color("ModeColor") : Color.gray.opacity(0.1))
                                             .padding(.horizontal, 10)
                                             .applyShadow()
-                                    Text("☀️ Go Outside")
-                                        .font(.system(size: 19, weight: .bold))
-                                        .foregroundColor(Color("TextColor"))
-                                        .padding(5)
-                                        .opacity(outside == true ? 1 : 0.5)
+                                        Text("☀️ Go Outside")
+                                            .font(.system(size: 19, weight: .bold))
+                                            .foregroundColor(Color("TextColor"))
+                                            .padding(5)
+                                            .opacity(outside == true ? 1 : 0.5)
                                     }
                                 })
                             }
@@ -466,7 +444,7 @@ struct NewEntryView: View {
                     }
                 }
                 .padding(10)
-            
+                
                 //complete entry button
                 Button(action: {
                     

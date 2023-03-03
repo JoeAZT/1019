@@ -30,7 +30,7 @@ struct NewTargetView: View {
             ScrollView {
                 
                 TitleAndDescriptionNewTarget
-                .padding(.bottom, 10)
+                    .padding(.bottom, 10)
                 
                 //Target Type
                 ZStack {
@@ -38,7 +38,7 @@ struct NewTargetView: View {
                         .foregroundColor(Color("ModeColor"))
                         .padding(.horizontal, 10)
                         .applyShadow()
-    
+                    
                     VStack(alignment: .leading) {
                         Text("Target Type:")
                             .fontWeight(.bold)
@@ -66,12 +66,13 @@ struct NewTargetView: View {
                                     .opacity(targetType == .weekly ? 1 : 0.5)
                                     .applyShadow()
                                 Button(action: {
-                                        targetType = .weekly                                }, label: {
-                                    Text("Weekly")
-                                        .applyButtonModifier()
-                                        .padding()
-                                        .cornerRadius(15)
-                                })
+                                    targetType = .weekly
+                                }, label: {
+                                        Text("Weekly")
+                                            .applyButtonModifier()
+                                            .padding()
+                                            .cornerRadius(15)
+                                    })
                             }
                             
                             ZStack {
@@ -99,7 +100,7 @@ struct NewTargetView: View {
                         .foregroundColor(Color("ModeColor"))
                         .applyShadow()
                         .padding(.horizontal, 10)
-                        
+                    
                     VStack(alignment: .leading) {
                         Text("Description:")
                             .fontWeight(.bold)
@@ -125,61 +126,59 @@ struct NewTargetView: View {
                 .padding(.bottom, 10)
             }
         }
-            Button(action: {
-                self.showGoalView = false
-                let goal = Goal(id: UUID().uuidString, title: titleText, goalText: goalText, completed: false, targetType: targetType)
-                if goal.targetType == .daily {
-                    dailyGoalStore.addDailyGoal(goal)
-                } else if goal.targetType == .weekly{
-                    weeklyGoalStore.addWeeklyGoal(goal)
-                } else {
-                    longTermGoallStore.addGoal(goal)
-                }
-                
-            
-            }, label: {
-                Text("Complete Entry")
-                    .font(.system(size: 20, weight: .bold))
-                    .foregroundColor(.white)
-                    .padding()
-                    .background(LinearGradient(gradient: Gradient(colors: [Color .blue, .pink]), startPoint: .leading, endPoint: .trailing))
-                    .cornerRadius(15)
-            })
+        Button(action: {
+            self.showGoalView = false
+            let goal = Goal(id: UUID().uuidString, title: titleText, goalText: goalText, completed: false, targetType: targetType)
+            if goal.targetType == .daily {
+                dailyGoalStore.addDailyGoal(goal)
+            } else if goal.targetType == .weekly{
+                weeklyGoalStore.addWeeklyGoal(goal)
+            } else {
+                longTermGoallStore.addGoal(goal)
+            }
+        }, label: {
+            Text("Complete Entry")
+                .font(.system(size: 20, weight: .bold))
+                .foregroundColor(.white)
+                .padding()
+                .background(LinearGradient(gradient: Gradient(colors: [Color .blue, .pink]), startPoint: .leading, endPoint: .trailing))
+                .cornerRadius(15)
+        })
             .preferredColorScheme(isDarkMode ? .dark : .light)
-        }
-    
-//MARK: - Top Items: All items at the top of the view are contained here
-    var TopItemsNewTarget: some View {
-    HStack {
-        
-        Button(action: {
-            presentationMode.wrappedValue.dismiss()
-        }) {
-            Image(systemName: "chevron.left.circle.fill")
-                .padding()
-                .font(.system(size: 30))
-                .foregroundColor(Color("TextColor"))
-                .applyShadow()
-        }
-        Spacer()
-        
-        //Screen Title
-        Text("New Target")
-            .fontWeight(.semibold)
-            .foregroundColor(Color("TextColor"))
-            .font(.title)
-            .padding()
-        
-        Spacer()
-        
-        Button(action: {
-        }) {
-            Image(systemName: "chevron.left.circle.fill")
-                .padding()
-                .font(.system(size: 30))
-                .foregroundColor(Color("TextColor")).opacity(0)
-        }
     }
+    
+    //MARK: - Top Items: All items at the top of the view are contained here
+    var TopItemsNewTarget: some View {
+        HStack {
+            
+            Button(action: {
+                presentationMode.wrappedValue.dismiss()
+            }) {
+                Image(systemName: "multiply")
+                    .padding()
+                    .font(.system(size: 30))
+                    .foregroundColor(.pink)
+                    .applyShadow()
+            }
+            Spacer()
+            
+            //Screen Title
+            Text("New Target")
+                .fontWeight(.semibold)
+                .foregroundColor(Color("TextColor"))
+                .font(.title)
+                .padding()
+            
+            Spacer()
+            
+            Button(action: {
+            }) {
+                Image(systemName: "multiply")
+                    .padding()
+                    .font(.system(size: 30))
+                    .foregroundColor(.pink).opacity(0)
+            }
+        }
     }
     
     //MARK: - Target Title and description:
@@ -210,14 +209,14 @@ struct NewTargetView: View {
         }
     }
     
-    }
+}
 
 struct buttonModifier: ViewModifier {
     func body(content: Content) -> some View {
         return content
             .font(.system(size: 20, weight: .bold))
             .foregroundColor(Color("TextColor"))
-            
+        
             .cornerRadius(15)
     }
 }

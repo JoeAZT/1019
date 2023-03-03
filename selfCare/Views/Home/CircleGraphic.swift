@@ -15,37 +15,41 @@ struct CircleGraphic: View {
         ZStack {
             RoundedRectangle(cornerRadius: 20)
                 .foregroundColor(Color("ModeColor"))
-                .opacity(0.2)
+//                .opacity(0.2)
             
             VStack {
                 Text("Your average rating:")
                     .font(.system(size: 20, weight: .bold, design: .default))
-                    .foregroundColor(.white)
-                    .shadow(color: .black.opacity(0.2), radius: 3, x: 0, y: 3)
+//                    .foregroundColor(.white)
+                    .foregroundColor(Color("TextColor"))
+//                    .shadow(color: .black.opacity(0.2), radius: 3, x: 0, y: 3)
                     .padding()
                 
                 ZStack {
                     Circle()
                         .stroke(lineWidth: 15)
                         .opacity(0.1)
-                        .foregroundColor(.black)
-                    
-                    VStack {
-                        Text(String(format: "%.1f", rating))
-                            .font(.system(size: 40))
-                            .foregroundColor(.white)
-                            .shadow(color: .black.opacity(0.3), radius: 3, x: 0, y: 3)
-                    }
+                        .foregroundColor(Color("TextColor"))
+//                        .foregroundColor(.black)
                     
                     Circle()
                         .trim(from: 0.0, to: CGFloat(self.rating / 10))
                         .stroke(style: StrokeStyle(lineWidth: 15.0, lineCap: .round, lineJoin: .round))
-                        .foregroundColor(.white)
+//                        .foregroundColor(.white)
+//                        .foregroundColor(Color("TextColor"))
+                        .foregroundColor(.blue)
                         .shadow(color: .black.opacity(0.2), radius: 3, x: 0, y: 3)
                         .animation(Animation.easeInOut(duration: 2.0))
                         .rotationEffect(.degrees(-90))
+                    
+                    VStack {
+                        Text(String(format: "%.1f", rating))
+                            .font(.system(size: 40))
+//                            .foregroundColor(.white)
+                            .foregroundColor(Color("TextColor"))
+//                            .shadow(color: .black.opacity(0.3), radius: 3, x: 0, y: 3)
+                    }
                 }
-//                .padding(15)
                 .padding(.bottom, 20)
             }
         }

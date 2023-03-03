@@ -25,10 +25,10 @@ struct JournalView: View {
                 Button(action: {
                     presentationMode.wrappedValue.dismiss()
                 }) {
-                    Image(systemName: "chevron.left.circle.fill")
+                    Image(systemName: "multiply")
                         .padding()
                         .font(.system(size: 30))
-                        .foregroundColor(Color("TextColor"))
+                        .foregroundColor(.pink)
                         .applyShadow()
                 }
                 
@@ -45,10 +45,10 @@ struct JournalView: View {
                 Button {
                     
                 } label: {
-                    Image(systemName: "chevron.left.circle.fill")
+                    Image(systemName: "multiply")
                         .padding()
                         .font(.system(size: 30))
-                        .foregroundColor(Color("TextColor")).opacity(0)
+                        .foregroundColor(.pink).opacity(0)
                 }
             }
             
@@ -81,11 +81,9 @@ struct JournalView: View {
             ForEach(entryStore.sortedEntries) { entry in
                 entryView(entry)
             }
-
+            .listStyle(.plain)
             placeholder
-            
         }
-        .listStyle(.plain)
     }
     
     //MARK: - Placeholder used when the Journal has no entries yet
@@ -122,12 +120,9 @@ struct JournalView: View {
                     VStack(alignment: .leading) {
                         Text(entry.date, style: .date)
 //                            .font(.system(size: 10, weight: .medium, design: .default))
-                        
-//                            .font(.system(size: 500))
-//                            .minimumScaleFactor(0.01)
                         HStack {
                             Text("Rating: \(entry.ratingString)")
-                                .font(.system(size: 17, weight: .bold, design: .default))
+                                .font(.system(size: 16, weight: .bold, design: .default))
                                 .scaledToFill()
                         }
                     }

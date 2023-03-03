@@ -67,47 +67,11 @@ struct ProfileView: View {
         }
     }
     
+    //MARK: - View
     var body: some View {
-        
         VStack {
-
             TopItemsProfile
-            
-            //MARK: - Profile image/Image Picker
-            
-            PictureItemProfile
-            
-            VStack {
-                if nameExpand == false {
-                    Text(nameText == "" ? "Add Your Name" : nameText)
-                        .font(.system(size: 40, weight: .semibold, design: .default))
-                        .foregroundColor(Color("ModeColor"))
-                        .onTapGesture {
-                            nameExpand = true
-                        }
-                } else {
-                    HStack {
-                        TextViewWrapper(text: $nameText)
-                            .frame(height: 45, alignment: .center)
-                            .cornerRadius(10)
-                        
-                        Button(action: {
-                            nameExpand = false
-                            saveProfile()
-                            
-                        }, label: {
-                            Text("Done")
-                                .font(.system(size: 12, weight: .bold))
-                                .foregroundColor(.white)
-                                .padding()
-                                .background(Color.green)
-                                .cornerRadius(10)
-                        })
-                    }
-                    .padding(.horizontal, 10)
-                }
-                //MARK: - Main Card with stats
-    
+            ScrollView {
                 StatsView(
                     targetTime: $targetTime,
                     journalTime: $journalTime,
@@ -123,16 +87,9 @@ struct ProfileView: View {
                         saveProfile()
                     }
                 )
-                .ignoresSafeArea()
             }
-            .preferredColorScheme(isDarkMode ? .dark : .light)
-            .navigationBarTitle("Pick a photo")
-            .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
-                ImagePicker(image: self.$inputImage)
-            }
-            
+            .padding(.horizontal)
         }
-        .background(LinearGradient(gradient: Gradient(colors: [Color .blue, .pink]), startPoint: .topLeading, endPoint: .trailing).ignoresSafeArea())
     }
     
     func loadImage() {
@@ -142,75 +99,87 @@ struct ProfileView: View {
     
     //MARK: - Top Items: Code associated with the top of the view are held here.
     var TopItemsProfile: some View {
-        HStack {
-            Button(action: {
-                saveProfile(true)
+        VStack {
+            HStack {
+                Button(action: {
+                    saveProfile(true)
+                }, label: {
+                    Image(systemName: "multiply")
+                        .padding()
+                        .font(.system(size: 30))
+                        .foregroundColor(.pink)
+                        .applyShadow()
+                })
+                Spacer()
                 
-            }, label: {
-                Image(systemName: "chevron.left.circle.fill")
-                    .padding()
-                    .font(.system(size: 30))
-                    .foregroundColor(Color("ModeColor"))
-                    .applyShadow()
-            })
-            Spacer()
-            
-            Text("Profile")
-                .fontWeight(.semibold)
-                .foregroundColor(Color("ModeColor"))
-                .font(.title)
-            Spacer()
-            
-            Button(action: {
-                
-                if isDarkMode == false {
-                    isDarkMode = true
-                } else {
-                    isDarkMode = false
-                }
-                
-            }, label: {
-                Image(systemName: isDarkMode ? "sun.max.fill" : "moon.fill")
-                    .font(.system(size: 30))
-                    .foregroundColor(Color("ModeColor"))
-                    .padding()
-            })
-            .applyShadow()
-        }
-    }
-    
-    //MARK: - Profile picture: Code associated with the profile picture is held here.
-    let circleSize = CGFloat(230)
-    
-    var PictureItemProfile: some View {
-        
-    Group {
-        if let image = image {
-            Image(uiImage: image)
-                .resizable()
-                .scaledToFit()
-                .clipShape(Circle())
-                .frame(minWidth: circleSize, idealWidth: circleSize, maxWidth: circleSize, minHeight: circleSize, idealHeight: circleSize, maxHeight: circleSize, alignment: .center)
-        } else {
-            ZStack {
-                Circle()
-                    .frame(minWidth: circleSize, idealWidth: circleSize, maxWidth: circleSize, minHeight: circleSize, idealHeight: circleSize, maxHeight: circleSize, alignment: .center)
-                    .foregroundColor(Color("ModeColor").opacity(0.4))
-                    .applyShadow()
-                
-                Text("Tap here to add profile picture")
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(Color("ModeColor"))
-                    .font(.system(size: 13, weight: .regular, design: .default))
-                    .frame(width: 100, height: 50, alignment: .center)
+                Text("Your Profile")
+                    .fontWeight(.semibold)
+                    .foregroundColor(Color("TextColor"))
+                    .font(.title)
+                //here for image
+                Spacer()
+                Button(action: {
+                    
+                    if isDarkMode == false {
+                        isDarkMode = true
+                    } else {
+                        isDarkMode = false
+                    }
+                    
+                }, label: {
+                    Image(systemName: isDarkMode ? "sun.max.fill" : "moon.fill")
+                        .font(.system(size: 30))
+                        .foregroundColor(Color("TextColor"))
+                        .padding()
+                })
+                .applyShadow()
             }
+//            Group {
+//                if let image = image {
+//                    Image(uiImage: image)
+//                        .resizable()
+//                        .scaledToFit()
+//                        .clipShape(Circle())
+//                        .frame(minWidth: circleSize, idealWidth: circleSize, maxWidth: circleSize, minHeight: circleSize, idealHeight: circleSize, maxHeight: circleSize, alignment: .center)
+//                } else {
+//                    ZStack {
+//                        Circle()
+//                            .frame(minWidth: circleSize, idealWidth: circleSize, maxWidth: circleSize, minHeight: circleSize, idealHeight: circleSize, maxHeight: circleSize, alignment: .center)
+//                            .foregroundColor(Color("TextColor").opacity(0.4))
+//                            .applyShadow()
+//
+//                        Text("Tap here to add profile picture")
+//                            .multilineTextAlignment(.center)
+//                            .foregroundColor(Color("TextColor"))
+//                            .font(.system(size: 13, weight: .regular, design: .default))
+//                            .frame(width: 100, height: 50, alignment: .center)
+//                    }
+//                }
+//            }
+//            .onTapGesture {
+//                print("Tapped")
+//                self.showingImagePicker = true
+//            }
         }
-    }
-    .onTapGesture {
-        self.showingImagePicker = true
-    }
     }
 }
+
+struct singleStatsViews: View {
+    var string1: String
+    var string2: String
+    
+    var body: some View {
+        HStack {
+            Text(string1)
+                .bold()
+            Spacer()
+            Text(string2)
+        }
+    }
+}
+    
+    //MARK: - Profile picture: Code associated with the profile picture is held here.
+    let circleSize = CGFloat(60)
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
@@ -230,10 +199,8 @@ struct shadowModifier: ViewModifier {
 struct TopTitlesModifier: ViewModifier {
     func body(content: Content) -> some View {
         return content
-            .font(.system(size: 16, weight: .regular, design: .default))
-            .padding(.vertical, 10)
-            .foregroundColor(Color("ModeColor"))
-            .multilineTextAlignment(.center)
+            .padding(.top, 10)
+            .font(.system(size: 24, weight: .semibold, design: .default))
     }
 }
 
@@ -241,7 +208,6 @@ struct MiddleTitlesModifier: ViewModifier {
     func body(content: Content) -> some View {
         return content
             .multilineTextAlignment(.center)
-            .font(.system(size: 24, weight: .semibold, design: .default))
     }
 }
 
@@ -249,9 +215,7 @@ struct BottomTitlesModifier: ViewModifier {
     func body(content: Content) -> some View {
         return content
             .multilineTextAlignment(.center)
-            .font(.system(size: 16, weight: .regular, design: .default))
-            .foregroundColor(Color("ModeColor")).opacity(0.4)
-            .padding(5)
+            .foregroundColor(Color("ModeColor"))
     }
 }
 
@@ -284,3 +248,119 @@ extension Date {
         return Calendar.current.date(byAdding: .minute, value: minutes, to: self)!
     }
 }
+
+
+//MARK: - Profile image/Image Picker
+
+//            VStack {
+//                if nameExpand == false {
+//                    Text(nameText == "" ? "Add Your Name" : nameText)
+//                        .font(.system(size: 40, weight: .semibold, design: .default))
+//                        .foregroundColor(Color("TextColor"))
+//                        .onTapGesture {
+//                            nameExpand = true
+//                        }
+//                } else {
+//                    HStack {
+//                        TextViewWrapper(text: $nameText)
+//                            .frame(height: 45, alignment: .center)
+//                            .cornerRadius(10)
+//
+//                        Button(action: {
+//                            nameExpand = false
+//                            saveProfile()
+//
+//                        }, label: {
+//                            Text("Done")
+//                                .font(.system(size: 12, weight: .bold))
+//                                .foregroundColor(.white)
+//                                .padding()
+//                                .background(Color.green)
+//                                .cornerRadius(10)
+//                        })
+//                    }
+//                    .padding(.horizontal, 10)
+//                }
+
+//    var PictureItemProfile: some View {
+//        HStack {
+////            if nameExpand == false {
+////                Text(nameText == "" ? "Add Your Name" : nameText)
+////                    .font(.system(size: 40, weight: .semibold, design: .default))
+////                    .foregroundColor(Color("TextColor"))
+////                    .onTapGesture {
+////                        nameExpand = true
+////                    }
+////            } else {
+////                HStack {
+////                    TextViewWrapper(text: $nameText)
+////                        .frame(height: 45, alignment: .center)
+////                        .cornerRadius(10)
+////
+////                    Button(action: {
+////                        nameExpand = false
+////                        saveProfile()
+////
+////                    }, label: {
+////                        Text("Done")
+////                            .font(.system(size: 12, weight: .bold))
+////                            .foregroundColor(.white)
+////                            .padding()
+////                            .background(Color.green)
+////                            .cornerRadius(10)
+////                    })
+////                }
+////                .padding(.horizontal, 10)
+////            }
+//            Group {
+//                if let image = image {
+//                    Image(uiImage: image)
+//                        .resizable()
+//                        .scaledToFit()
+//                        .clipShape(Circle())
+//                        .frame(minWidth: circleSize, idealWidth: circleSize, maxWidth: circleSize, minHeight: circleSize, idealHeight: circleSize, maxHeight: circleSize, alignment: .center)
+//                } else {
+//                    ZStack {
+//                        Circle()
+//                            .frame(minWidth: circleSize, idealWidth: circleSize, maxWidth: circleSize, minHeight: circleSize, idealHeight: circleSize, maxHeight: circleSize, alignment: .center)
+//                            .foregroundColor(Color("TextColor").opacity(0.4))
+//                            .applyShadow()
+//
+//                        Text("Tap here to add profile picture")
+//                            .multilineTextAlignment(.center)
+//                            .foregroundColor(Color("TextColor"))
+//                            .font(.system(size: 13, weight: .regular, design: .default))
+//                            .frame(width: 100, height: 50, alignment: .center)
+//                    }
+//                }
+//            }
+//            .onTapGesture {
+//                self.showingImagePicker = true
+//            }
+//        }
+//    }
+
+//MARK: - Main Card with stats
+//
+//            StatsView(
+//                targetTime: $targetTime,
+//                journalTime: $journalTime,
+//                profileStore: profileStore,
+//                entryStore: entryStore,
+//                longTermGoalStore: longTermGoalStore,
+//                dailyGoalStore: dailyGoalStore,
+//                weeklyGoalStore: weeklyGoalStore,
+//                onTapSaveTargetTime: {
+//                    saveProfile()
+//                },
+//                onTapSaveJournalTime: {
+//                    saveProfile()
+//                }
+//            )
+//            .ignoresSafeArea()
+//        }
+//        .preferredColorScheme(isDarkMode ? .dark : .light)
+//        .navigationBarTitle("Pick a photo")
+//        .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
+//            ImagePicker(image: self.$inputImage)
+//        }

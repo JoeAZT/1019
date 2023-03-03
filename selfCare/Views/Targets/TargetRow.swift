@@ -23,12 +23,12 @@ struct TargetRow: View {
                     Text(goal.title)
                         .foregroundColor(goal.completed ? Color.gray : Color("TextColor"))
                         .fontWeight(.bold)
-                        .padding(.vertical, 10)
+                        .padding(.vertical, 8)
                     if isExpanded {
                         Text(goal.goalText)
                     }
                 }
-                .padding(.horizontal, 10)
+                .padding(.horizontal, 0)
                 Spacer()
                 Image(systemName: goal.completed ? "checkmark.square" : "square")
                     .font(.system(size: 30, weight: .bold, design: .default))

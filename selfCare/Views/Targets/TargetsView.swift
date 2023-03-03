@@ -28,10 +28,10 @@ struct TargetsView: View {
                     Button(action: {
                         presentationMode.wrappedValue.dismiss()
                     }) {
-                        Image(systemName: "chevron.left.circle.fill")
+                        Image(systemName: "multiply")
                             .padding()
                             .font(.system(size: 30))
-                            .foregroundColor(Color("TextColor"))
+                            .foregroundColor(.pink)
                             .applyShadow()
                     }
                     Spacer()
@@ -46,10 +46,10 @@ struct TargetsView: View {
                     
                     Button(action: {
                     }) {
-                        Image(systemName: "chevron.left.circle.fill")
+                        Image(systemName: "multiply")
                             .padding()
                             .font(.system(size: 30))
-                            .foregroundColor(Color("TextColor")).opacity(0)
+                            .foregroundColor(.pink).opacity(0)
                     }
                 }
                 
@@ -90,10 +90,10 @@ struct TargetsView: View {
                     Button(action: {
                         presentationMode.wrappedValue.dismiss()
                     }) {
-                        Image(systemName: "chevron.left.circle.fill")
+                        Image(systemName: "multiply")
                             .padding()
                             .font(.system(size: 30))
-                            .foregroundColor(Color("TextColor"))
+                            .foregroundColor(.pink)
                             .applyShadow()
                     }
                     Spacer()
@@ -108,10 +108,10 @@ struct TargetsView: View {
                     
                     Button(action: {
                     }) {
-                        Image(systemName: "chevron.left.circle.fill")
+                        Image(systemName: "multiply")
                             .padding()
                             .font(.system(size: 30))
-                            .foregroundColor(Color("TextColor")).opacity(0)
+                            .foregroundColor(.pink).opacity(0)
                     }
                 }
                 
